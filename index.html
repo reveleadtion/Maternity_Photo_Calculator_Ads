@@ -145,7 +145,7 @@
         <div style="margin-top:18px;">
             <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" target="_blank"
                style="display:inline-block;background:#000;color:#fff;text-decoration:none;font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:2px;padding:16px 40px;border:2px solid #000;transition:all 0.2s;">
-                Reserve Your Maternity Session →
+                Book Your Maternity Session →
             </a>
         </div>
     </div>
@@ -157,6 +157,9 @@
                 <div class="form-group">
                     <label for="due-date">What's your due date?</label>
                     <input type="date" id="due-date" required onclick="try{this.showPicker()}catch(e){}">
+                    <div id="date-warning" style="display:none;margin-top:10px;padding:12px 16px;background:#fff3f3;border:1px solid #c94b4b;color:#c94b4b;font-size:13px;font-weight:500;">
+                        ⚠️ It looks like you're past 32 weeks — maternity sessions aren't available at this stage. Scroll down to explore newborn photography instead.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Is this your first baby?</label>
@@ -285,13 +288,27 @@
         window.addEventListener('resize', sendHeightToParent);
         new MutationObserver(sendHeightToParent).observe(document.body, { childList: true, subtree: true, attributes: true });
 
-        // ─── Date bounds ──────────────────────────────────────────────────────
+        // ─── Date bounds ────────────────────────────────────────────────
+        // Gate: moms 32+ weeks pregnant today cannot select a valid due date.
+        // At 32 weeks pregnant, due date = 280-(32*7) = 56 days from today (minimum).
         const dueDateInput = document.getElementById('due-date');
         const today = new Date();
-        const minDate = new Date(today); minDate.setMonth(minDate.getMonth() - 2);
+        const minDate = new Date(today); minDate.setDate(minDate.getDate() + 56);
         const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + 9);
         dueDateInput.min = minDate.toISOString().split('T')[0];
         dueDateInput.max = maxDate.toISOString().split('T')[0];
+
+        // Catch manual typing of out-of-range dates
+        dueDateInput.addEventListener('change', function() {
+            const warning = document.getElementById('date-warning');
+            const minStr = minDate.toISOString().split('T')[0];
+            if (this.value && this.value < minStr) {
+                if (warning) warning.style.display = 'block';
+                this.value = '';
+            } else {
+                if (warning) warning.style.display = 'none';
+            }
+        });
 
         // ─── Form submit ──────────────────────────────────────────────────────
         const form = document.getElementById('calc-form');
@@ -442,7 +459,7 @@
                         <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:24px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">We Can't Wait to Meet Baby!</h4>
                         <p style="margin-bottom:10px;font-size:16px;line-height:1.6;">At ${currentWeek} weeks, we're unable to book maternity sessions — but your newborn session is going to be absolutely magical.</p>
                         <p style="margin-bottom:30px;font-size:13px;opacity:0.9;letter-spacing:0.5px;">We only take 6 newborn sessions per month — reserve your spot before baby arrives.</p>
-                        <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" onclick="trackBookingClick('late_newborn')" style="background:#fff;color:#c94b4b;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;border:2px solid #fff;margin:0;">Reserve My Newborn Session</a>
+                        <a href="https://twowildsoulsphotography.com/metro-detroit-newborn-photography" class="cta-btn" target="_blank" onclick="trackBookingClick('late_newborn')" style="background:#fff;color:#c94b4b;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;border:2px solid #fff;margin:0;">Reserve My Newborn Session</a>
                         <p style="margin-top:25px;font-size:12px;opacity:0.9;">Newborn sessions available in the first 5–14 days 💕</p>
                     </div>`;
             } else if (currentWeek < startWeek) {
