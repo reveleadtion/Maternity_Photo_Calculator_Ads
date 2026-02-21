@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maternity Photo Timing Calculator | Two Wild Souls Photography</title>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1484618222285119');
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1484618222285119&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #ffffff; color: #000000; line-height: 1.6; }
@@ -25,15 +45,9 @@
         .btn { width: 100%; padding: 18px; background: #000000; color: #ffffff; border: none; font-size: 14px; font-weight: 500; font-family: 'Helvetica Neue', Arial, sans-serif; cursor: pointer; margin-top: 20px; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1.5px; }
         .btn:hover { background: #333333; }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .location-status { margin-top: 12px; padding: 12px 16px; font-size: 13px; display: none; animation: fadeIn 0.3s ease; border: 1px solid #000000; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .location-status.checking { display: block; background: #f5f5f5; color: #000000; border-color: #cccccc; }
-        .location-status.checking::before { content: '⏳'; display: inline-block; margin-right: 8px; animation: pulse 1.5s ease-in-out infinite; }
-        .location-status.found { display: block; background: #000000; color: #ffffff; border-color: #000000; }
-        .location-status.error { display: block; background: #f5f5f5; color: #000000; border-color: #999999; }
         .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #ffffff; animation: spin 1s linear infinite; margin-left: 10px; vertical-align: middle; }
         @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
         .results { display: none; }
         .results.active { display: block; }
         .results-hero { background: #eceae6; color: #000000; padding: 35px 35px 30px; margin-bottom: 40px; border: 1px solid rgba(0,0,0,0.1); }
@@ -58,12 +72,14 @@
         .explanation p { font-size: 15px; line-height: 1.8; margin-bottom: 15px; }
         .cta-btn { display: inline-block; padding: 16px 40px; background: #000000; color: #ffffff; text-decoration: none; font-size: 13px; font-weight: 500; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 15px; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1.5px; border: none; }
         .cta-btn:hover { background: #333333; }
-        .referral-btn { padding: 14px 32px; font-size: 12px; letter-spacing: 1px; margin: 0; }
-        .referral-btn--outline { background: #ffffff; color: #000000; border: 1px solid #000000; }
-        .referral-btn--outline:hover { background: #f5f5f5; }
         .cta-block { padding: 50px 40px; }
         .cta-btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center; }
         .cta-btn-group a { display: block; }
+
+        /* Scarcity bar */
+        .scarcity-bar { background: #1a1a1a; color: #fff; text-align: center; padding: 10px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; animation: fadeIn 0.5s ease; }
+        .scarcity-bar span { color: #e8c97a; font-weight: 700; }
+
         .footer { text-align: center; padding: 60px 20px; color: #666666; font-size: 13px; border-top: 1px solid #e5e5e5; margin-top: 60px; }
         .footer p { margin-bottom: 8px; }
         .footer a { color: #000000; text-decoration: none; font-weight: 500; border-bottom: 1px solid #000000; }
@@ -94,7 +110,6 @@
             .cta-block { padding: 32px 20px !important; }
             .cta-block h4 { font-size: 16px !important; letter-spacing: 1px !important; overflow-wrap: break-word; word-break: break-word; }
             .cta-btn-group { flex-direction: column; align-items: center; gap: 10px; }
-            .referral-btn { width: 200px; text-align: center; padding: 14px 16px !important; font-size: 12px; display: block; }
             .explanation { padding: 24px 16px; margin: 0; border-left: none; border-top: 3px solid #000; }
             .explanation h4 { font-size: 13px; margin-bottom: 14px; }
             .explanation p, .explanation li { font-size: 14px; }
@@ -185,18 +200,15 @@
                     </label>
                     <small style="margin-top: 8px; display: block;">We recommend scheduling earlier to ensure you're comfortable and have flexibility if plans change</small>
                 </div>
-                <div class="form-group">
-                    <label>Your location</label>
-                    <input type="text" id="location-input" placeholder="City, State or Zip Code (e.g., Troy, MI or 48307)" required>
-                    <small>Required to determine if you're within 40 miles of our Rochester Hills studio</small>
-                    <div class="location-status" id="location-status"></div>
-                </div>
                 <button type="submit" class="btn" id="submit-btn">Calculate My Perfect Timing ✨</button>
             </form>
         </div>
 
         <div class="results" id="results">
             <div class="card">
+                <!-- Scarcity bar injected here dynamically -->
+                <div id="scarcity-bar-container"></div>
+
                 <div class="results-hero">
                     <div class="hero-header">
                         <h3>Your Ideal Session Window</h3>
@@ -250,6 +262,7 @@
     </div>
 
     <script>
+        // ─── Height messaging for iframe embeds ───────────────────────────────
         function sendHeightToParent() {
             window.parent.postMessage({ calculatorHeight: document.body.scrollHeight }, '*');
         }
@@ -257,177 +270,49 @@
         window.addEventListener('resize', sendHeightToParent);
         new MutationObserver(sendHeightToParent).observe(document.body, { childList: true, subtree: true, attributes: true });
 
-        const STUDIO_LAT = 42.6533;
-        const STUDIO_LNG = -83.1499;
-        const RADIUS_MILES = 40;
-
-        const form = document.getElementById('calc-form');
+        // ─── Date bounds ──────────────────────────────────────────────────────
         const dueDateInput = document.getElementById('due-date');
-        const locationInput = document.getElementById('location-input');
-        const locationStatus = document.getElementById('location-status');
-        const submitBtn = document.getElementById('submit-btn');
-
-        // FIX: Use a proper state object so calculate() always reads current values
-        let locationState = {
-            checked: false,
-            isLocal: false,
-            distanceMiles: null,
-            checking: false
-        };
-
-        let locationDebounceTimer = null;
-
-        // Extended city/state lookup for Metro Detroit area (no fetch needed)
-        const localCities = [
-            // Oakland County
-            'rochester hills','rochester','troy','auburn hills','pontiac','waterford',
-            'clarkston','lake orion','oxford','orion township','independence township',
-            'birmingham','bloomfield hills','bloomfield township','west bloomfield',
-            'novi','wixom','walled lake','milford','highland','white lake',
-            'ferndale','royal oak','berkley','hazel park','madison heights',
-            'southfield','lathrup village','oak park','huntington woods',
-            'sterling heights','utica','shelby township','macomb township',
-            'washington township','romeo','ray township',
-            // Macomb County
-            'clinton township','mount clemens','harrison township','chesterfield',
-            'new baltimore','richmond','eastpointe','roseville','st. clair shores',
-            'center line','fraser','warren',
-            // Wayne County (inner)
-            'detroit','dearborn','dearborn heights','livonia','westland','garden city',
-            'inkster','wayne','canton','plymouth','northville','farmington hills','farmington',
-            'redford','taylor','allen park','lincoln park','wyandotte','riverview',
-            'trenton','grosse pointe','grosse pointe park','grosse pointe farms',
-            'grosse pointe woods','grosse pointe shores','harper woods',
-            // Washtenaw / Livingston fringe
-            'ann arbor','ypsilanti','saline','milan','brighton','howell'
-        ];
-
         const today = new Date();
         const minDate = new Date(today); minDate.setMonth(minDate.getMonth() - 2);
         const maxDate = new Date(today); maxDate.setMonth(maxDate.getMonth() + 9);
         dueDateInput.min = minDate.toISOString().split('T')[0];
         dueDateInput.max = maxDate.toISOString().split('T')[0];
 
-        const fallbackFortyMileZips = [
-            '48306','48307','48309','48326','48327','48328','48329',
-            '48083','48084','48085','48009','48012','48301','48302','48304',
-            '48310','48312','48313','48314','48315','48316','48317','48318',
-            '48035','48036','48038','48043','48044','48045','48046',
-            '48089','48091','48092','48093','48021','48066',
-            '48067','48068','48069','48073','48220','48237',
-            '48340','48341','48342','48343','48320','48323','48324','48325',
-            '48346','48348','48350','48462','48359','48362','48363','48370','48371',
-            '48322','48334','48335','48336','48374','48375','48376','48377',
-            '48033','48034','48075','48076','48240',
-            '48026','48080','48081','48082','48088','48236','48230',
-            '48382','48386','48390','48393',
-            '48150','48152','48154','48170','48185','48239',
-            '48025','48030','48071','48072','48094','48095','48096','48097','48098',
-            '48101','48167','48178','48187','48188','48223','48224','48225','48234','48235',
-            '48183','48184','48186','48189','48192','48195','48242','48243',
-            '48160','48161','48164','48165','48168','48169','48174','48176',
-            '48197','48198','48141','48143','48144','48146','48191'
-        ];
-
-        locationInput.addEventListener('input', function() {
-            clearTimeout(locationDebounceTimer);
-            const value = this.value.trim();
-
-            // Reset state when user edits location
-            locationState = { checked: false, isLocal: false, distanceMiles: null, checking: false };
-
-            if (value.length < 3) {
-                locationStatus.className = 'location-status';
-                updateButtonState();
-                return;
-            }
-
-            // Instant offline check — no fetch needed
-            locationDebounceTimer = setTimeout(() => checkLocation(value), 400);
-        });
-
-        function updateButtonState() {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = 'Calculate My Perfect Timing ✨';
-        }
-
-        // Pure offline location check: zip codes + city name matching. No fetch() calls.
-        function checkLocation(locationStr) {
-            if (!locationStr) return;
-
-            const normalized = locationStr.toLowerCase().trim();
-
-            // 1. Zip code lookup
-            const zipMatch = normalized.match(/\b(\d{5})\b/);
-            if (zipMatch) {
-                if (fallbackFortyMileZips.includes(zipMatch[1])) {
-                    locationState = { checked: true, isLocal: true, distanceMiles: 20, checking: false };
-                    locationStatus.className = 'location-status found';
-                    locationStatus.innerHTML = "✓ Great! You're in our service area (within 40 miles of Rochester Hills)";
-                } else {
-                    locationState = { checked: true, isLocal: false, distanceMiles: null, checking: false };
-                    locationStatus.className = 'location-status error';
-                    locationStatus.innerHTML = "You appear to be outside our 40-mile service area — we may still have referrals!";
-                }
-                return;
-            }
-
-            // 2. City name lookup (strip state abbreviation if present, e.g. "Troy, MI")
-            const cityOnly = normalized.replace(/,?\s*[a-z]{2}$/, '').trim();
-            const matched = localCities.some(city => cityOnly === city || normalized.startsWith(city));
-
-            if (matched) {
-                locationState = { checked: true, isLocal: true, distanceMiles: 20, checking: false };
-                locationStatus.className = 'location-status found';
-                locationStatus.innerHTML = "✓ Great! You're in our service area (within 40 miles of Rochester Hills)";
-            } else if (cityOnly.length >= 3) {
-                // Unknown city — soft message, don't block
-                locationState = { checked: true, isLocal: false, distanceMiles: null, checking: false };
-                locationStatus.className = 'location-status error';
-                locationStatus.innerHTML = "We couldn't confirm your area — you can still submit and we'll follow up!";
-            }
-        }
-
+        // ─── Form submit ──────────────────────────────────────────────────────
+        const form = document.getElementById('calc-form');
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-
-            const locationValue = locationInput.value.trim();
-            if (!locationValue) {
-                locationInput.style.border = '2px solid #c94b4b';
-                locationStatus.className = 'location-status error';
-                locationStatus.innerHTML = '⚠️ Location is required to provide personalized recommendations';
-                locationStatus.style.display = 'block';
-                locationInput.focus();
-                locationInput.addEventListener('input', function clearError() {
-                    locationInput.style.border = '1px solid #000000';
-                    locationInput.removeEventListener('input', clearError);
-                }, { once: true });
-                return;
-            }
-
-            // Run check synchronously if not yet done (e.g. user hit Enter quickly)
-            if (!locationState.checked) {
-                clearTimeout(locationDebounceTimer);
-                checkLocation(locationValue);
-            }
-
             calculate();
         });
 
+        // ─── Scarcity copy (contextual) ───────────────────────────────────────
+        function getScarcityMessage(context) {
+            // context: 'inWindow' | 'early' | 'late' | 'pastWindow'
+            const messages = {
+                inWindow:    '🔥 We only take <span>6 maternity sessions per month</span> — your window is open now. Spots fill fast.',
+                early:       '📅 We only take <span>6 maternity sessions per month</span> — booking early is the only way to guarantee your date.',
+                pastWindow:  '⚡ We only take <span>6 maternity sessions per month</span> — a few spots remain this month. Don\'t wait.',
+                late:        '💕 We only take <span>6 newborn sessions per month</span> — reserve your spot before baby arrives.'
+            };
+            return messages[context] || messages.early;
+        }
+
+        // ─── Main calculation ─────────────────────────────────────────────────
         function calculate() {
             const dueDateStr = document.getElementById('due-date').value;
             if (!dueDateStr) return alert("Please enter your due date.");
 
-            const dueDate = new Date(dueDateStr);
-            const isFirst = document.querySelector('input[name="first-baby"]:checked')?.value === 'yes';
-            const multiples = document.getElementById('multiples').checked;
-            const vibe = document.querySelector('input[name="vibe"]:checked')?.value || 'full';
-            const setting = document.querySelector('input[name="setting"]:checked')?.value || 'both';
-            const highRisk = document.getElementById('high-risk').checked;
+            const dueDate    = new Date(dueDateStr);
+            const isFirst    = document.querySelector('input[name="first-baby"]:checked')?.value === 'yes';
+            const multiples  = document.getElementById('multiples').checked;
+            const vibe       = document.querySelector('input[name="vibe"]:checked')?.value || 'full';
+            const setting    = document.querySelector('input[name="setting"]:checked')?.value || 'both';
+            const highRisk   = document.getElementById('high-risk').checked;
 
-            const now = new Date();
-            const daysSinceLMP = Math.floor((now - new Date(dueDate.getTime() - 280 * 24 * 60 * 60 * 1000)) / (1000 * 60 * 60 * 24));
-            const currentWeek = Math.max(1, Math.min(42, Math.ceil(daysSinceLMP / 7)));
+            const now            = new Date();
+            const conceptionDate = new Date(dueDate.getTime() - 280 * 24 * 60 * 60 * 1000);
+            const daysSinceLMP   = Math.floor((now - conceptionDate) / (1000 * 60 * 60 * 24));
+            const currentWeek    = Math.max(1, Math.min(42, Math.ceil(daysSinceLMP / 7)));
 
             let startWeek, endWeek;
             if (multiples) {
@@ -441,37 +326,38 @@
             }
 
             if (!multiples) {
-                if (setting === 'outdoor') {
-                    startWeek = Math.max(20, startWeek - 2);
-                    endWeek   = Math.max(22, endWeek - 2);
-                } else if (setting === 'indoor') {
-                    startWeek = Math.min(32, startWeek + 1);
-                    endWeek   = Math.min(34, endWeek + 1);
-                }
+                if (setting === 'outdoor') { startWeek = Math.max(20, startWeek - 2); endWeek = Math.max(22, endWeek - 2); }
+                else if (setting === 'indoor') { startWeek = Math.min(32, startWeek + 1); endWeek = Math.min(34, endWeek + 1); }
             }
 
-            if (highRisk && !multiples) {
-                startWeek = Math.max(20, startWeek - 2);
-                endWeek   = Math.max(22, endWeek - 2);
-            }
+            if (highRisk && !multiples) { startWeek = Math.max(20, startWeek - 2); endWeek = Math.max(22, endWeek - 2); }
 
             const isLate     = currentWeek > 34;
             const isInWindow = currentWeek >= startWeek && currentWeek <= endWeek;
-
-            const conception = new Date(dueDate);
-            conception.setDate(conception.getDate() - 280);
+            const isPastWindow = !isLate && currentWeek > endWeek;
 
             let startDate, endDate, bookBy;
             if (!isLate) {
-                startDate = new Date(conception); startDate.setDate(startDate.getDate() + startWeek * 7);
-                endDate   = new Date(conception); endDate.setDate(endDate.getDate() + endWeek * 7);
-                bookBy    = new Date(startDate);  bookBy.setDate(bookBy.getDate() - 42);
+                startDate = new Date(conceptionDate); startDate.setDate(startDate.getDate() + startWeek * 7);
+                endDate   = new Date(conceptionDate); endDate.setDate(endDate.getDate() + endWeek * 7);
+                bookBy    = new Date(startDate);      bookBy.setDate(bookBy.getDate() - 42);
             }
 
             const fmt = d => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
             document.getElementById('current-week-badge').textContent = `You're at Week ${currentWeek}`;
             document.getElementById('current-week').textContent = `Week ${currentWeek}`;
+
+            // ── Determine scarcity context ──
+            let scarcityContext = 'early';
+            if (isLate)       scarcityContext = 'late';
+            else if (isInWindow) scarcityContext = 'inWindow';
+            else if (isPastWindow) scarcityContext = 'pastWindow';
+            else              scarcityContext = 'early';
+
+            // ── Inject scarcity bar ──
+            document.getElementById('scarcity-bar-container').innerHTML =
+                `<div class="scarcity-bar">${getScarcityMessage(scarcityContext)}</div>`;
 
             if (isLate) {
                 document.getElementById('date-range').innerHTML = `Maternity booking window has closed 💕`;
@@ -492,18 +378,16 @@
                 document.getElementById('backup').textContent = `${endWeek}–${Math.min(endWeek + 4, 36)} weeks (flexible backup)`;
             }
 
-            // Build explanation
+            // ── Explanation ──
             const adjustmentNotes = [];
-            if (setting === 'outdoor') adjustmentNotes.push('outdoor sessions (shifted earlier for comfort)');
-            if (setting === 'indoor') adjustmentNotes.push('indoor/studio sessions (allows a bit more flexibility later)');
-            if (highRisk) adjustmentNotes.push('high-risk pregnancy (shifted earlier to build in flexibility)');
-            if (multiples) adjustmentNotes.push('multiple pregnancy (earlier window is standard)');
+            if (setting === 'outdoor')  adjustmentNotes.push('outdoor sessions (shifted earlier for comfort)');
+            if (setting === 'indoor')   adjustmentNotes.push('indoor/studio sessions (allows a bit more flexibility later)');
+            if (highRisk)               adjustmentNotes.push('high-risk pregnancy (shifted earlier to build in flexibility)');
+            if (multiples)              adjustmentNotes.push('multiple pregnancy (earlier window is standard)');
 
             let exp = `<h4>Your Personalized Timing</h4>
                        <p>Based on your details, your ideal window is <strong>weeks ${startWeek}–${endWeek}</strong>.`;
-            if (adjustmentNotes.length > 0) {
-                exp += ` This has been adjusted for: ${adjustmentNotes.join(', ')}.`;
-            }
+            if (adjustmentNotes.length > 0) exp += ` This has been adjusted for: ${adjustmentNotes.join(', ')}.`;
             exp += `</p>`;
 
             if (isLate) {
@@ -523,82 +407,81 @@
             }
             document.getElementById('explanation').innerHTML = exp;
 
-            // Read from locationState
-            const { isLocal, distanceMiles } = locationState;
-            const distLabel = isLocal
-                ? `✓ You're ${Math.round(distanceMiles)} miles from our studio`
-                : `You're outside our 40-mile service area`;
-            const footerNote = `<p style="margin-top: 25px; font-size: 12px; opacity: 0.7;">Professional hair & makeup • Designer gowns • Serving Rochester Hills & 40-mile radius</p>`;
-
+            // ── CTA (all local — location removed) ──
+            const footerNote = `<p style="margin-top: 25px; font-size: 12px; opacity: 0.7;">Professional hair & makeup • Designer gowns • Serving Rochester Hills & Metro Detroit</p>`;
             const combinedCTAEl = document.getElementById('combined-cta-section');
             let combinedCTA = '';
 
-            if (isLocal) {
-                if (isInWindow) {
-                    combinedCTA = `
-                        <div class="cta-block" style="background:#000;color:#fff;border:2px solid #000;text-align:center;">
-                            <div style="font-size:12px;text-transform:uppercase;letter-spacing:2px;margin-bottom:15px;opacity:0.7;">${distLabel}</div>
-                            <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:24px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">You're in the Perfect Window!</h4>
-                            <p style="margin-bottom:30px;font-size:16px;line-height:1.6;">Your bump is beautiful and you're likely still feeling great. This is the ideal time to book your maternity session with Two Wild Souls Photography.</p>
-                            <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Book Your Dream Session</a>
-                            <p style="margin-top:25px;font-size:12px;opacity:0.7;">Professional hair & makeup • Designer gowns • 100% Love It Guarantee</p>
-                        </div>`;
-                } else if (currentWeek < startWeek) {
-                    combinedCTA = `
-                        <div class="cta-block" style="background:#000;color:#fff;text-align:center;">
-                            <div style="font-size:12px;text-transform:uppercase;letter-spacing:2px;margin-bottom:15px;opacity:0.7;">${distLabel}</div>
-                            <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:22px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">Secure Your Spot Early</h4>
-                            <p style="margin-bottom:30px;font-size:15px;line-height:1.6;opacity:0.9;">Your ideal window is weeks ${startWeek}–${endWeek}. Many clients book early to lock in their preferred date — reach out now and we'll hold your spot.</p>
-                            <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Reserve Your Date</a>
-                            ${footerNote}
-                        </div>`;
-                } else if (isLate) {
-                    combinedCTA = `
-                        <div class="cta-block" style="background:#c94b4b;color:#fff;border:3px solid #c94b4b;text-align:center;">
-                            <div style="font-size:14px;text-transform:uppercase;letter-spacing:2px;margin-bottom:15px;opacity:0.9;">⚠️ Beyond Our Maternity Cutoff • ${Math.round(distanceMiles)} miles from studio</div>
-                            <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:24px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">We Can't Wait to Meet Baby!</h4>
-                            <p style="margin-bottom:30px;font-size:16px;line-height:1.6;">At ${currentWeek} weeks, we're unable to book maternity sessions — but your newborn session is going to be absolutely magical. Contact us now to reserve your spot for those precious first days.</p>
-                            <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" style="background:#fff;color:#c94b4b;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;border:2px solid #fff;margin:0;">Book My Newborn Session</a>
-                            <p style="margin-top:25px;font-size:12px;opacity:0.9;">Newborn sessions available in the first 5–14 days 💕</p>
-                        </div>`;
-                } else {
-                    combinedCTA = `
-                        <div class="cta-block" style="background:#000;color:#fff;text-align:center;">
-                            <div style="font-size:12px;text-transform:uppercase;letter-spacing:2px;margin-bottom:15px;opacity:0.7;">${distLabel}</div>
-                            <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:22px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">Still in a Beautiful Range</h4>
-                            <p style="margin-bottom:30px;font-size:15px;line-height:1.6;">You're just past the main window but timing is still great. Book soon to secure availability.</p>
-                            <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Book Your Session</a>
-                            ${footerNote}
-                        </div>`;
-                }
+            if (isInWindow) {
+                combinedCTA = `
+                    <div class="cta-block" style="background:#000;color:#fff;border:2px solid #000;text-align:center;">
+                        <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:24px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">You're in the Perfect Window!</h4>
+                        <p style="margin-bottom:10px;font-size:16px;line-height:1.6;">Your bump is beautiful and you're likely still feeling great. This is the ideal time to book your maternity session.</p>
+                        <p style="margin-bottom:30px;font-size:13px;opacity:0.8;letter-spacing:0.5px;">We only take 6 sessions per month — check availability before your dates are gone.</p>
+                        <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" onclick="trackBookingClick('in_window')" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Check Availability Now</a>
+                        <p style="margin-top:25px;font-size:12px;opacity:0.7;">Professional hair & makeup • Designer gowns • 100% Love It Guarantee</p>
+                    </div>`;
+            } else if (isLate) {
+                combinedCTA = `
+                    <div class="cta-block" style="background:#c94b4b;color:#fff;border:3px solid #c94b4b;text-align:center;">
+                        <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:24px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">We Can't Wait to Meet Baby!</h4>
+                        <p style="margin-bottom:10px;font-size:16px;line-height:1.6;">At ${currentWeek} weeks, we're unable to book maternity sessions — but your newborn session is going to be absolutely magical.</p>
+                        <p style="margin-bottom:30px;font-size:13px;opacity:0.9;letter-spacing:0.5px;">We only take 6 newborn sessions per month — reserve your spot before baby arrives.</p>
+                        <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" onclick="trackBookingClick('late_newborn')" style="background:#fff;color:#c94b4b;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;border:2px solid #fff;margin:0;">Reserve My Newborn Session</a>
+                        <p style="margin-top:25px;font-size:12px;opacity:0.9;">Newborn sessions available in the first 5–14 days 💕</p>
+                    </div>`;
+            } else if (currentWeek < startWeek) {
+                combinedCTA = `
+                    <div class="cta-block" style="background:#000;color:#fff;text-align:center;">
+                        <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:22px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">Secure Your Spot Early</h4>
+                        <p style="margin-bottom:10px;font-size:15px;line-height:1.6;opacity:0.9;">Your ideal window is weeks ${startWeek}–${endWeek}. Reach out now and we'll hold your date.</p>
+                        <p style="margin-bottom:30px;font-size:13px;opacity:0.7;letter-spacing:0.5px;">We only take 6 sessions per month — early birds get first pick of dates.</p>
+                        <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" onclick="trackBookingClick('early')" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Reserve Your Date</a>
+                        ${footerNote}
+                    </div>`;
             } else {
                 combinedCTA = `
-                    <div class="cta-block" style="background:#f5f5f5;border:1px solid #000;text-align:center;">
-                        <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:18px;margin-bottom:14px;text-transform:uppercase;letter-spacing:1.5px;font-weight:500;overflow-wrap:break-word;word-break:break-word;">Find a Photographer Near You</h4>
-                        <p style="margin-bottom:24px;font-size:14px;color:#666;line-height:1.6;max-width:460px;margin-left:auto;margin-right:auto;">You're outside our 40-mile service area, but we can help you find a qualified maternity photographer in your region.</p>
-                        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-                            <a href="https://www.google.com/search?q=maternity+photographers+near+me" target="_blank" style="width:200px;text-align:center;padding:14px 16px;background:#000;color:#fff;text-decoration:none;font-size:12px;font-weight:500;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;box-sizing:border-box;">Find Photographers</a>
-                            <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" style="width:200px;text-align:center;padding:14px 16px;background:#fff;color:#000;border:1px solid #000;text-decoration:none;font-size:12px;font-weight:500;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;box-sizing:border-box;">Get Referrals</a>
-                        </div>
+                    <div class="cta-block" style="background:#000;color:#fff;text-align:center;">
+                        <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:22px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">Still in a Beautiful Range</h4>
+                        <p style="margin-bottom:10px;font-size:15px;line-height:1.6;">You're just past the main window but timing is still great.</p>
+                        <p style="margin-bottom:30px;font-size:13px;opacity:0.7;letter-spacing:0.5px;">We only take 6 sessions per month — don't let availability decide for you.</p>
+                        <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" onclick="trackBookingClick('past_window')" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Book Your Session</a>
+                        ${footerNote}
                     </div>`;
             }
 
             combinedCTAEl.innerHTML = combinedCTA;
 
+            // ── Fire Pixel events ──
+            fbq('track', 'ViewContent', {
+                content_name: 'Calculator Result',
+                content_category: scarcityContext,
+                value: currentWeek,
+                currency: 'USD'
+            });
+
+            // Show results
             document.getElementById('form-card').style.display = 'none';
             const resultsEl = document.getElementById('results');
             resultsEl.classList.add('active');
             if (isLate) resultsEl.classList.add('late');
             setTimeout(() => resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+            sendHeightToParent();
+        }
+
+        // ── Booking link click tracking ──
+        function trackBookingClick(context) {
+            fbq('track', 'Lead', {
+                content_name: 'Calculator Booking Click',
+                content_category: context
+            });
         }
 
         function resetCalculator() {
             document.getElementById('form-card').style.display = 'block';
             document.getElementById('results').classList.remove('active', 'late');
+            document.getElementById('scarcity-bar-container').innerHTML = '';
             form.reset();
-            locationStatus.className = 'location-status';
-            locationState = { checked: false, isLocal: false, distanceMiles: null, checking: false };
-            updateButtonState();
             setTimeout(() => document.getElementById('form-card').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
         }
     </script>
