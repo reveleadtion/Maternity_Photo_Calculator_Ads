@@ -364,12 +364,18 @@
 
             if (highRisk && !multiples) { startWeek = Math.max(20, startWeek - 2); endWeek = Math.max(22, endWeek - 2); }
 
-            const isLate     = currentWeek > 34;
-            const isInWindow = currentWeek >= startWeek && currentWeek <= endWeek;
-            const isPastWindow = !isLate && currentWeek > endWeek;
+            // ── Pregnancy stage classifications ──
+            // < 32 weeks  → normal maternity flow
+            // = 32 weeks  → RED FLAG: book today or newborn only
+            // 33–34 weeks → maternity closed, newborn only
+            // 35+ weeks   → newborn only
+            const isUrgent   = currentWeek === 32;                        // last possible maternity week
+            const isLate     = currentWeek >= 33;                         // maternity window fully closed
+            const isInWindow = !isUrgent && !isLate && currentWeek >= startWeek && currentWeek <= endWeek;
+            const isPastWindow = !isUrgent && !isLate && currentWeek > endWeek && currentWeek < startWeek === false && currentWeek > endWeek;
 
             let startDate, endDate, bookBy;
-            if (!isLate) {
+            if (!isLate && !isUrgent) {
                 startDate = new Date(conceptionDate); startDate.setDate(startDate.getDate() + startWeek * 7);
                 endDate   = new Date(conceptionDate); endDate.setDate(endDate.getDate() + endWeek * 7);
                 bookBy    = new Date(startDate);      bookBy.setDate(bookBy.getDate() - 42);
@@ -382,20 +388,28 @@
 
             // ── Determine scarcity context ──
             let scarcityContext = 'early';
-            if (isLate)       scarcityContext = 'late';
-            else if (isInWindow) scarcityContext = 'inWindow';
-            else if (isPastWindow) scarcityContext = 'pastWindow';
-            else              scarcityContext = 'early';
+            if (isLate || isUrgent) scarcityContext = 'late';
+            else if (isInWindow)    scarcityContext = 'inWindow';
+            else if (isPastWindow)  scarcityContext = 'pastWindow';
+            else                    scarcityContext = 'early';
 
             // ── Inject scarcity bar ──
             document.getElementById('scarcity-bar-container').innerHTML =
                 `<div class="scarcity-bar">${getScarcityMessage(scarcityContext)}</div>`;
 
-            if (isLate) {
+            if (isUrgent) {
+                // 32 weeks — urgent, both options
+                document.getElementById('date-range').innerHTML = `⚠️ You're at the absolute limit for maternity sessions`;
+                document.getElementById('weeks-range').textContent = `Week 32 is our final week — same-week booking required or newborn only`;
+                document.getElementById('book-by').innerHTML = `<span style="color:#c94b4b;font-weight:700;">TODAY</span>`;
+                document.getElementById('status').textContent = `Week 32 — last possible week`;
+                document.getElementById('backup').textContent = `Newborn portraits (first 5–14 days)`;
+            } else if (isLate) {
+                // 33+ weeks — maternity fully closed
                 document.getElementById('date-range').innerHTML = `Maternity booking window has closed 💕`;
-                document.getElementById('weeks-range').textContent = `You're at ${currentWeek} weeks — beyond our 34-week cutoff for maternity sessions`;
+                document.getElementById('weeks-range').textContent = `You're at ${currentWeek} weeks — beyond our 32-week booking cutoff`;
                 document.getElementById('book-by').innerHTML = `<span style="color:#c94b4b;">Passed</span>`;
-                document.getElementById('status').textContent = `Beyond our 34-week cutoff`;
+                document.getElementById('status').textContent = `Beyond our booking cutoff`;
                 document.getElementById('backup').textContent = `Newborn portraits (first 5–14 days)`;
             } else {
                 document.getElementById('date-range').textContent = `${fmt(startDate)} – ${fmt(endDate)}`;
@@ -407,7 +421,7 @@
                 document.getElementById('status').textContent = isInWindow
                     ? `You're in the sweet spot!`
                     : (currentWeek < startWeek ? `Perfect time to book now` : `Still good — don't wait too long`);
-                document.getElementById('backup').textContent = `${endWeek}–${Math.min(endWeek + 4, 36)} weeks (flexible backup)`;
+                document.getElementById('backup').textContent = `${endWeek}–${Math.min(endWeek + 2, 32)} weeks (last chance)`;
             }
 
             // ── Explanation ──
@@ -417,50 +431,75 @@
             if (highRisk)               adjustmentNotes.push('high-risk pregnancy (shifted earlier to build in flexibility)');
             if (multiples)              adjustmentNotes.push('multiple pregnancy (earlier window is standard)');
 
-            let exp = `<h4>Your Personalized Timing</h4>
-                       <p>Based on your details, your ideal window is <strong>weeks ${startWeek}–${endWeek}</strong>.`;
-            if (adjustmentNotes.length > 0) exp += ` This has been adjusted for: ${adjustmentNotes.join(', ')}.`;
-            exp += `</p>`;
+            let exp = '';
 
-            if (isLate) {
-                exp += `<p><strong>Unfortunately our maternity booking window has closed</strong> — we are unable to accept maternity sessions beyond 34 weeks. But this chapter isn't over! Here are your best next steps:</p>
-                        <ul>
-                            <li><strong>Book a newborn session with us</strong> — the first 5–14 days are pure magic and we'd love to capture them</li>
-                            <li>If maternity photos are important to you, a few photographers may still accept sessions up to 36–37 weeks — reach out quickly</li>
-                            <li>Be open to last-minute dates and comfortable posed styles</li>
-                        </ul>
-                        <p style="margin-top:25px; font-size:18px; font-weight:600;">✨ <strong>Newborn portraits</strong> in those first precious days are absolutely magical — and honestly, some of our most breathtaking work. We'd love to be there for it.</p>`;
-            } else if (isInWindow) {
-                exp += `<p>You're right in the <strong>ideal window</strong> — your bump is prominent and you're likely still feeling great. Book now to secure your dream date!</p>`;
-            } else if (currentWeek < startWeek) {
-                exp += `<p>You're approaching the perfect time — now is ideal for reaching out (most photographers need 4–8 weeks notice).</p>`;
+            if (isUrgent) {
+                exp = `<h4>Week 32 — Last Possible Week</h4>
+                       <p>You are at <strong>32 weeks</strong> — this is our absolute final week to accept a maternity booking. To make this work, we would need to confirm availability and schedule your session <strong>this week</strong>. There is no flexibility beyond this point.</p>
+                       <p>If we cannot accommodate you this week, we warmly encourage you to consider a <strong>newborn session</strong> instead — the first 5–14 days after birth are pure magic, and honestly some of our most breathtaking work.</p>`;
+            } else if (isLate) {
+                exp = `<h4>Maternity Window Has Closed</h4>
+                       <p>At <strong>${currentWeek} weeks</strong>, we are unable to book maternity sessions — our cutoff is 32 weeks. But this isn't the end of your story with us.</p>
+                       <p><strong>Newborn portraits</strong> in those first precious 5–14 days are absolutely magical. We'd love to be there for it.</p>`;
             } else {
-                exp += `<p>You're just past the main window but still in a beautiful range. Reach out soon to catch availability.</p>`;
+                exp = `<h4>Your Personalized Timing</h4>
+                       <p>Based on your details, your ideal window is <strong>weeks ${startWeek}–${endWeek}</strong>.`;
+                if (adjustmentNotes.length > 0) exp += ` This has been adjusted for: ${adjustmentNotes.join(', ')}.`;
+                exp += `</p>`;
+                if (isInWindow) {
+                    exp += `<p>You're right in the <strong>ideal window</strong> — your bump is prominent and you're likely still feeling great. Book now to secure your dream date!</p>`;
+                } else if (currentWeek < startWeek) {
+                    exp += `<p>You're approaching the perfect time — now is ideal for reaching out. Most photographers need 4–8 weeks notice, and we only take 6 sessions per month.</p>`;
+                } else {
+                    exp += `<p>You're just past the main window but still in a beautiful range. Reach out soon — we stop taking bookings at 32 weeks.</p>`;
+                }
             }
             document.getElementById('explanation').innerHTML = exp;
 
-            // ── CTA (all local — location removed) ──
-            const footerNote = `<p style="margin-top: 25px; font-size: 12px; opacity: 0.7;">Professional hair & makeup • Designer gowns • Serving Rochester Hills & Metro Detroit</p>`;
+            // ── CTA blocks ──
+            const NEWBORN_URL  = 'https://twowildsoulsphotography.com/metro-detroit-newborn-photography';
+            const MATERNITY_URL = 'https://twowildsoulsphotography.com/detroit-maternity-photographer-ads';
+            const footerNote = `<p style="margin-top:25px;font-size:12px;opacity:0.7;">Professional hair & makeup • Designer gowns • Serving Rochester Hills & Metro Detroit</p>`;
             const combinedCTAEl = document.getElementById('combined-cta-section');
             let combinedCTA = '';
 
-            if (isInWindow) {
+            if (isUrgent) {
+                // Week 32 — show BOTH options, maternity urgent + newborn fallback
+                combinedCTA = `
+                    <div class="cta-block" style="background:#8b0000;color:#fff;border:3px solid #8b0000;text-align:center;margin-bottom:12px;">
+                        <div style="font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;opacity:0.85;">⚠️ Week 32 — Maternity Booking Closes Today</div>
+                        <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:22px;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">Last Chance for Maternity Photos</h4>
+                        <p style="margin-bottom:10px;font-size:15px;line-height:1.6;">If we have availability this week, we can make it happen — but you need to reach out right now.</p>
+                        <p style="margin-bottom:24px;font-size:13px;opacity:0.85;letter-spacing:0.5px;">We only take 6 sessions per month — availability is not guaranteed.</p>
+                        <a href="${MATERNITY_URL}" class="cta-btn" target="_blank" onclick="trackBookingClick('urgent_maternity')" style="background:#fff;color:#8b0000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:700;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;border:2px solid #fff;margin:0;">Check Availability Now</a>
+                        <p style="margin-top:18px;font-size:12px;opacity:0.85;">Professional hair & makeup • Designer gowns • Rochester Hills Studio</p>
+                    </div>
+                    <div style="text-align:center;padding:16px 0 8px;color:#666;font-size:13px;text-transform:uppercase;letter-spacing:1px;">— or —</div>
+                    <div class="cta-block" style="background:#2c2c2c;color:#fff;text-align:center;">
+                        <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:20px;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">Plan Your Newborn Session Instead</h4>
+                        <p style="margin-bottom:10px;font-size:15px;line-height:1.6;opacity:0.9;">The first 5–14 days after birth are absolutely magical. Reserve your spot now so we're ready the moment baby arrives.</p>
+                        <p style="margin-bottom:24px;font-size:13px;opacity:0.7;letter-spacing:0.5px;">We only take 6 newborn sessions per month — spots go fast.</p>
+                        <a href="${NEWBORN_URL}" class="cta-btn" target="_blank" onclick="trackBookingClick('urgent_newborn')" style="background:#fff;color:#000;display:inline-block;padding:16px 40px;text-decoration:none;font-size:13px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Explore Newborn Photography</a>
+                        <p style="margin-top:18px;font-size:12px;opacity:0.7;">Newborn sessions — first 5–14 days 💕</p>
+                    </div>`;
+            } else if (isLate) {
+                // 33+ weeks — newborn only
+                combinedCTA = `
+                    <div class="cta-block" style="background:#c94b4b;color:#fff;border:3px solid #c94b4b;text-align:center;">
+                        <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:24px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">We Can't Wait to Meet Baby!</h4>
+                        <p style="margin-bottom:10px;font-size:16px;line-height:1.6;">At ${currentWeek} weeks, maternity sessions are no longer available — but your newborn session is going to be absolutely magical.</p>
+                        <p style="margin-bottom:30px;font-size:13px;opacity:0.9;letter-spacing:0.5px;">We only take 6 newborn sessions per month — reserve your spot before baby arrives.</p>
+                        <a href="${NEWBORN_URL}" class="cta-btn" target="_blank" onclick="trackBookingClick('late_newborn')" style="background:#fff;color:#c94b4b;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;border:2px solid #fff;margin:0;">Reserve My Newborn Session</a>
+                        <p style="margin-top:25px;font-size:12px;opacity:0.9;">Newborn sessions available in the first 5–14 days 💕</p>
+                    </div>`;
+            } else if (isInWindow) {
                 combinedCTA = `
                     <div class="cta-block" style="background:#000;color:#fff;border:2px solid #000;text-align:center;">
                         <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:24px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">You're in the Perfect Window!</h4>
                         <p style="margin-bottom:10px;font-size:16px;line-height:1.6;">Your bump is beautiful and you're likely still feeling great. This is the ideal time to book your maternity session.</p>
                         <p style="margin-bottom:30px;font-size:13px;opacity:0.8;letter-spacing:0.5px;">We only take 6 sessions per month — check availability before your dates are gone.</p>
-                        <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" onclick="trackBookingClick('in_window')" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Check Availability Now</a>
+                        <a href="${MATERNITY_URL}" class="cta-btn" target="_blank" onclick="trackBookingClick('in_window')" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Check Availability Now</a>
                         <p style="margin-top:25px;font-size:12px;opacity:0.7;">Professional hair & makeup • Designer gowns • 100% Love It Guarantee</p>
-                    </div>`;
-            } else if (isLate) {
-                combinedCTA = `
-                    <div class="cta-block" style="background:#c94b4b;color:#fff;border:3px solid #c94b4b;text-align:center;">
-                        <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:24px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">We Can't Wait to Meet Baby!</h4>
-                        <p style="margin-bottom:10px;font-size:16px;line-height:1.6;">At ${currentWeek} weeks, we're unable to book maternity sessions — but your newborn session is going to be absolutely magical.</p>
-                        <p style="margin-bottom:30px;font-size:13px;opacity:0.9;letter-spacing:0.5px;">We only take 6 newborn sessions per month — reserve your spot before baby arrives.</p>
-                        <a href="https://twowildsoulsphotography.com/metro-detroit-newborn-photography" class="cta-btn" target="_blank" onclick="trackBookingClick('late_newborn')" style="background:#fff;color:#c94b4b;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;border:2px solid #fff;margin:0;">Reserve My Newborn Session</a>
-                        <p style="margin-top:25px;font-size:12px;opacity:0.9;">Newborn sessions available in the first 5–14 days 💕</p>
                     </div>`;
             } else if (currentWeek < startWeek) {
                 combinedCTA = `
@@ -468,16 +507,17 @@
                         <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:22px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">Secure Your Spot Early</h4>
                         <p style="margin-bottom:10px;font-size:15px;line-height:1.6;opacity:0.9;">Your ideal window is weeks ${startWeek}–${endWeek}. Reach out now and we'll hold your date.</p>
                         <p style="margin-bottom:30px;font-size:13px;opacity:0.7;letter-spacing:0.5px;">We only take 6 sessions per month — early birds get first pick of dates.</p>
-                        <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" onclick="trackBookingClick('early')" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Reserve Your Date</a>
+                        <a href="${MATERNITY_URL}" class="cta-btn" target="_blank" onclick="trackBookingClick('early')" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Reserve Your Date</a>
                         ${footerNote}
                     </div>`;
             } else {
+                // Past ideal window but under 32 weeks — still possible, urgent tone
                 combinedCTA = `
                     <div class="cta-block" style="background:#000;color:#fff;text-align:center;">
-                        <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:22px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">Still in a Beautiful Range</h4>
-                        <p style="margin-bottom:10px;font-size:15px;line-height:1.6;">You're just past the main window but timing is still great.</p>
+                        <h4 style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:22px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:300;">Don't Wait — Book This Week</h4>
+                        <p style="margin-bottom:10px;font-size:15px;line-height:1.6;">You're past your ideal window and approaching our 32-week cutoff. If you want maternity photos, now is the time to act.</p>
                         <p style="margin-bottom:30px;font-size:13px;opacity:0.7;letter-spacing:0.5px;">We only take 6 sessions per month — don't let availability decide for you.</p>
-                        <a href="https://twowildsoulsphotography.com/detroit-maternity-photographer-ads" class="cta-btn" target="_blank" onclick="trackBookingClick('past_window')" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Book Your Session</a>
+                        <a href="${MATERNITY_URL}" class="cta-btn" target="_blank" onclick="trackBookingClick('past_window')" style="background:#fff;color:#000;display:inline-block;padding:18px 45px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin:0;">Check Availability Now</a>
                         ${footerNote}
                     </div>`;
             }
@@ -496,7 +536,7 @@
             document.getElementById('form-card').style.display = 'none';
             const resultsEl = document.getElementById('results');
             resultsEl.classList.add('active');
-            if (isLate) resultsEl.classList.add('late');
+            if (isLate || isUrgent) resultsEl.classList.add('late');
             setTimeout(() => resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
             sendHeightToParent();
         }
