@@ -365,8 +365,9 @@
 
             const fmt = d => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
-            document.getElementById('current-week-badge').textContent = `You're at Week ${currentWeek}`;
-            document.getElementById('current-week').textContent = `Week ${currentWeek}`;
+            // ── Destination URLs ──
+            const MATERNITY_URL = 'https://twowildsoulsphotography.com/detroit-maternity-photographer-ads';
+            const NEWBORN_URL   = 'https://twowildsoulsphotography.com/detroit-newborn-photographer-ads';
 
             // ── Determine scarcity context ──
             let scarcityContext = 'early';
@@ -375,18 +376,8 @@
             else if (isPastWindow)  scarcityContext = 'pastWindow';
             else                    scarcityContext = 'early';
 
-
-
-            // ── Fire Pixel events ──
-            fbq('track', 'ViewContent', {
-                content_name: 'Calculator Result',
-                content_category: scarcityContext,
-                value: currentWeek,
-                currency: 'USD'
-            });
-
             // ── Build redirect URL with personalized parameters ──
-            const destinationURL = (isLate) ? NEWBORN_URL : MATERNITY_URL;
+            const destinationURL = isLate ? NEWBORN_URL : MATERNITY_URL;
 
             // Format bookBy date for URL if available
             let bookByStr = '';
@@ -411,8 +402,8 @@
             btn.innerHTML = 'Finding Your Results&hellip;';
             btn.disabled = true;
 
-            // Fire pixel before redirect
-            fbq('track', 'ViewContent', {
+            // Fire pixel then redirect
+            fbq('track', 'Lead', {
                 content_name: 'Calculator Complete',
                 content_category: scarcityContext,
                 value: currentWeek,
@@ -433,11 +424,10 @@
         }
 
         function resetCalculator() {
-            document.getElementById('form-card').style.display = 'block';
-            document.getElementById('results').classList.remove('active', 'late');
-            document.getElementById('scarcity-bar-container').innerHTML = '';
+            const btn = document.getElementById('submit-btn');
+            btn.innerHTML = 'Calculate My Perfect Timing ✨';
+            btn.disabled = false;
             form.reset();
-            setTimeout(() => document.getElementById('form-card').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
         }
     </script>
 </body>
