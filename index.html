@@ -390,7 +390,8 @@
                 bookby:  bookByStr,
                 type:    isLate ? 'newborn' : 'maternity',
                 vibe:    vibe,
-                setting: setting
+                setting: setting,
+                duedate: dueDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
             });
 
             // Show a brief loading state so it doesn't feel abrupt
