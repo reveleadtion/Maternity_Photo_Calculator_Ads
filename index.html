@@ -394,6 +394,10 @@
                 duedate: dueDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
             });
 
+            // ── Passthrough fbclid for Meta cross-domain attribution ──
+            const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+            if (fbclid) params.set('fbclid', fbclid);
+
             // Show a brief loading state so it doesn't feel abrupt
             const btn = document.getElementById('submit-btn');
             btn.innerHTML = 'Finding Your Results&hellip;';
