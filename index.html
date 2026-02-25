@@ -25,117 +25,437 @@
     <!-- End Meta Pixel Code -->
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #ffffff; color: #000000; line-height: 1.6; }
-        .container { max-width: 1000px; margin: 40px auto 80px; padding: 0 20px; }
-        .card { background: white; border: 1px solid #000000; padding: 60px; margin-top: 30px; }
-        .form-group { margin-bottom: 35px; }
-        .form-group label { display: block; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; margin-bottom: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: #000000; }
-        .form-group input, .form-group select { width: 100%; padding: 16px; border: 1px solid #000000; font-size: 16px; font-family: 'Helvetica Neue', Arial, sans-serif; transition: all 0.3s; background: white; }
-        .form-group input:focus { outline: none; border: 2px solid #000000; padding: 15px; }
-        .form-group small { display: block; margin-top: 8px; color: #666666; font-size: 13px; font-weight: 300; }
-        .radio-group { display: flex; gap: 20px; flex-wrap: wrap; }
-        .radio-option { flex: 1; min-width: 220px; }
-        .radio-option.radio-option--third { min-width: 140px; }
-        .radio-option input { display: none; }
-        .radio-label { display: block; padding: 16px 24px; border: 1px solid #000000; cursor: pointer; text-align: center; transition: all 0.2s ease; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; background: white; color: #000000; }
-        .radio-option input:checked + .radio-label { background: #000000; color: #ffffff; }
-        .radio-label:hover { background: #f5f5f5; }
-        .radio-option input:checked + .radio-label:hover { background: #000000; }
-        .btn { width: 100%; padding: 18px; background: #000000; color: #ffffff; border: none; font-size: 14px; font-weight: 500; font-family: 'Helvetica Neue', Arial, sans-serif; cursor: pointer; margin-top: 20px; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1.5px; }
-        .btn:hover { background: #333333; }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #ffffff; animation: spin 1s linear infinite; margin-left: 10px; vertical-align: middle; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-        .results { display: none; }
-        .results.active { display: block; }
-        .results-hero { background: #eceae6; color: #000000; padding: 35px 35px 30px; margin-bottom: 40px; border: 1px solid rgba(0,0,0,0.1); }
-        .results.late .results-hero { border: 2px solid #c94b4b; background: #f5f5f5; }
-        .hero-header { text-align: center; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid rgba(0,0,0,0.1); }
-        .hero-header h3 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 15px; font-weight: 500; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 2px; color: #000000; }
-        .current-week-badge { font-size: 16px; font-weight: 500; margin: 12px 0 8px; padding: 10px 20px; background: rgba(0,0,0,0.08); display: inline-block; border: 1px solid rgba(0,0,0,0.15); color: #000000; text-transform: uppercase; letter-spacing: 1px; }
-        .date-range-display { font-size: 22px; font-weight: 700; margin: 15px 0 8px; color: #000000; word-break: break-word; }
-        .results.late .date-range-display { color: #c94b4b; font-size: 20px; }
-        .weeks-range-display { font-size: 14px; opacity: 0.85; color: #000000; }
-        .hero-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 25px; }
-        .hero-info-item { text-align: center; padding: 18px 12px; background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.1); }
-        .hero-info-item .icon { font-size: 28px; margin-bottom: 8px; display: block; }
-        .hero-info-item h4 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 9px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 500; color: #666; }
-        .hero-info-item .value { font-size: 16px; font-weight: 500; color: #000000; display: block; margin-bottom: 5px; }
-        .hero-info-item .description { font-size: 11px; color: #666; line-height: 1.3; }
-        .results.late .hero-info-item .value { color: #c94b4b; }
-        .explanation { background: #f5f5f5; border-left: 3px solid #000000; padding: 40px; margin: 40px 0; }
-        .explanation h4 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 16px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; }
-        .explanation ul { margin: 20px 0 20px 25px; font-size: 15px; line-height: 1.8; }
-        .explanation li { margin-bottom: 12px; }
-        .explanation p { font-size: 15px; line-height: 1.8; margin-bottom: 15px; }
-        .cta-btn { display: inline-block; padding: 16px 40px; background: #000000; color: #ffffff; text-decoration: none; font-size: 13px; font-weight: 500; font-family: 'Helvetica Neue', Arial, sans-serif; margin: 15px; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1.5px; border: none; }
-        .cta-btn:hover { background: #333333; }
-        .cta-block { padding: 50px 40px; }
-        .cta-btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center; }
-        .cta-btn-group a { display: block; }
-
-        /* Form validation */
-        .field-error-highlight { border: 2px solid #c94b4b !important; }
-        .radio-group.field-error-highlight .radio-label { border-color: #c94b4b; }
-
-        /* Scarcity bar */
-        .scarcity-bar { background: #1a1a1a; color: #fff; text-align: center; padding: 10px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; animation: fadeIn 0.5s ease; }
-        .scarcity-bar span { color: #e8c97a; font-weight: 700; }
-
-        .footer { text-align: center; padding: 60px 20px; color: #666666; font-size: 13px; border-top: 1px solid #e5e5e5; margin-top: 60px; }
-        .footer p { margin-bottom: 8px; }
-        .footer a { color: #000000; text-decoration: none; font-weight: 500; border-bottom: 1px solid #000000; }
-        .footer a:hover { border-bottom: 2px solid #000000; }
-
-        @media (max-width: 768px) {
-            .container { margin: 0; padding: 0; max-width: 100%; }
-            .card { padding: 0; border: none; margin-top: 0; }
-            #form-card { padding: 28px 16px 32px; border: none; }
-            #form-card h2 { font-size: 18px !important; letter-spacing: 1.5px !important; margin-bottom: 32px !important; }
-            .results-hero { padding: 24px 16px 20px; margin-bottom: 0; border-left: none; border-right: none; border-radius: 0; }
-            .hero-header { padding-bottom: 18px; margin-bottom: 18px; }
-            .hero-header h3 { font-size: 11px; letter-spacing: 1.5px; margin-bottom: 12px; }
-            .current-week-badge { font-size: 13px; padding: 7px 14px; }
-            .date-range-display { font-size: 17px; }
-            .weeks-range-display { font-size: 12px; }
-            .radio-group { flex-direction: column; gap: 10px; }
-            .radio-option { min-width: 100%; }
-            .radio-label { padding: 14px 16px; font-size: 13px; }
-            .hero-info-grid { grid-template-columns: 1fr; gap: 8px; margin-top: 18px; }
-            .hero-info-item { padding: 14px 16px; display: flex; align-items: center; gap: 14px; text-align: left; }
-            .hero-info-item .icon { font-size: 26px; margin-bottom: 0; flex-shrink: 0; }
-            .hero-info-item .item-text { flex: 1; min-width: 0; }
-            .hero-info-item h4 { font-size: 9px; letter-spacing: 0.8px; margin-bottom: 2px; }
-            .hero-info-item .value { font-size: 14px; margin-bottom: 2px; }
-            .hero-info-item .description { font-size: 11px; }
-            #combined-cta-section { margin-bottom: 0; }
-            .cta-block { padding: 32px 20px !important; }
-            .cta-block h4 { font-size: 16px !important; letter-spacing: 1px !important; overflow-wrap: break-word; word-break: break-word; }
-            .cta-btn-group { flex-direction: column; align-items: center; gap: 10px; }
-            .explanation { padding: 24px 16px; margin: 0; border-left: none; border-top: 3px solid #000; }
-            .explanation h4 { font-size: 13px; margin-bottom: 14px; }
-            .explanation p, .explanation li { font-size: 14px; }
-            #results .card > div:last-child { padding: 24px 16px; margin: 0 !important; }
-            .footer { padding: 36px 16px; margin-top: 0; }
-        }
-
-        @media (max-width: 480px) {
-            #form-card { padding: 24px 14px 28px; }
-            #form-card h2 { font-size: 16px !important; }
-            .form-group { margin-bottom: 24px; }
-            .form-group label { font-size: 12px; letter-spacing: 0.8px; }
-            .form-group input { padding: 14px 12px; font-size: 16px; }
-            .results-hero { padding: 20px 14px 16px; }
-            .hero-header h3 { font-size: 10px; }
-            .date-range-display { font-size: 15px; }
-            .current-week-badge { font-size: 12px; padding: 6px 12px; }
-            .btn { font-size: 13px; letter-spacing: 1px; padding: 16px; }
-            .cta-block h4 { font-size: 14px !important; letter-spacing: 0.5px !important; }
-            .explanation { padding: 20px 14px; }
-            .footer { padding: 32px 14px; }
-        }
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Work+Sans:wght@400;500;600&display=swap');
+    
+    /* ── Brand Tokens ───────────────────────────────────────────── */
+    :root {
+        --bg-primary:       #F7F5F2;
+        --bg-section:       #ECEAE6;
+        --text-primary:     #2E2F2C;
+        --text-secondary:   #6B6E6A;
+        --accent-olive:     #7C8A5A;
+        --accent-steel:     #6F8191;
+        --highlight-gold:   #C7B27A;
+        --cta-deep:         #3F4438;
+        --error:            #c94b4b;
+        --border:           rgba(46,47,44,0.2);
+    }
+    
+    /* ── Reset & Base ───────────────────────────────────────────── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.7;
+    }
+    
+    /* ── Typography Roles ───────────────────────────────────────── */
+    /* Titles — apply class "title-serif" or use h1/h2 directly */
+    h1, h2, .title-serif {
+        font-family: 'Royal Serif', 'Cormorant Garamond', Georgia, serif;
+        font-weight: 300;
+        color: var(--text-primary);
+        letter-spacing: 2px;
+    }
+    
+    /* Subheadings — Work Sans, all caps */
+    h3, h4, label, .subheading {
+        font-family: 'Work Sans', 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--text-primary);
+    }
+    
+    /* Paragraph / body */
+    p, li, .form-group small {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-weight: 400;
+    }
+    
+    /* ── Layout ─────────────────────────────────────────────────── */
+    .container {
+        max-width: 1000px;
+        margin: 40px auto 80px;
+        padding: 0 20px;
+    }
+    
+    .card {
+        background: #ffffff;
+        border: 1px solid var(--border);
+        padding: 60px;
+        margin-top: 30px;
+    }
+    
+    /* ── Form Elements ──────────────────────────────────────────── */
+    .form-group { margin-bottom: 35px; }
+    
+    .form-group label {
+        display: block;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 11px;
+        margin-bottom: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--text-primary);
+    }
+    
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 16px;
+        border: 1px solid var(--border);
+        font-size: 17px;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        transition: all 0.3s;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+    }
+    
+    .form-group input:focus {
+        outline: none;
+        border: 2px solid var(--accent-olive);
+        padding: 15px;
+        background: #ffffff;
+    }
+    
+    .form-group small {
+        display: block;
+        margin-top: 8px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        font-weight: 400;
+    }
+    
+    /* ── Radio Buttons ──────────────────────────────────────────── */
+    .radio-group { display: flex; gap: 20px; flex-wrap: wrap; }
+    .radio-option { flex: 1; min-width: 220px; }
+    .radio-option.radio-option--third { min-width: 140px; }
+    .radio-option input { display: none; }
+    
+    .radio-label {
+        display: block;
+        padding: 16px 24px;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s ease;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+    }
+    
+    .radio-option input:checked + .radio-label {
+        background: var(--cta-deep);
+        color: #ffffff;
+        border-color: var(--cta-deep);
+    }
+    
+    .radio-label:hover { background: var(--bg-section); }
+    .radio-option input:checked + .radio-label:hover { background: var(--cta-deep); }
+    
+    /* ── Primary Button ─────────────────────────────────────────── */
+    .btn {
+        width: 100%;
+        padding: 18px;
+        background: var(--cta-deep);
+        color: #ffffff;
+        border: none;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    
+    .btn:hover { background: var(--accent-olive); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    
+    /* ── Spinner ────────────────────────────────────────────────── */
+    .spinner {
+        display: inline-block;
+        width: 14px; height: 14px;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-top-color: #ffffff;
+        animation: spin 1s linear infinite;
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+    
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* ── Results ────────────────────────────────────────────────── */
+    .results { display: none; }
+    .results.active { display: block; }
+    
+    .results-hero {
+        background: var(--bg-section);
+        color: var(--text-primary);
+        padding: 35px 35px 30px;
+        margin-bottom: 40px;
+        border: 1px solid var(--border);
+    }
+    
+    .results.late .results-hero {
+        border: 2px solid var(--error);
+        background: #faf8f5;
+    }
+    
+    .hero-header {
+        text-align: center;
+        padding-bottom: 25px;
+        margin-bottom: 25px;
+        border-bottom: 1px solid var(--border);
+    }
+    
+    .hero-header h3 {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 10px;
+        font-weight: 500;
+        margin-bottom: 18px;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        color: var(--text-secondary);
+    }
+    
+    .current-week-badge {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        margin: 12px 0 8px;
+        padding: 10px 20px;
+        background: rgba(124,138,90,0.1);
+        display: inline-block;
+        border: 1px solid rgba(124,138,90,0.3);
+        color: var(--accent-olive);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+    
+    .date-range-display {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 28px;
+        font-weight: 300;
+        margin: 15px 0 8px;
+        color: var(--text-primary);
+        word-break: break-word;
+        letter-spacing: 1px;
+    }
+    
+    .results.late .date-range-display {
+        color: var(--error);
+        font-size: 24px;
+    }
+    
+    .weeks-range-display {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 15px;
+        opacity: 0.8;
+        color: var(--text-secondary);
+    }
+    
+    /* ── Info Grid ──────────────────────────────────────────────── */
+    .hero-info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 25px;
+    }
+    
+    .hero-info-item {
+        text-align: center;
+        padding: 18px 12px;
+        background: rgba(255,255,255,0.6);
+        border: 1px solid var(--border);
+    }
+    
+    .hero-info-item .icon { font-size: 28px; margin-bottom: 8px; display: block; }
+    
+    .hero-info-item h4 {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 8px;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+    
+    .hero-info-item .value {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 17px;
+        font-weight: 500;
+        color: var(--text-primary);
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .hero-info-item .description {
+        font-size: 12px;
+        color: var(--text-secondary);
+        line-height: 1.4;
+    }
+    
+    .results.late .hero-info-item .value { color: var(--error); }
+    
+    /* ── Explanation Block ──────────────────────────────────────── */
+    .explanation {
+        background: var(--bg-section);
+        border-left: 3px solid var(--highlight-gold);
+        padding: 40px;
+        margin: 40px 0;
+    }
+    
+    .explanation h4 {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 11px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+    
+    .explanation ul { margin: 20px 0 20px 25px; line-height: 1.9; }
+    .explanation li { margin-bottom: 12px; font-size: 16px; }
+    .explanation p { font-size: 16px; line-height: 1.9; margin-bottom: 15px; }
+    
+    /* ── CTA Button ─────────────────────────────────────────────── */
+    .cta-btn {
+        display: inline-block;
+        padding: 16px 40px;
+        background: var(--cta-deep);
+        color: #ffffff;
+        text-decoration: none;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        margin: 15px;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border: none;
+    }
+    
+    .cta-btn:hover { background: var(--accent-olive); }
+    
+    .cta-block { padding: 50px 40px; }
+    
+    .cta-btn-group {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    
+    .cta-btn-group a { display: block; }
+    
+    /* ── Validation ─────────────────────────────────────────────── */
+    .field-error-highlight { border: 2px solid var(--error) !important; }
+    .radio-group.field-error-highlight .radio-label { border-color: var(--error); }
+    
+    /* ── Scarcity Bar ───────────────────────────────────────────── */
+    .scarcity-bar {
+        background: var(--cta-deep);
+        color: #ffffff;
+        text-align: center;
+        padding: 10px 16px;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 500;
+        animation: fadeIn 0.5s ease;
+    }
+    
+    .scarcity-bar span {
+        color: var(--highlight-gold);
+        font-weight: 700;
+    }
+    
+    /* ── Footer ─────────────────────────────────────────────────── */
+    .footer {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-secondary);
+        font-size: 14px;
+        border-top: 1px solid var(--border);
+        margin-top: 60px;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    
+    .footer p { margin-bottom: 8px; }
+    
+    .footer a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 1px solid var(--highlight-gold);
+    }
+    
+    .footer a:hover { border-bottom: 2px solid var(--accent-olive); }
+    
+    /* ── Responsive: Tablet ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+        .container { margin: 0; padding: 0; max-width: 100%; }
+        .card { padding: 0; border: none; margin-top: 0; }
+        #form-card { padding: 28px 16px 32px; border: none; }
+        #form-card h2 { font-size: 22px !important; letter-spacing: 1.5px !important; margin-bottom: 32px !important; }
+        .results-hero { padding: 24px 16px 20px; margin-bottom: 0; border-left: none; border-right: none; }
+        .hero-header { padding-bottom: 18px; margin-bottom: 18px; }
+        .hero-header h3 { font-size: 9px; letter-spacing: 1.5px; margin-bottom: 12px; }
+        .current-week-badge { font-size: 10px; padding: 7px 14px; }
+        .date-range-display { font-size: 20px; }
+        .weeks-range-display { font-size: 13px; }
+        .radio-group { flex-direction: column; gap: 10px; }
+        .radio-option { min-width: 100%; }
+        .radio-label { padding: 14px 16px; font-size: 11px; }
+        .hero-info-grid { grid-template-columns: 1fr; gap: 8px; margin-top: 18px; }
+        .hero-info-item { padding: 14px 16px; display: flex; align-items: center; gap: 14px; text-align: left; }
+        .hero-info-item .icon { font-size: 26px; margin-bottom: 0; flex-shrink: 0; }
+        .hero-info-item .item-text { flex: 1; min-width: 0; }
+        .hero-info-item h4 { font-size: 8px; letter-spacing: 0.8px; margin-bottom: 2px; }
+        .hero-info-item .value { font-size: 15px; margin-bottom: 2px; }
+        .hero-info-item .description { font-size: 11px; }
+        #combined-cta-section { margin-bottom: 0; }
+        .cta-block { padding: 32px 20px !important; }
+        .cta-block h4 { font-size: 12px !important; letter-spacing: 1px !important; overflow-wrap: break-word; word-break: break-word; }
+        .cta-btn-group { flex-direction: column; align-items: center; gap: 10px; }
+        .explanation { padding: 24px 16px; margin: 0; border-left: none; border-top: 3px solid var(--highlight-gold); }
+        .explanation h4 { font-size: 10px; margin-bottom: 14px; }
+        .explanation p, .explanation li { font-size: 15px; }
+        #results .card > div:last-child { padding: 24px 16px; margin: 0 !important; }
+        .footer { padding: 36px 16px; margin-top: 0; }
+    }
+    
+    /* ── Responsive: Mobile ─────────────────────────────────────── */
+    @media (max-width: 480px) {
+        #form-card { padding: 24px 14px 28px; }
+        #form-card h2 { font-size: 20px !important; }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { font-size: 10px; letter-spacing: 0.8px; }
+        .form-group input { padding: 14px 12px; font-size: 16px; }
+        .results-hero { padding: 20px 14px 16px; }
+        .hero-header h3 { font-size: 8px; }
+        .date-range-display { font-size: 17px; }
+        .current-week-badge { font-size: 10px; padding: 6px 12px; }
+        .btn { font-size: 11px; letter-spacing: 1px; padding: 16px; }
+        .cta-block h4 { font-size: 11px !important; letter-spacing: 0.5px !important; }
+        .explanation { padding: 20px 14px; }
+        .footer { padding: 32px 14px; }
+    }
     </style>
 </head>
 <body>
