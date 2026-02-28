@@ -3,22 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>When to Take Maternity Photos | Two Wild Souls Photography</title>
-
-    <!-- Meta Pixel -->
-    <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-    (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1484618222285119');
-    fbq('track', 'PageView');
-    </script>
-    <noscript>
-      <img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=1484618222285119&ev=PageView&noscript=1"/>
-    </noscript>
+    <title>Maternity Photo Timing | Two Wild Souls Photography</title>
 
     <style>
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap");
@@ -39,147 +24,203 @@
         font-family: "DM Sans", sans-serif;
         background: var(--bg);
         color: var(--text);
-        line-height: 1.65;
+        line-height: 1.5;
         min-height: 100vh;
-        padding: 40px 20px 100px;
+        padding: 24px 16px 40px;
     }
 
-    .container { max-width: 820px; margin: 0 auto; }
+    .container { max-width: 900px; margin: 0 auto; }
 
-    .header { text-align: center; padding: 0 0 48px; }
-    .header .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-    .header h1 { font-family: "Playfair Display", serif; font-size: clamp(32px, 7vw, 48px); font-weight: 400; line-height: 1.15; margin-bottom: 16px; }
-    .header h1 em { color: var(--gold); font-style: italic; }
-    .header p { font-size: 17px; color: var(--text-light); max-width: 640px; margin: 0 auto; }
+    .brand-header { text-align: center; margin-bottom: 20px; }
+    .brand-logo { font-family: "Playfair Display", serif; font-size: clamp(28px, 7vw, 42px); font-weight: 400; color: var(--deep); margin-bottom: 4px; }
+    .brand-logo span { color: var(--gold); font-style: italic; }
+    .brand-tagline { font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
 
-    .progress-bar { height: 4px; background: rgba(124,138,90,0.12); margin: 0 0 40px; border-radius: 2px; overflow: hidden; }
+    .tagline-excerpt {
+        font-size: 11px; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase;
+        color: var(--text-light); text-align: center; margin: 12px 0 20px; line-height: 1.6;
+    }
+    .tagline-excerpt strong { color: var(--deep); }
+
+    .intro-section { text-align: center; margin-bottom: 24px; }
+    .intro-title { font-family: "Playfair Display", serif; font-size: clamp(22px, 5vw, 28px); font-weight: 400; color: var(--deep); margin-bottom: 8px; }
+    .intro-text { font-size: 14px; color: var(--text-light); line-height: 1.6; }
+
+    .progress-bar { height: 3px; background: rgba(63,68,56,0.12); margin: 0 0 20px; border-radius: 2px; overflow: hidden; }
     .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--gold)); transition: width 0.5s ease; }
 
-    .dots { display: flex; justify-content: center; gap: 10px; margin: 0 0 32px; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: #E0DDD8; transition: all 0.3s; }
+    .dots { display: flex; justify-content: center; gap: 8px; margin: 0 0 16px; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: #E0DDD8; transition: all 0.3s; }
     .dot.active { background: var(--accent); transform: scale(1.4); }
     .dot.completed { background: var(--gold); transform: scale(1.1); }
 
-    .step { display: none; }
+    .step { display: none; animation: fadeIn 0.3s ease; }
     .step.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-    .question { font-family: "Playfair Display", serif; font-size: clamp(24px, 5vw, 32px); font-weight: 400; line-height: 1.25; margin: 0 0 12px; text-align: center; }
-    .hint { font-size: 15px; color: var(--text-light); font-style: italic; text-align: center; margin: 0 0 28px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .question { font-family: "Playfair Display", serif; font-size: clamp(20px, 5vw, 26px); font-weight: 400; margin: 0 0 8px; text-align: center; }
+    .hint { font-size: 13px; color: var(--text-light); font-style: italic; text-align: center; margin: 0 0 16px; }
 
-    .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 0 0 32px; }
+    .options { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 0 0 20px; }
     .option {
-        padding: 20px 24px; border: 2px solid var(--border); border-radius: 6px;
+        padding: 16px; border: 1.5px solid var(--border); border-radius: 6px;
         cursor: pointer; transition: all 0.2s; background: white; text-align: center;
     }
     .option:hover { border-color: var(--accent); background: rgba(124,138,90,0.04); }
-    .option.selected { border-color: var(--accent); background: rgba(124,138,90,0.08); box-shadow: 0 0 0 3px rgba(124,138,90,0.15); }
-    .option-title { font-size: 17px; font-weight: 500; margin-bottom: 6px; }
-    .option-desc { font-size: 14px; color: var(--text-light); }
+    .option.selected { border-color: var(--accent); background: rgba(124,138,90,0.08); box-shadow: 0 0 0 2px rgba(124,138,90,0.15); }
+    .option-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .option-desc { font-size: 12px; color: var(--text-light); }
 
     .date-picker {
-        width: 100%; max-width: 420px; margin: 0 auto 32px; padding: 18px 24px;
-        font-size: 17px; background: white; border: 2px solid var(--border);
-        border-radius: 6px; cursor: pointer; text-align: center; transition: all 0.2s;
+        width: 100%; padding: 14px 20px; font-size: 15px; background: white;
+        border: 1.5px solid var(--border); border-radius: 6px; cursor: pointer;
+        text-align: center; transition: all 0.2s; margin-bottom: 16px;
+        font-family: "DM Sans", sans-serif;
     }
-    .date-picker:hover, .date-picker:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(124,138,90,0.12); }
+    .date-picker:hover { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(124,138,90,0.1); }
     .date-placeholder { color: var(--text-light); }
 
-    .checkbox-option { display: flex; align-items: center; gap: 12px; padding: 16px; border: 2px solid var(--border); border-radius: 6px; cursor: pointer; background: white; transition: all 0.2s; }
+    .checkbox-option { padding: 14px; border: 1.5px solid var(--border); border-radius: 6px; cursor: pointer; background: white; transition: all 0.2s; text-align: center; }
     .checkbox-option:hover { border-color: var(--accent); background: rgba(124,138,90,0.04); }
     .checkbox-option.selected { border-color: var(--accent); background: rgba(124,138,90,0.08); }
-    .checkbox-label { font-size: 17px; font-weight: 500; }
+    .checkbox-label { font-size: 15px; font-weight: 500; }
 
-    .buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+    .buttons { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
     .btn {
-        padding: 16px 36px; font-size: 14px; font-weight: 500; letter-spacing: 0.08em;
-        text-transform: uppercase; border-radius: 6px; cursor: pointer; transition: all 0.2s; min-width: 160px;
+        padding: 12px 28px; font-size: 12px; font-weight: 500; letter-spacing: 0.8px;
+        text-transform: uppercase; border-radius: 6px; cursor: pointer; transition: all 0.2s; min-width: 140px;
+        font-family: "DM Sans", sans-serif;
     }
-    .btn-back { background: transparent; border: 2px solid var(--border); color: var(--text-light); }
+    .btn-back { background: transparent; border: 1.5px solid var(--border); color: var(--text-light); }
     .btn-back:hover { border-color: var(--text); color: var(--text); }
-    .btn-next { background: var(--deep); color: white; border: none; }
-    .btn-next:hover { background: var(--accent); }
+    .btn-next { background: linear-gradient(90deg, var(--accent), var(--gold)); color: white; border: none; }
     .btn-gold { background: linear-gradient(90deg, var(--accent), var(--gold)); color: white; border: none; }
 
-    .error-msg { color: var(--error); font-size: 14px; text-align: center; margin: 12px 0; display: none; }
+    .error-msg { color: var(--error); font-size: 12px; text-align: center; margin: 8px 0; display: none; }
     .error-msg.show { display: block; }
 
-    .loading-screen { text-align: center; padding: 100px 20px; display: none; }
-    .spinner {
-        width: 48px; height: 48px; border: 5px solid rgba(124,138,90,0.2);
-        border-top: 5px solid var(--accent); border-radius: 50%;
-        animation: spin 1s linear infinite; margin: 0 auto 24px;
-    }
+    .loading-screen { text-align: center; padding: 60px 20px; display: none; }
+    .spinner { width: 40px; height: 40px; border: 4px solid rgba(124,138,90,0.2); border-top: 4px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px; }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+
+
+    .footer-brand { text-align: center; margin-top: 40px; font-size: 11px; color: var(--text-light); opacity: 0.7; }
 
     /* Calendar */
     #calendar-overlay {
-        display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65);
-        z-index: 1000; align-items: center; justify-content: center; padding: 20px;
+        display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+        z-index: 1000; align-items: center; justify-content: center; padding: 16px;
     }
     #calendar-overlay.open { display: flex; }
     .calendar {
-        background: white; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+        background: white; border-radius: 12px; box-shadow: 0 16px 48px rgba(0,0,0,0.25);
         max-width: 360px; width: 100%; overflow: hidden;
     }
-    .cal-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: #F7F5F1; border-bottom: 1px solid var(--border); }
-    .cal-header button { background: none; border: none; font-size: 24px; color: var(--deep); cursor: pointer; padding: 0 12px; }
-    .cal-header span { font-family: "Playfair Display", serif; font-size: 18px; font-weight: 500; }
-    .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 12px; font-weight: 500; color: var(--text-light); padding: 12px 0; background: #F7F5F1; }
-    .cal-days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; padding: 12px; }
+    .cal-header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 16px 20px; background: var(--deep); color: white;
+    }
+    .cal-header span { font-family: "Playfair Display", serif; font-size: 17px; font-weight: 400; }
+    .cal-header button { background: none; border: none; color: white; font-size: 22px; cursor: pointer; padding: 0 6px; line-height: 1; }
+    .cal-weekdays {
+        display: grid; grid-template-columns: repeat(7, 1fr);
+        padding: 10px 12px 4px; gap: 2px;
+        font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
+        text-transform: uppercase; color: var(--text-light); text-align: center;
+    }
+    .cal-days-grid {
+        display: grid; grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        padding: 4px 12px 12px; gap: 3px;
+        height: 228px;
+    }
     .cal-day {
         aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-        font-size: 15px; border-radius: 50%; cursor: pointer; transition: all 0.15s;
+        font-size: 13px; border-radius: 50%; cursor: pointer; transition: all 0.15s;
+        border: none; background: none; font-family: "DM Sans", sans-serif; color: var(--text);
     }
-    .cal-day:hover:not(.disabled):not(.empty) { background: rgba(124,138,90,0.1); }
-    .cal-day.selected { background: var(--accent); color: white; font-weight: 600; }
-    .cal-day.disabled { color: #ccc; cursor: not-allowed; }
-    .cal-day.empty { background: transparent; cursor: default; }
-    .cal-footer { padding: 16px; text-align: right; border-top: 1px solid var(--border); }
-    .cal-footer button { padding: 10px 20px; margin-left: 12px; border: none; border-radius: 6px; cursor: pointer; }
-    .cal-footer .btn-cancel { background: #eee; color: #555; }
-    .cal-footer .btn-done  { background: var(--accent); color: white; }
+    .cal-day:hover:not(.disabled):not(.empty) { background: rgba(124,138,90,0.12); }
+    .cal-day.selected { background: var(--accent); color: white; }
+    .cal-day.today { font-weight: 700; color: var(--accent); }
+    .cal-day.disabled { color: #CCC; cursor: not-allowed; }
+    .cal-day.too-soon { color: #CCC; cursor: pointer; }
+    .cal-day.too-soon:hover { background: rgba(191,80,64,0.08); color: #bf5040; }
+    .cal-day.empty { pointer-events: none; }
 
-    @media (max-width: 640px) {
-        .options { grid-template-columns: 1fr; }
-        .buttons { flex-direction: column; }
-        .btn { width: 100%; }
+    /* Too-soon popup */
+    #too-soon-popup {
+        display: none; position: absolute; left: 50%; transform: translateX(-50%);
+        bottom: calc(100% + 8px); background: #3F4438; color: white;
+        font-size: 12px; line-height: 1.5; padding: 10px 14px; border-radius: 8px;
+        width: 240px; text-align: center; z-index: 10; pointer-events: none;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+    #too-soon-popup::after {
+        content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+        border: 6px solid transparent; border-top-color: #3F4438;
+    }
+    #too-soon-popup.show { display: block; animation: fadeIn 0.2s ease; }
+    .cal-days-wrapper { position: relative; }
+    .cal-footer {
+        display: flex; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--border);
+        justify-content: flex-end;
+    }
+    .cal-footer button { padding: 8px 20px; border-radius: 5px; font-size: 12px; font-weight: 500; cursor: pointer; font-family: "DM Sans", sans-serif; letter-spacing: 0.5px; text-transform: uppercase; }
+    .btn-cancel { background: none; border: 1.5px solid var(--border); color: var(--text-light); }
+    .btn-done { background: linear-gradient(90deg, var(--accent), var(--gold)); color: white; border: none; }
+
+    @media (min-width: 500px) {
+        .options { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
     }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header class="header">
-        <div class="eyebrow">Find Your Perfect Timing</div>
-        <h1>When Should You Book Your <em>Maternity Photos</em>?</h1>
-        <p>Answer a few quick questions — get your personalized window, booking urgency, and tips tailored to your situation in Metro Detroit.</p>
-    </header>
+    <div class="brand-header">
+        <div class="brand-logo">Two Wild <span>Souls</span> Photography</div>
+        <div class="brand-tagline">Metro Detroit Maternity Portraits</div>
+    </div>
+
+    <div class="tagline-excerpt">
+        <strong>Pro Hair + Makeup · Designer Gowns · In-Studio & Outdoors · Fully Guided</strong>
+    </div>
+
+    <div class="intro-section">
+        <h2 class="intro-title">Get Your Personalized Timing</h2>
+        <p class="intro-text">
+            Answer a few quick questions → get your exact week window, booking urgency, and tips so you can reserve your spot before we fill up <i>(only 6 sessions/month)</i>.
+        </p>
+    </div>
 
     <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
     <div class="dots" id="dots"></div>
 
     <!-- Step 1: Due Date -->
     <div class="step active" id="step-1">
-        <div class="question">What's your expected due date?</div>
-        <div class="hint">We'll use this to calculate your current week and ideal photo timing.</div>
+        <div class="question">When is your due date?</div>
+        <div class="hint">We'll calculate your ideal photo window from this.</div>
         <div class="date-picker" id="date-display" onclick="openCalendar()">
-            <span id="selected-date" class="date-placeholder">Tap to select due date...</span>
+            <span id="selected-date" class="date-placeholder">Tap to select your due date...</span>
         </div>
-        <div class="error-msg" id="error-1">Please select a valid due date to continue.</div>
+        <div class="error-msg" id="error-1">Please select a due date to continue.</div>
+        <div class="buttons">
+            <button class="btn btn-next" onclick="validateStep1()">Next →</button>
+        </div>
     </div>
 
     <!-- Step 2: First Baby -->
     <div class="step" id="step-2">
         <div class="question">Is this your first baby?</div>
-        <div class="hint">First-time moms often show later — this adjusts your ideal window.</div>
         <div class="options">
-            <div class="option" data-value="yes" onclick="selectOption(this, 'firstBaby', 2, 3)">
-                <div class="option-title">Yes, first baby!</div>
-                <div class="option-desc">Excited for the journey</div>
+            <div class="option" data-key="firstBaby" data-value="yes" onclick="selectOption(this)">
+                <div class="option-title">Yes — first time!</div>
+                <div class="option-desc">Exciting new chapter</div>
             </div>
-            <div class="option" data-value="no" onclick="selectOption(this, 'firstBaby', 2, 3)">
-                <div class="option-title">No, we've done this before</div>
-                <div class="option-desc">Experienced parents</div>
+            <div class="option" data-key="firstBaby" data-value="no" onclick="selectOption(this)">
+                <div class="option-title">No — I've done this before</div>
+                <div class="option-desc">Adding to the family</div>
             </div>
         </div>
         <div class="error-msg" id="error-2">Please make a selection.</div>
@@ -191,15 +232,12 @@
     <!-- Step 3: Multiples -->
     <div class="step" id="step-3">
         <div class="question">Are you expecting multiples?</div>
-        <div class="hint">Twins or more? We recommend earlier sessions for comfort.</div>
         <div class="options">
-            <div class="option" data-value="yes" onclick="selectOption(this, 'multiples', 3, 4)">
-                <div class="option-title">Yes</div>
-                <div class="option-desc">Twins, triplets, etc.</div>
+            <div class="option" data-key="multiples" data-value="yes" onclick="selectOption(this)">
+                <div class="option-title">Yes — twins or more!</div>
             </div>
-            <div class="option" data-value="no" onclick="selectOption(this, 'multiples', 3, 4)">
-                <div class="option-title">No</div>
-                <div class="option-desc">Single baby</div>
+            <div class="option" data-key="multiples" data-value="no" onclick="selectOption(this)">
+                <div class="option-title">No — just one</div>
             </div>
         </div>
         <div class="error-msg" id="error-3">Please make a selection.</div>
@@ -210,277 +248,325 @@
 
     <!-- Step 4: Preferred Style -->
     <div class="step" id="step-4">
-        <div class="question">Preferred style</div>
-        <div class="hint">Choose how you'd like your bump to look in the photos.</div>
+        <div class="question">What look are you going for?</div>
         <div class="options">
-            <div class="option" data-value="full" onclick="selectOption(this, 'style', 4, 5)">
+            <div class="option" data-key="style" data-value="full" onclick="selectOption(this)">
                 <div class="option-title">Full, dramatic bump</div>
-                <div class="option-desc">Later in pregnancy — maximum curve & glow</div>
+                <div class="option-desc">Classic maternity look — beautifully round</div>
             </div>
-            <div class="option" data-value="early" onclick="selectOption(this, 'style', 4, 5)">
+            <div class="option" data-key="style" data-value="early" onclick="selectOption(this)">
                 <div class="option-title">Earlier & more comfortable</div>
-                <div class="option-desc">Softer bump — easier to move & pose</div>
+                <div class="option-desc">More energy, easier to move around</div>
             </div>
         </div>
-        <div class="error-msg" id="error-4">Please select your preferred style.</div>
+        <div class="error-msg" id="error-4">Please make a selection.</div>
         <div class="buttons">
             <button class="btn btn-back" onclick="goToStep(3)">Back</button>
         </div>
     </div>
 
-    <!-- Step 5: Preferred Setting -->
+    <!-- Step 5: Setting -->
     <div class="step" id="step-5">
-        <div class="question">Preferred setting?</div>
-        <div class="hint">This influences timing for weather or comfort.</div>
+        <div class="question">Where would you love to shoot?</div>
         <div class="options">
-            <div class="option" data-value="outdoor" onclick="selectOption(this, 'setting', 5, 6)">
-                <div class="option-title">Outdoor</div>
-                <div class="option-desc">Natural light, scenic locations</div>
+            <div class="option" data-key="setting" data-value="outdoor" onclick="selectOption(this)">
+                <div class="option-title">🌿 Outdoor</div>
+                <div class="option-desc">Natural light, golden hour, greenery</div>
             </div>
-            <div class="option" data-value="indoor" onclick="selectOption(this, 'setting', 5, 6)">
-                <div class="option-title">Indoor/Studio</div>
-                <div class="option-desc">Controlled, intimate</div>
+            <div class="option" data-key="setting" data-value="indoor" onclick="selectOption(this)">
+                <div class="option-title">🏛 Indoor / Studio</div>
+                <div class="option-desc">Controlled, elegant, weather-proof</div>
             </div>
-            <div class="option" data-value="both" onclick="selectOption(this, 'setting', 5, 6)">
-                <div class="option-title">Both</div>
-                <div class="option-desc">Mix of outdoor & indoor</div>
+            <div class="option" data-key="setting" data-value="both" onclick="selectOption(this)">
+                <div class="option-title">✨ Both</div>
+                <div class="option-desc">Best of both worlds</div>
             </div>
         </div>
-        <div class="error-msg" id="error-5">Please select your preferred setting.</div>
+        <div class="error-msg" id="error-5">Please make a selection.</div>
         <div class="buttons">
             <button class="btn btn-back" onclick="goToStep(4)">Back</button>
         </div>
     </div>
 
-    <!-- Step 6: High-risk (final) -->
+    <!-- Step 6: High-risk -->
     <div class="step" id="step-6">
         <div class="question">Any special considerations?</div>
-        <div class="hint">This refines your recommendation. Skip if none apply.</div>
-        <div class="options" style="grid-template-columns: 1fr;">
-            <div class="checkbox-option" onclick="toggleCheckbox(this, 'highRisk')">
-                <input type="checkbox" id="highRisk" style="display:none;">
-                <div class="checkbox-label">High-risk pregnancy</div>
-                <div style="font-size:14px; color:var(--text-light); font-style:italic;">We recommend scheduling earlier</div>
+        <div class="hint">Optional — helps us personalize your timing.</div>
+        <div class="options" style="grid-template-columns:1fr; max-width: 400px; margin: 0 auto 20px;">
+            <div class="checkbox-option" id="highRiskBox" onclick="toggleCheckbox()">
+                <div class="checkbox-label" id="highRiskLabel">☐ &nbsp;High-risk pregnancy</div>
             </div>
         </div>
         <div class="buttons">
             <button class="btn btn-back" onclick="goToStep(5)">Back</button>
-            <button class="btn btn-gold" onclick="calculateAndRedirect()">See My Recommendation →</button>
+            <button class="btn btn-gold" onclick="calculate()">Get My Timing →</button>
         </div>
     </div>
 
+    <!-- Loading -->
     <div class="loading-screen" id="loading">
         <div class="spinner"></div>
-        <h2>Creating Your Personalized Plan…</h2>
-        <p>Just a moment</p>
+        <div style="font-family:'Playfair Display',serif; font-size:22px; color:var(--deep); margin-bottom:8px;">Building Your Plan…</div>
+        <p style="font-size:13px;color:var(--text-light);">Calculating your perfect session window</p>
     </div>
+
+
+    <div class="footer-brand">© Two Wild Souls Photography · Metro Detroit</div>
 </div>
 
 <!-- Calendar Modal -->
-<div id="calendar-overlay">
+<div id="calendar-overlay" onclick="handleOverlayClick(event)">
     <div class="calendar">
         <div class="cal-header">
             <button onclick="changeMonth(-1)">‹</button>
-            <span id="cal-header"></span>
+            <span id="cal-header-text"></span>
             <button onclick="changeMonth(1)">›</button>
         </div>
         <div class="cal-weekdays">
             <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
             <div>Thu</div><div>Fri</div><div>Sat</div>
         </div>
+        <div class="cal-days-wrapper">
+        <div id="too-soon-popup">She's already past 32 weeks — unfortunately we can't accommodate sessions this late. Please call us to discuss options! 💛</div>
         <div id="cal-days-grid" class="cal-days-grid"></div>
+    </div>
         <div class="cal-footer">
-            <button class="btn btn-cancel" onclick="closeCalendar()">Cancel</button>
-            <button class="btn btn-done" onclick="closeCalendar()">Done</button>
+            <button class="btn-cancel" onclick="closeCalendar()">Cancel</button>
+            <button class="btn-done" onclick="confirmCalendar()">Done</button>
         </div>
     </div>
 </div>
 
 <script>
-// ────────────────────────────────────────────────
-// State
-// ────────────────────────────────────────────────
+// ─── STATE ───────────────────────────────────────────────────────────────────
 const state = {
     dueDate: null,
     firstBaby: null,
     multiples: null,
-    style: null,      // 'full' or 'early'
+    style: null,
     setting: null,
     highRisk: false
 };
 
 let currentStep = 1;
-const totalSteps = 6; // now 6 steps
+const totalSteps = 6;
 
-const today = new Date(); today.setHours(0,0,0,0);
-const MIN_DAYS_FROM_TODAY = 56;
-const minDueDate = new Date(today); minDueDate.setDate(minDueDate.getDate() + MIN_DAYS_FROM_TODAY);
+// Calendar state
+let calViewYear, calViewMonth, calTempDate = null;
 
-const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-let calYear = today.getFullYear();
-let calMonth = today.getMonth();
-
-// ────────────────────────────────────────────────
-// DOM Helpers
-// ────────────────────────────────────────────────
-function safeGet(id) { return document.getElementById(id); }
-
-// ────────────────────────────────────────────────
-// Progress
-// ────────────────────────────────────────────────
-function updateProgress() {
-    const fill = safeGet('progress-fill');
-    if (fill) fill.style.width = `${(currentStep / totalSteps) * 100}%`;
-
-    const dots = safeGet('dots');
-    if (dots) {
-        dots.innerHTML = '';
-        for (let i = 1; i <= totalSteps; i++) {
-            const d = document.createElement('div');
-            d.className = 'dot';
-            if (i === currentStep) d.classList.add('active');
-            if (i < currentStep) d.classList.add('completed');
-            dots.appendChild(d);
-        }
-    }
-}
-
-// ────────────────────────────────────────────────
-// Navigation
-// ────────────────────────────────────────────────
-function goToStep(step) {
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    const target = safeGet(`step-${step}`);
-    if (target) target.classList.add('active');
-    currentStep = step;
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+function init() {
+    const now = new Date();
+    calViewYear = now.getFullYear();
+    calViewMonth = now.getMonth();
+    buildDots();
     updateProgress();
 }
 
-// ────────────────────────────────────────────────
-// Option Selection (auto-advance)
-function selectOption(el, key, fromStep, nextStep) {
-    const group = el.parentElement;
-    group.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
-    el.classList.add('selected');
-    state[key] = el.dataset.value;
-
-    if (nextStep) setTimeout(() => goToStep(nextStep), 400);
-}
-
-// ────────────────────────────────────────────────
-// Checkbox
-function toggleCheckbox(el, key) {
-    const input = el.querySelector('input');
-    input.checked = !input.checked;
-    el.classList.toggle('selected', input.checked);
-    state[key] = input.checked;
-}
-
-// ────────────────────────────────────────────────
-// Calendar
-// ────────────────────────────────────────────────
-function openCalendar() {
-    const overlay = safeGet('calendar-overlay');
-    if (!overlay) return;
-
-    if (state.dueDate) {
-        calYear = state.dueDate.getFullYear();
-        calMonth = state.dueDate.getMonth();
-    } else {
-        let test = new Date(minDueDate);
-        calYear = test.getFullYear();
-        calMonth = test.getMonth();
-        while (!hasSelectableDaysInMonth(calYear, calMonth)) {
-            calMonth++;
-            if (calMonth > 11) { calMonth = 0; calYear++; }
-        }
+// ─── DOTS & PROGRESS ─────────────────────────────────────────────────────────
+function buildDots() {
+    const container = document.getElementById('dots');
+    container.innerHTML = '';
+    for (let i = 1; i <= totalSteps; i++) {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === currentStep ? ' active' : i < currentStep ? ' completed' : '');
+        d.id = 'dot-' + i;
+        container.appendChild(d);
     }
+}
 
+function updateProgress() {
+    const pct = ((currentStep - 1) / totalSteps) * 100;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    buildDots();
+}
+
+// ─── STEP NAVIGATION ─────────────────────────────────────────────────────────
+function goToStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('loading').style.display = 'none';
+    const target = document.getElementById('step-' + n) || document.getElementById('step-results');
+    if (target) target.classList.add('active');
+    currentStep = n;
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── STEP 1 VALIDATION ───────────────────────────────────────────────────────
+function validateStep1() {
+    if (!state.dueDate) {
+        document.getElementById('error-1').classList.add('show');
+        return;
+    }
+    document.getElementById('error-1').classList.remove('show');
+    goToStep(2);
+}
+
+// ─── OPTION SELECTION (steps 2–5) ────────────────────────────────────────────
+function selectOption(el) {
+    const key = el.dataset.key;
+    const value = el.dataset.value;
+    const stepNum = parseInt(el.closest('.step').id.replace('step-', ''));
+
+    // Deselect siblings in same step
+    el.closest('.options').querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+
+    state[key] = value;
+
+    // Hide error
+    const err = document.getElementById('error-' + stepNum);
+    if (err) err.classList.remove('show');
+
+    // Auto-advance after short delay
+    setTimeout(() => {
+        if (stepNum < 6) goToStep(stepNum + 1);
+    }, 280);
+}
+
+// ─── CHECKBOX (step 6) ───────────────────────────────────────────────────────
+function toggleCheckbox() {
+    state.highRisk = !state.highRisk;
+    const box = document.getElementById('highRiskBox');
+    const label = document.getElementById('highRiskLabel');
+    box.classList.toggle('selected', state.highRisk);
+    label.textContent = (state.highRisk ? '☑' : '☐') + '  High-risk pregnancy';
+}
+
+// ─── CALENDAR ────────────────────────────────────────────────────────────────
+function openCalendar() {
+    // Start from current selection or today
+    if (state.dueDate) {
+        calViewYear = state.dueDate.getFullYear();
+        calViewMonth = state.dueDate.getMonth();
+        calTempDate = new Date(state.dueDate);
+    } else {
+        // Jump straight to the first valid date (8 weeks from today)
+        const firstValid = new Date();
+        firstValid.setDate(firstValid.getDate() + 56);
+        calViewYear = firstValid.getFullYear();
+        calViewMonth = firstValid.getMonth();
+        calTempDate = null;
+    }
     renderCalendar();
-    overlay.classList.add('open');
+    document.getElementById('calendar-overlay').classList.add('open');
 }
 
 function closeCalendar() {
-    const overlay = safeGet('calendar-overlay');
-    if (overlay) overlay.classList.remove('open');
+    document.getElementById('calendar-overlay').classList.remove('open');
+    calTempDate = null;
+}
+
+function confirmCalendar() {
+    if (calTempDate) {
+        state.dueDate = new Date(calTempDate);
+        const opts = { year: 'numeric', month: 'long', day: 'numeric' };
+        const dateEl = document.getElementById('selected-date');
+        dateEl.textContent = state.dueDate.toLocaleDateString('en-US', opts);
+        dateEl.classList.remove('date-placeholder');
+        document.getElementById('error-1').classList.remove('show');
+        document.getElementById('calendar-overlay').classList.remove('open');
+        setTimeout(() => goToStep(2), 300);
+    } else {
+        document.getElementById('calendar-overlay').classList.remove('open');
+    }
+}
+
+function handleOverlayClick(e) {
+    if (e.target === document.getElementById('calendar-overlay')) closeCalendar();
 }
 
 function changeMonth(dir) {
-    calMonth += dir;
-    if (calMonth < 0) { calMonth = 11; calYear--; }
-    if (calMonth > 11) { calMonth = 0; calYear++; }
+    calViewMonth += dir;
+    if (calViewMonth > 11) { calViewMonth = 0; calViewYear++; }
+    if (calViewMonth < 0) { calViewMonth = 11; calViewYear--; }
     renderCalendar();
 }
 
-function hasSelectableDaysInMonth(y, m) {
-    return new Date(y, m + 1, 0) >= minDueDate;
-}
-
 function renderCalendar() {
-    const header = safeGet('cal-header');
-    if (header) header.textContent = `${months[calMonth]} ${calYear}`;
+    const monthNames = ['January','February','March','April','May','June',
+                        'July','August','September','October','November','December'];
+    document.getElementById('cal-header-text').textContent = monthNames[calViewMonth] + ' ' + calViewYear;
 
-    const grid = safeGet('cal-days-grid');
-    if (!grid) return;
+    const grid = document.getElementById('cal-days-grid');
     grid.innerHTML = '';
 
-    const first = new Date(calYear, calMonth, 1).getDay();
-    const days = new Date(calYear, calMonth + 1, 0).getDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+    // Min selectable: today
+    const minDate = new Date(today);
 
-    for (let i = 0; i < first; i++) {
-        const e = document.createElement('div');
-        e.className = 'cal-day empty';
-        grid.appendChild(e);
+    const firstDay = new Date(calViewYear, calViewMonth, 1).getDay();
+    const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
+
+    // Empty cells before first day
+    for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement('button');
+        empty.className = 'cal-day empty';
+        grid.appendChild(empty);
     }
 
-    for (let d = 1; d <= days; d++) {
-        const date = new Date(calYear, calMonth, d);
-        date.setHours(0,0,0,0);
+    for (let d = 1; d <= daysInMonth; d++) {
+        const btn = document.createElement('button');
+        btn.className = 'cal-day';
+        btn.textContent = d;
 
-        const day = document.createElement('div');
-        day.className = 'cal-day';
-        day.textContent = d;
+        const thisDate = new Date(calViewYear, calViewMonth, d);
+        thisDate.setHours(0,0,0,0);
 
-        if (date < minDueDate) {
-            day.classList.add('disabled');
+        const maxDate = new Date(today);
+        maxDate.setDate(today.getDate() + 56); // due date must be 8+ weeks away (mom ≤32 weeks)
+
+        if (thisDate < minDate) {
+            // Past date — plain disabled
+            btn.classList.add('disabled');
+        } else if (thisDate < maxDate) {
+            // Already past 32 weeks — tappable but shows error popup
+            btn.classList.add('disabled', 'too-soon');
+            btn.onclick = () => showTooSoonPopup();
         } else {
-            day.onclick = () => {
-                state.dueDate = date;
-                const disp = safeGet('selected-date');
-                if (disp) {
-                    disp.textContent = date.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-                    disp.classList.remove('date-placeholder');
-                }
-                closeCalendar();
-                setTimeout(() => goToStep(2), 300);
-            };
-
-            if (state.dueDate && state.dueDate.toDateString() === date.toDateString()) {
-                day.classList.add('selected');
+            // Valid selectable date
+            if (thisDate.getTime() === today.getTime()) btn.classList.add('today');
+            if (calTempDate) {
+                const t = new Date(calTempDate); t.setHours(0,0,0,0);
+                if (thisDate.getTime() === t.getTime()) btn.classList.add('selected');
             }
+            btn.onclick = () => selectCalDay(thisDate, btn);
         }
-        grid.appendChild(day);
+
+        grid.appendChild(btn);
     }
 }
 
-// ────────────────────────────────────────────────
-// Final Calculation & Redirect (updated for 'style' instead of 'vibe')
-// ────────────────────────────────────────────────
-function calculateAndRedirect() {
-    document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
-    const loading = safeGet('loading');
-    if (loading) loading.style.display = 'block';
+function showTooSoonPopup() {
+    const popup = document.getElementById('too-soon-popup');
+    popup.classList.add('show');
+    clearTimeout(window._tooSoonTimer);
+    window._tooSoonTimer = setTimeout(() => popup.classList.remove('show'), 3500);
+}
+
+function selectCalDay(date, btn) {
+    calTempDate = new Date(date);
+    // Update visuals
+    document.querySelectorAll('.cal-day').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+}
+
+// ─── CALCULATION & REDIRECT ──────────────────────────────────────────────────
+function calculate() {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('loading').style.display = 'block';
 
     setTimeout(() => {
         const due = state.dueDate;
         const isFirst = state.firstBaby === 'yes';
         const multiples = state.multiples === 'yes';
-        const style = state.style || 'full'; // default to full
+        const style = state.style || 'full';
         const setting = state.setting;
         const highRisk = state.highRisk;
 
+        const todayMs = new Date(); todayMs.setHours(0,0,0,0);
         const conception = new Date(due.getTime() - 280 * 86400000);
-        const daysSince = Math.floor((today - conception) / 86400000);
+        const daysSince = Math.floor((todayMs - conception) / 86400000);
         const currentWeek = Math.max(1, Math.min(42, Math.ceil(daysSince / 7)));
 
         let startWeek, endWeek;
@@ -501,11 +587,11 @@ function calculateAndRedirect() {
 
         if (highRisk && !multiples) { startWeek = Math.max(20, startWeek - 2); endWeek = Math.max(22, endWeek - 2); }
 
-        endWeek = Math.min(endWeek, 32);
+        endWeek   = Math.min(endWeek, 32);
         startWeek = Math.min(startWeek, 32);
 
-        const isLate   = currentWeek >= 33;
-        const isUrgent = currentWeek === 32;
+        const isLate     = currentWeek >= 33;
+        const isUrgent   = currentWeek === 32;
         const isInWindow = currentWeek >= startWeek && currentWeek <= endWeek && !isUrgent && !isLate;
 
         let context = 'early';
@@ -527,12 +613,12 @@ function calculateAndRedirect() {
         }
 
         const params = new URLSearchParams({
-            week: currentWeek,
-            status: context,
-            window: isLate || isUrgent ? '' : `${startWeek}-${endWeek}`,
-            bookby: bookByStr,
-            type: isLate ? 'newborn' : 'maternity',
-            style: style,           // ← updated key (was vibe)
+            week:    currentWeek,
+            status:  context,
+            window:  isLate || isUrgent ? '' : `${startWeek}-${endWeek}`,
+            bookby:  bookByStr,
+            type:    isLate ? 'newborn' : 'maternity',
+            style:   style,
             setting: setting || '',
             duedate: due.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'})
         });
@@ -541,26 +627,20 @@ function calculateAndRedirect() {
         if (fbclid) params.append('fbclid', fbclid);
 
         try {
-            fbq('track', 'Lead', { content_name: 'Calculator Complete', content_category: context, value: currentWeek, currency: 'USD' });
+            fbq('track', 'Lead', {
+                content_name: 'Calculator Complete',
+                content_category: context,
+                value: currentWeek,
+                currency: 'USD'
+            });
         } catch(e) {}
 
         window.location.href = `${dest}?${params.toString()}`;
     }, 1600);
 }
 
-// ────────────────────────────────────────────────
-// Init
-// ────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-    updateProgress();
-
-    const overlay = safeGet('calendar-overlay');
-    if (overlay) {
-        overlay.addEventListener('click', e => {
-            if (e.target === overlay) closeCalendar();
-        });
-    }
-});
+// ─── START ────────────────────────────────────────────────────────────────────
+init();
 </script>
 
 </body>
