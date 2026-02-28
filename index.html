@@ -623,8 +623,11 @@ function calculate() {
             duedate: due.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'})
         });
 
-        const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+        const urlParams = new URLSearchParams(window.location.search);
+        const fbclid = urlParams.get('fbclid');
+        const gclid  = urlParams.get('gclid');
         if (fbclid) params.append('fbclid', fbclid);
+        if (gclid)  params.append('gclid', gclid);
 
         try {
             fbq('track', 'Lead', {
