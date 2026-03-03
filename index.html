@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-        <!-- Meta Pixel -->
+    <!-- Meta Pixel -->
     <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -328,7 +328,7 @@
         </div>
     </div>
 
-    <!-- Step 5: Who's joining? (replaces old setting question — drives both setting + package) -->
+    <!-- Step 5: Who's joining? -->
     <div class="step" id="step-5">
         <div class="question">Who's joining you for photos?</div>
         <div class="hint">This helps us match you to the right experience.</div>
@@ -351,9 +351,6 @@
             <button class="btn btn-back" onclick="goToStep(4)">Back</button>
         </div>
     </div>
-
-    <!-- Step 6: Special considerations (hidden — still collected, no UI shown) -->
-    <!-- High-risk is derived silently; step 6 is now the transition screen -->
 
     <!-- Transition / Preview Screen -->
     <div class="loading-screen" id="loading">
@@ -396,14 +393,9 @@ const state = {
     firstBaby: null,
     multiples: null,
     style:     null,
-    whoJoins:  null,   // 'momOnly' | 'partner' | 'family'
+    whoJoins:  null,
     highRisk:  false
 };
-
-// Derived automatically from whoJoins:
-//   momOnly  → package: 'portraits',   setting: 'indoor'
-//   partner  → package: 'whiteGlove',  setting: 'both'
-//   family   → package: 'whiteGlove',  setting: 'both'
 
 let currentStep = 1;
 const totalSteps = 5;
@@ -473,7 +465,6 @@ function goToStep(n) {
     if (target) target.classList.add('active');
     currentStep = n;
     updateProgress();
-    if (n === 6 && state.whoJoins) {} // unused
 }
 
 // ─── STEP 1 VALIDATION ───────────────────────────────────────────────────────
@@ -508,41 +499,6 @@ function selectOption(el) {
 // ─── PACKAGE RECOMMENDATION ──────────────────────────────────────────────────
 function getRecommendedPackage() {
     return state.whoJoins === 'momOnly' ? 'portraits' : 'whiteGlove';
-}
-
-function renderPackageRecommendation() {
-    const pkgKey = getRecommendedPackage();
-    const pkg    = packages[pkgKey];
-    const container = document.getElementById('package-recommendation');
-
-    const featuresHtml = pkg.features.map(f =>
-        `<li><span class="pkg-icon">${f.icon}</span>${f.text}</li>`
-    ).join('');
-
-    container.innerHTML = `
-        <div class="package-card">
-            <div class="package-card-header">
-                <div class="package-eyebrow">✦ Your Recommended Package ✦</div>
-                <div class="package-name">${pkg.emoji} ${pkg.name}</div>
-                <div class="package-tagline">${pkg.tagline}</div>
-            </div>
-            <div class="package-card-body">
-                <p class="package-reason">${pkg.reason}</p>
-                <ul class="package-features">${featuresHtml}</ul>
-                <hr class="package-divider">
-                <p class="package-alt">${pkg.alt}</p>
-            </div>
-        </div>
-    `;
-}
-
-// ─── CHECKBOX (step 6) ───────────────────────────────────────────────────────
-function toggleCheckbox() {
-    state.highRisk = !state.highRisk;
-    const box   = document.getElementById('highRiskBox');
-    const label = document.getElementById('highRiskLabel');
-    box.classList.toggle('selected', state.highRisk);
-    label.textContent = (state.highRisk ? '☑' : '☐') + '  High-risk pregnancy';
 }
 
 // ─── CALENDAR ────────────────────────────────────────────────────────────────
@@ -657,7 +613,6 @@ function selectCalDay(date, btn) {
 function calculate() {
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
 
-    // Show branded transition screen immediately
     const pkgKey = getRecommendedPackage();
     const pkg    = packages[pkgKey];
     document.getElementById('transition-package-name').textContent = pkg.emoji + ' ' + pkg.name;
@@ -729,8 +684,7 @@ function calculate() {
             type:    isLate ? 'newborn' : 'maternity',
             style:   style,
             setting: setting,
-            package: pkgKey,
-            duedate: due.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'})
+            package: pkgKey
         });
 
         const urlParams = new URLSearchParams(window.location.search);
