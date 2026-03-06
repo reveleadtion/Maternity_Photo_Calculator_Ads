@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+<html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Find your ideal maternity photo window. Answer 5 quick questions and get a personalized session quote from Two Wild Souls Photography.">
 
 <!-- Meta Pixel -->
 <script>
@@ -17,10 +19,8 @@ fbq('track', 'PageView');
     src="https://www.facebook.com/tr?id=1484618222285119&ev=PageView&noscript=1"/>
 </noscript>
 
-<!-- Preconnect removed — no external fonts = fastest possible load -->
 <title>Maternity Photo Quiz</title>
 <style>
-/* System font stack — zero network requests, renders instantly */
 :root{
   --sage:#7C8A5A;--gold:#C7B27A;--dark:#3F4438;--text:#2E2F2C;--muted:#6B6E6A;
   --border:#DDD9D3;--bg:#FAFAF7;
@@ -28,57 +28,46 @@ fbq('track', 'PageView');
 }
 *,*::before,*::after{box-sizing:border-box;max-width:100%;min-width:0;word-break:break-word;overflow-wrap:break-word}
 html,body{margin:0;padding:0;width:100%;overflow:hidden;background:var(--bg);
-  /* System serif for brand feel + system sans for body — no download */
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   color:var(--text);-webkit-text-size-adjust:none;text-size-adjust:none}
 .serif{font-family:Georgia,"Times New Roman",serif}
 .wrap{padding:18px 16px 32px;width:100%}
-/* Brand */
 .brand{text-align:center;margin-bottom:12px}
 .brand-name{font-size:20px;font-weight:400;color:var(--dark);line-height:1.2}
 .brand-name em{color:var(--gold);font-style:italic}
 .brand-sub{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0;color:var(--sage);margin-top:3px}
 .features{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0;color:#6B6E6A;text-align:center;line-height:1.9;margin:8px 0 14px}
 .features strong{color:var(--dark)}
-/* Intro */
 .intro{text-align:center;margin-bottom:16px}
 .intro h2{font-size:18px;font-weight:400;color:var(--dark);margin-bottom:8px;line-height:1.3}
 .intro p{font-size:12px;color:var(--muted);line-height:1.6}
-/* Progress */
 .prog-bar{height:3px;background:rgba(63,68,56,.12);border-radius:2px;margin-bottom:12px;overflow:hidden}
 .prog-fill{height:100%;background:linear-gradient(90deg,var(--sage),var(--gold));
-  /* transform instead of width — composited, no layout recalc */
   transform:scaleX(0);transform-origin:left;transition:transform .45s ease;will-change:transform}
 .dots{display:flex;justify-content:center;gap:8px;margin-bottom:14px}
 .dot{width:6px;height:6px;border-radius:50%;background:#E0DDD8;flex-shrink:0;transition:background .25s,transform .25s}
 .dot.active{background:var(--sage);transform:scale(1.4)}
 .dot.done{background:var(--gold);transform:scale(1.1)}
-/* Steps */
 .step{display:none}
 .step.on{display:block;animation:up .28s ease}
 @keyframes up{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 .q{font-size:20px;font-weight:400;text-align:center;color:var(--text);margin-bottom:6px;line-height:1.3}
 .hint{font-size:12px;color:var(--muted);font-style:italic;text-align:center;margin-bottom:12px}
-/* Options */
 .opts{display:flex;flex-direction:column;gap:9px;margin-bottom:12px}
 .opt{padding:12px 10px;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;background:#fff;text-align:center;transition:border-color .18s,background .18s}
 .opt:hover{border-color:var(--sage);background:rgba(124,138,90,.04)}
 .opt.sel{border-color:var(--sage);background:rgba(124,138,90,.08);box-shadow:0 0 0 2px rgba(124,138,90,.15)}
 .opt-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px}
 .opt-desc{font-size:11px;color:var(--muted);line-height:1.4}
-/* Date btn */
 .date-btn{display:block;width:100%;padding:14px 10px;font-size:14px;font-family:inherit;background:#fff;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;text-align:center;color:var(--muted);margin-bottom:12px;transition:border-color .18s;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .date-btn.filled{color:var(--text)}
 .date-btn:hover{border-color:var(--sage)}
-/* Buttons */
 .btns{display:flex;gap:10px;justify-content:center;margin-top:14px}
 .btn{padding:13px 0;width:140px;font-size:11px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;border-radius:6px;cursor:pointer;font-family:inherit;border:none}
 .btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted)}
 .btn-next{background:linear-gradient(90deg,var(--sage),var(--gold));color:#fff}
-/* Error */
 .err{color:#bf5040;font-size:11px;text-align:center;margin:5px 0;display:none}
 .err.on{display:block}
-/* Loading */
 .loading{display:none;text-align:center;padding:48px 16px}
 .spinner{width:38px;height:38px;border:4px solid rgba(124,138,90,.2);border-top-color:var(--sage);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -86,7 +75,6 @@ html,body{margin:0;padding:0;width:100%;overflow:hidden;background:var(--bg);
 .loading-tag{font-size:11px;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
 .loading-msg{font-size:12px;color:var(--muted)}
 .footer{text-align:center;margin-top:28px;font-size:10px;color:var(--muted);opacity:.7}
-/* Calendar overlay */
 #co{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center;padding:10px}
 #co.on{display:flex}
 .cal{background:#fff;border-radius:10px;overflow:hidden;width:300px;max-width:100%;box-shadow:0 12px 40px rgba(0,0,0,.25)}
@@ -112,7 +100,7 @@ html,body{margin:0;padding:0;width:100%;overflow:hidden;background:var(--bg);
 .cal-done{background:linear-gradient(90deg,var(--sage),var(--gold));color:#fff;border:none}
 </style>
 
-<div class="wrap">
+<main class="wrap">
   <div class="brand">
     <div class="brand-name serif">Two Wild <em>Souls</em> Photography</div>
     <div class="brand-sub">Metro Detroit Maternity Portraits</div>
@@ -183,14 +171,14 @@ html,body{margin:0;padding:0;width:100%;overflow:hidden;background:var(--bg);
   </div>
 
   <div class="footer">© Two Wild Souls Photography · Metro Detroit</div>
-</div>
+</main>
 
 <div id="co" onclick="if(event.target===this)closeCal()">
   <div class="cal">
     <div class="cal-hdr">
-      <button onclick="cm(-1)">‹</button>
+      <button aria-label="Previous month" onclick="cm(-1)">‹</button>
       <span class="serif" id="ct"></span>
-      <button onclick="cm(1)">›</button>
+      <button aria-label="Next month" onclick="cm(1)">›</button>
     </div>
     <div class="cal-dl"><div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div></div>
     <div class="cal-grid" id="cg"><div id="tsm">Due date is too soon for a maternity session. Call us to discuss options! 💛</div></div>
@@ -202,10 +190,8 @@ html,body{margin:0;padding:0;width:100%;overflow:hidden;background:var(--bg);
 </div>
 
 <script>
-// Cached DOM refs — single querySelector at init, not on every interaction
 var S={dueDate:null,firstBaby:null,multiples:null,style:null,whoJoins:null};
 var cur=1,cY,cM,cTmp=null;
-// Element cache
 var $pf,$dots,$db,$co,$cg,$ct,$tsm,$loading,$lpkg,$ltag;
 
 var MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -226,7 +212,6 @@ function init(){
 }
 
 function uiProg(){
-  // scaleX on a pre-composited element — no layout, no paint
   $pf.style.transform='scaleX('+((cur-1)/5)+')';
   var h='';
   for(var i=1;i<=5;i++) h+='<div class="dot'+(i===cur?' active':i<cur?' done':'')+'"></div>';
@@ -261,7 +246,6 @@ function pick(el){
   setTimeout(sn<5?function(){go(sn+1);}:calc,280);
 }
 
-// Calendar
 function openCal(){
   if(S.dueDate){cY=S.dueDate.getFullYear();cM=S.dueDate.getMonth();cTmp=new Date(S.dueDate);}
   else{var fv=new Date();fv.setDate(fv.getDate()+56);cY=fv.getFullYear();cM=fv.getMonth();cTmp=null;}
@@ -273,7 +257,6 @@ function cm(d){cM+=d;if(cM>11){cM=0;cY++;}else if(cM<0){cM=11;cY--;}renderCal();
 
 function renderCal(){
   $ct.textContent=MN[cM]+' '+cY;
-  // Build HTML string — one innerHTML set, one reflow
   var today=new Date();today.setHours(0,0,0,0);
   var maxD=new Date(+today+56*864e5);
   var fd=new Date(cY,cM,1).getDay();
@@ -290,12 +273,10 @@ function renderCal(){
       if(t===today.getTime()) cls+=' today';
       if(selT&&t===selT) cls+=' sel';
     }
-    html+='<button class="'+cls+'" data-t="'+t+'">'+d+'</button>';
+    html+='<button class="'+cls+'" data-t="'+t+'" aria-label="'+MN[cM]+' '+d+', '+cY+'">'+d+'</button>';
   }
-  // Restore popup, set grid
   $cg.innerHTML='<div id="tsm"'+(document.getElementById('tsm')&&document.getElementById('tsm').classList.contains('on')?' class="on"':'')+'>Due date is too soon for a maternity session. Call us to discuss options! 💛</div>'+html;
   $tsm=document.getElementById('tsm');
-  // Single delegated listener — not per-day
   $cg.onclick=function(e){
     var btn=e.target.closest('.cal-day');
     if(!btn||btn.classList.contains('empty')) return;
@@ -325,7 +306,6 @@ function confirmCal(){
   } else closeCal();
 }
 
-// Calculate & redirect
 function calc(){
   document.getElementById('s5').classList.remove('on');
   var pk=S.whoJoins==='momOnly'?'portraits':'whiteGlove';
@@ -354,7 +334,6 @@ function calc(){
     var bk='';
     if(!late&&!urgent){var bd=new Date(+conc+sw*7*864e5-42*864e5);bk=bd.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}
     else if(urgent) bk='Today';
-    // Lightweight encoding — no btoa/unescape needed
     var qd={week:wk,status:ctx,window:late||urgent?'':sw+'-'+ew,bookby:bk,type:late?'newborn':'maternity',style:style,setting:setting,package:pk};
     var encoded=encodeURIComponent(JSON.stringify(qd));
     var up=new URLSearchParams(location.search);
