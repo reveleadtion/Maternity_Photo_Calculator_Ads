@@ -18,6 +18,12 @@
       <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1484618222285119&amp;ev=PageView&amp;noscript=1">
     </noscript>
 
+    <!-- Vercel Web Analytics -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
     <title>Find Your Best Time for Maternity Photos | Instant Results</title>
 
     <style>
@@ -424,7 +430,7 @@ function selectCalDay(date, btn) {
     btn.classList.add('selected');
 }
 
-// ─── CALCULATION & REDIRECT ──────────────────────────────────────────────────
+// ─── CALCULATION & REDIRECT ──────────────────���───────────────────────────────
 function calculate() {
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
     const pkgKey = getRecommendedPackage();
