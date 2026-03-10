@@ -26,6 +26,9 @@ fbq('track','PageView');
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 
+<!-- Elfsight Google Reviews -->
+<script src="https://static.elfsight.com/platform/platform.js" async></script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -58,15 +61,12 @@ html, body {
 
 /* ── HEADER ─────────────────────────────────────────── */
 header {
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   justify-content: space-between;
   padding: 18px 20px;
   border-bottom: 1px solid var(--faint);
-  position: sticky;
-  top: 0;
-  background: var(--bg);
-  z-index: 100;
+  position: sticky; top: 0;
+  background: var(--bg); z-index: 100;
 }
 .logo-wrap { display: flex; flex-direction: column; gap: 2px; }
 .logo-name {
@@ -121,60 +121,79 @@ header {
 }
 .dot {
   width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(46,47,44,0.15);
-  transition: all 0.3s;
+  background: rgba(46,47,44,0.15); transition: all 0.3s;
 }
 .dot.active { background: var(--accent); transform: scale(1.4); }
 .dot.done   { background: var(--gold); transform: scale(1.1); }
 
 /* ── MAIN ───────────────────────────────────────────── */
-main {
-  padding: 0 20px 120px;
-  max-width: 540px;
-  margin: 0 auto;
-}
+main { padding: 0 20px 120px; max-width: 540px; margin: 0 auto; }
 
 /* ── INTRO ──────────────────────────────────────────── */
-.intro-block {
-  padding: 40px 0 8px;
-  animation: fadeUp 0.5s ease both;
-}
+.intro-block { padding: 20px 0 6px; animation: fadeUp 0.5s ease both; }
 .intro-eyebrow {
   font-size: 10px; letter-spacing: 0.25em;
-  text-transform: uppercase; color: var(--accent);
-  margin-bottom: 16px;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
 }
 .intro-headline {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 8vw, 46px);
+  font-size: clamp(26px, 7vw, 46px);
   font-weight: 300; line-height: 1.1;
-  color: var(--text); margin-bottom: 16px;
+  color: var(--text); margin-bottom: 10px;
 }
 .intro-headline em { font-style: italic; color: var(--accent); }
 .intro-body {
-  font-size: 14px; line-height: 1.7;
-  color: var(--text2); margin-bottom: 32px;
+  font-size: 13px; line-height: 1.6;
+  color: var(--text2); margin-bottom: 14px;
 }
 .intro-pills {
   display: flex; flex-wrap: wrap;
-  gap: 8px; margin-bottom: 36px;
+  gap: 6px; margin-bottom: 16px;
 }
 .pill {
-  font-size: 11px; letter-spacing: 0.06em;
-  color: var(--accent2);
+  font-size: 10px; letter-spacing: 0.06em; color: var(--accent2);
   border: 1px solid rgba(111,129,145,0.3);
-  padding: 5px 12px; border-radius: 100px;
+  padding: 4px 10px; border-radius: 100px;
 }
+
+/* ── REVIEWS BLOCK ──────────────────────────────────── */
+/* Sits BELOW the CTA so a slow widget never pushes the button off-screen */
+.reviews-wrap {
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-left: -4px;
+  margin-right: -4px;
+  min-height: 110px;
+  position: relative;
+}
+/* Skeleton shimmer while Elfsight loads — prevents layout shift */
+.reviews-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--surface) 25%, var(--bg) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  z-index: 0;
+}
+.reviews-wrap:has(iframe)::before,
+.reviews-wrap:has([class*="eapps"])::before { display: none; }
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.reviews-wrap > * { position: relative; z-index: 1; }
+
 .intro-cta {
-  width: 100%; background: var(--cta);
-  color: var(--bg); border: none;
-  font-family: 'DM Sans', sans-serif;
+  width: 100%; background: var(--cta); color: var(--bg);
+  border: none; font-family: 'DM Sans', sans-serif;
   font-weight: 500; font-size: 14px;
   letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 18px; cursor: pointer;
-  transition: background 0.2s;
-  display: flex; align-items: center;
-  justify-content: center; gap: 10px;
+  padding: 18px; cursor: pointer; transition: background 0.2s;
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; border-radius: 6px;
 }
 .intro-cta:hover { background: #2e3128; }
 .intro-trust {
@@ -183,10 +202,7 @@ main {
 }
 
 /* ── QUESTION ───────────────────────────────────────── */
-.question-wrap {
-  padding: 36px 0 0;
-  animation: fadeUp 0.4s ease both;
-}
+.question-wrap { padding: 36px 0 0; animation: fadeUp 0.4s ease both; }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -199,54 +215,34 @@ main {
 }
 .question-hint {
   font-size: 13px; color: var(--text2);
-  line-height: 1.6; margin-bottom: 28px;
-  font-style: italic;
+  line-height: 1.6; margin-bottom: 28px; font-style: italic;
 }
 
 /* ── DATE INPUT ─────────────────────────────────────── */
 .date-field-wrap {
-  position: relative;
-  cursor: pointer;
-  margin-bottom: 8px;
+  position: relative; cursor: pointer; margin-bottom: 8px;
 }
 .date-field-wrap:hover .date-field,
 .date-field-wrap:focus-within .date-field { border-color: var(--accent); }
 .date-field {
-  width: 100%;
-  background: white;
+  width: 100%; background: white;
   border: 1.5px solid rgba(46,47,44,0.18);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  padding: 16px 20px;
-  appearance: none; -webkit-appearance: none;
-  outline: none;
-  transition: border-color 0.25s;
-  border-radius: 6px;
-  cursor: pointer;
-  pointer-events: none;
+  color: var(--text); font-family: 'DM Sans', sans-serif;
+  font-size: 16px; font-weight: 300; padding: 16px 20px;
+  appearance: none; -webkit-appearance: none; outline: none;
+  transition: border-color 0.25s; border-radius: 6px;
+  cursor: pointer; pointer-events: none;
 }
-.date-field::-webkit-calendar-picker-indicator {
-  filter: opacity(0.4); padding: 4px;
-}
+.date-field::-webkit-calendar-picker-indicator { filter: opacity(0.4); padding: 4px; }
 
 /* ── OPTIONS ────────────────────────────────────────── */
-.options-list {
-  display: flex; flex-direction: column;
-  gap: 10px; margin-bottom: 8px;
-}
+.options-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
 .opt-btn {
-  background: white;
-  border: 1.5px solid rgba(46,47,44,0.18);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px; font-weight: 300;
-  padding: 16px 20px;
-  text-align: left; cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex; align-items: center;
-  gap: 14px; border-radius: 6px;
+  background: white; border: 1.5px solid rgba(46,47,44,0.18);
+  color: var(--text); font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 300; padding: 16px 20px;
+  text-align: left; cursor: pointer; transition: all 0.2s ease;
+  display: flex; align-items: center; gap: 14px; border-radius: 6px;
   -webkit-tap-highlight-color: transparent;
 }
 .opt-btn:active,
@@ -262,98 +258,70 @@ main {
   display: flex; align-items: center;
   justify-content: center; transition: all 0.2s;
 }
-.opt-btn.selected .opt-check {
-  background: var(--accent); border-color: var(--accent);
-}
+.opt-btn.selected .opt-check { background: var(--accent); border-color: var(--accent); }
 .opt-btn.selected .opt-check::after {
-  content: ''; width: 6px; height: 6px;
-  background: white; border-radius: 50%;
+  content: ''; width: 6px; height: 6px; background: white; border-radius: 50%;
 }
 .opt-text { flex: 1; }
 .opt-label { display: block; line-height: 1.3; }
-.opt-sub {
-  display: block; font-size: 12px;
-  color: var(--text2); margin-top: 3px;
-}
+.opt-sub { display: block; font-size: 12px; color: var(--text2); margin-top: 3px; }
 
 /* ── VALIDATION ─────────────────────────────────────── */
-.val-msg {
-  font-size: 12px; color: var(--error);
-  padding: 0 0 8px; display: none;
-}
+.val-msg { font-size: 12px; color: var(--error); padding: 0 0 8px; display: none; }
 
 /* ── BOTTOM NAV ─────────────────────────────────────── */
 .bottom-nav {
   position: fixed; bottom: 0; left: 0; right: 0;
-  background: var(--bg);
-  border-top: 1px solid var(--faint);
+  background: var(--bg); border-top: 1px solid var(--faint);
   padding: 14px 20px max(14px, env(safe-area-inset-bottom));
   display: flex; gap: 10px; z-index: 200;
 }
 .btn-back {
-  background: transparent;
-  border: 1.5px solid rgba(46,47,44,0.15);
-  color: var(--text2);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px; letter-spacing: 0.06em;
-  padding: 0 20px; cursor: pointer;
-  min-height: 52px; transition: all 0.2s;
+  background: transparent; border: 1.5px solid rgba(46,47,44,0.15);
+  color: var(--text2); font-family: 'DM Sans', sans-serif;
+  font-size: 13px; letter-spacing: 0.06em; padding: 0 20px;
+  cursor: pointer; min-height: 52px; transition: all 0.2s;
   flex-shrink: 0; border-radius: 6px;
   -webkit-tap-highlight-color: transparent;
 }
 .btn-back:hover { border-color: var(--text); color: var(--text); }
 .btn-next {
-  flex: 1; background: var(--cta); color: var(--bg);
-  border: none;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 500; font-size: 14px;
+  flex: 1; background: var(--cta); color: var(--bg); border: none;
+  font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 14px;
   letter-spacing: 0.1em; text-transform: uppercase;
-  min-height: 52px; cursor: pointer;
-  transition: background 0.2s; border-radius: 6px;
-  -webkit-tap-highlight-color: transparent;
+  min-height: 52px; cursor: pointer; transition: background 0.2s;
+  border-radius: 6px; -webkit-tap-highlight-color: transparent;
 }
 .btn-next:hover { background: #2e3128; }
-.btn-next:disabled {
-  background: var(--surface); color: var(--text2);
-  cursor: not-allowed;
-}
+.btn-next:disabled { background: var(--surface); color: var(--text2); cursor: not-allowed; }
 
-/* ── LOADING / REDIRECT ─────────────────────────────── */
+/* ── REDIRECT SCREEN ────────────────────────────────── */
 .redirect-screen {
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   min-height: 65vh; padding: 40px 20px;
-  text-align: center;
-  animation: fadeUp 0.5s ease both;
+  text-align: center; animation: fadeUp 0.5s ease both;
 }
 .redirect-spinner {
   width: 48px; height: 48px; border-radius: 50%;
-  border: 3px solid var(--faint);
-  border-top-color: var(--accent);
-  animation: spin 1s linear infinite;
-  margin-bottom: 28px;
+  border: 3px solid var(--faint); border-top-color: var(--accent);
+  animation: spin 1s linear infinite; margin-bottom: 28px;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 .redirect-package {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(22px, 5vw, 30px);
   font-style: italic; font-weight: 300;
-  color: var(--cta); margin-bottom: 6px;
-  line-height: 1.2;
+  color: var(--cta); margin-bottom: 6px; line-height: 1.2;
 }
 .redirect-tagline {
   font-size: 11px; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--accent);
-  margin-bottom: 20px;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
 }
-.redirect-sub {
-  font-size: 13px; color: var(--text2); margin-bottom: 28px;
-}
+.redirect-sub { font-size: 13px; color: var(--text2); margin-bottom: 28px; }
 .redirect-summary {
-  background: white;
-  border: 1px solid rgba(46,47,44,0.12);
-  border-radius: 8px;
-  padding: 20px 24px;
+  background: white; border: 1px solid rgba(46,47,44,0.12);
+  border-radius: 8px; padding: 20px 24px;
   width: 100%; max-width: 340px; text-align: left;
 }
 .summary-row {
@@ -370,7 +338,7 @@ main {
 /* ── FOOTER ─────────────────────────────────────────── */
 .footer { text-align: center; margin-top: 40px; font-size: 11px; color: var(--text2); opacity: 0.6; }
 
-/* ── DESKTOP ENHANCEMENTS ───────────────────────────── */
+/* ── DESKTOP ────────────────────────────────────────── */
 @media (min-width: 600px) {
   header, .progress-shell { padding-left: 40px; padding-right: 40px; }
   main { padding: 0 40px 120px; }
@@ -381,9 +349,7 @@ main {
   body { display: flex; flex-direction: column; }
   main { flex: 1; max-width: 600px; width: 100%; margin: 0 auto; padding: 0 0 140px; }
   .bottom-nav {
-    width: 600px;
-    left: 50%;
-    right: auto;
+    width: 600px; left: 50%; right: auto;
     transform: translateX(-50%);
     border-left: 1px solid var(--faint);
     border-right: 1px solid var(--faint);
@@ -395,7 +361,6 @@ main {
 </head>
 <body>
 
-<!-- ── HEADER ── -->
 <header>
   <div class="logo-wrap">
     <span class="logo-name">Two Wild <em>Souls</em> Photography</span>
@@ -404,7 +369,6 @@ main {
   <span class="header-badge">6 spots / month</span>
 </header>
 
-<!-- ── PROGRESS (hidden until quiz starts) ── -->
 <div class="progress-shell" id="progressShell" style="display:none">
   <div class="progress-row">
     <span class="progress-step-label" id="stepLabel">Step 1 of 5</span>
@@ -416,91 +380,72 @@ main {
   <div class="dots" id="dots"></div>
 </div>
 
-<!-- ── MAIN CONTENT ── -->
 <main id="mainContent"></main>
 
-<!-- ── STICKY BOTTOM NAV (hidden until quiz starts) ── -->
 <div class="bottom-nav" id="bottomNav" style="display:none">
   <button class="btn-back" id="btnBack" onclick="goBack()">← Back</button>
   <button class="btn-next" id="btnNext" onclick="goNext()">Continue →</button>
 </div>
 
 <script>
-// ─── DESTINATIONS ─────────────────────────────────────────
 const MATERNITY_URL = 'https://twowildsoulsphotography.com/detroit-maternity-photographer-ads-custom';
 const NEWBORN_URL   = 'https://twowildsoulsphotography.com/detroit-newborn-photographer-ads';
 
-// ─── PACKAGES ─────────────────────────────────────────────
 const PACKAGES = {
-  portraits:   { name: 'Portraits of Just Mom',    tagline: 'Intimate · Studio Only · All About You',             emoji: '🤍' },
-  whiteGlove:  { name: 'White Glove Experience',   tagline: 'Full Family · Studio & Outdoors · The Full Story',   emoji: '✨' }
+  portraits:  { name: 'Portraits of Just Mom',  tagline: 'Intimate · Studio Only · All About You',           emoji: '🤍' },
+  whiteGlove: { name: 'White Glove Experience', tagline: 'Full Family · Studio & Outdoors · The Full Story', emoji: '✨' }
 };
 
-// ─── QUIZ STEPS ───────────────────────────────────────────
 const STEPS = [
   {
-    id: 'dueDate',
-    type: 'date',
+    id: 'dueDate', type: 'date',
     question: 'When is your due date?',
     hint: "We'll calculate your ideal photo window from this."
   },
   {
-    id: 'firstBaby',
-    type: 'options',
-    question: 'Is this your first baby?',
-    hint: null,
+    id: 'firstBaby', type: 'options',
+    question: 'Is this your first baby?', hint: null,
     options: [
-      { value: 'yes', label: 'Yes — first time!',           sub: 'Exciting new chapter' },
-      { value: 'no',  label: "No — I've done this before",  sub: 'Adding to the family' }
+      { value: 'yes', label: 'Yes — first time!',          sub: 'Exciting new chapter' },
+      { value: 'no',  label: "No — I've done this before", sub: 'Adding to the family' }
     ]
   },
   {
-    id: 'multiples',
-    type: 'options',
-    question: 'Are you expecting multiples?',
-    hint: null,
+    id: 'multiples', type: 'options',
+    question: 'Are you expecting multiples?', hint: null,
     options: [
       { value: 'yes', label: 'Yes — twins or more!', sub: null },
       { value: 'no',  label: 'No — just one',        sub: null }
     ]
   },
   {
-    id: 'style',
-    type: 'options',
+    id: 'style', type: 'options',
     question: 'What look are you going for?',
     hint: "We'll match your gown, lighting, and timing to this.",
     options: [
-      { value: 'full',  label: 'Full, dramatic bump',          sub: 'Classic maternity look — beautifully round' },
-      { value: 'early', label: 'Earlier & more comfortable',   sub: 'More energy, easier to move around' }
+      { value: 'full',  label: 'Full, dramatic bump',        sub: 'Classic maternity look — beautifully round' },
+      { value: 'early', label: 'Earlier & more comfortable', sub: 'More energy, easier to move around' }
     ]
   },
   {
-    id: 'whoJoins',
-    type: 'options',
+    id: 'whoJoins', type: 'options',
     question: "Who's joining you for photos?",
     hint: 'This helps us match you to the right experience.',
     options: [
-      { value: 'momOnly',  label: 'Just me 🤍',             sub: 'Intimate studio portraits — all about you and your bump' },
-      { value: 'partner',  label: 'Me + my partner 💑',    sub: 'Include your husband or partner in some or all shots' },
-      { value: 'family',   label: 'The whole family 👨‍👩‍👧',  sub: 'Partner, kids, fur babies — everyone welcome' }
+      { value: 'momOnly', label: 'Just me 🤍',            sub: 'Intimate studio portraits — all about you and your bump' },
+      { value: 'partner', label: 'Me + my partner 💑',   sub: 'Include your husband or partner in some or all shots' },
+      { value: 'family',  label: 'The whole family 👨‍👩‍👧', sub: 'Partner, kids, fur babies — everyone welcome' }
     ]
   }
 ];
 
-// ─── STATE ────────────────────────────────────────────────
-const state = {
-  dueDate: null, firstBaby: null, multiples: null,
-  style: null, whoJoins: null
-};
-let currentStep = -1; // -1 = intro screen
+const state = { dueDate: null, firstBaby: null, multiples: null, style: null, whoJoins: null };
+let currentStep = -1;
 const TOTAL = STEPS.length;
 
-// ─── ENCODING ─────────────────────────────────────────────
 function encodeQuizData(data) {
   return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
 }
-
-// ─── DATE HELPERS ─────────────────────────────────────────
 function todayPlus(days) {
   const d = new Date(); d.setDate(d.getDate() + days);
   return d.toISOString().split('T')[0];
@@ -509,14 +454,13 @@ function formatDateStr(str) {
   return new Date(str + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 function currentPregnancyWeek(dueDateStr) {
-  const due       = new Date(dueDateStr + 'T12:00:00');
-  const today     = new Date(); today.setHours(0,0,0,0);
+  const due        = new Date(dueDateStr + 'T12:00:00');
+  const today      = new Date(); today.setHours(0,0,0,0);
   const conception = new Date(due.getTime() - 280 * 86400000);
   const daysSince  = Math.floor((today - conception) / 86400000);
   return Math.max(1, Math.min(42, Math.ceil(daysSince / 7)));
 }
 
-// ─── CALCULATION ──────────────────────────────────────────
 function calculate() {
   const isFirst   = state.firstBaby === 'yes';
   const multiples = state.multiples === 'yes';
@@ -546,11 +490,10 @@ function calculate() {
   const isInWindow = week >= startWeek && week <= endWeek && !isUrgent && !isLate;
 
   let context = 'early';
-  if (isLate || isUrgent)         context = 'late';
-  else if (isInWindow)            context = 'inWindow';
-  else if (week > endWeek)        context = 'pastWindow';
+  if (isLate || isUrgent)  context = 'late';
+  else if (isInWindow)     context = 'inWindow';
+  else if (week > endWeek) context = 'pastWindow';
 
-  // Book-by date
   let bookByStr = '';
   if (!isLate && !isUrgent) {
     const due        = new Date(state.dueDate + 'T12:00:00');
@@ -566,18 +509,14 @@ function calculate() {
   const dest   = isLate ? NEWBORN_URL : MATERNITY_URL;
 
   const quizData = {
-    week,
-    status:  context,
+    week, status: context,
     window:  (isLate || isUrgent) ? '' : `${startWeek}-${endWeek}`,
     bookby:  bookByStr,
     type:    isLate ? 'newborn' : 'maternity',
-    style,
-    setting,
-    package: pkgKey,
+    style, setting, package: pkgKey,
     duedate: formatDateStr(state.dueDate)
   };
 
-  // fbclid / gclid passthrough (unencoded so Meta/Google can read them)
   const incomingParams = new URLSearchParams(window.location.search);
   const fbclid = incomingParams.get('fbclid');
   const gclid  = incomingParams.get('gclid');
@@ -586,30 +525,26 @@ function calculate() {
   if (fbclid) finalParams.append('fbclid', fbclid);
   if (gclid)  finalParams.append('gclid', gclid);
 
-  // Pixel Lead event
   try {
     fbq('track', 'Lead', {
-      content_name:     'Calculator Complete',
-      content_category: context,
-      value:            week,
-      currency:         'USD'
+      content_name: 'Calculator Complete', content_category: context,
+      value: week, currency: 'USD'
     });
   } catch(e) {}
 
   return { dest, finalParams, pkgKey, quizData };
 }
 
-// ─── RENDER ───────────────────────────────────────────────
 function render() {
-  const content  = document.getElementById('mainContent');
-  const shell    = document.getElementById('progressShell');
-  const nav      = document.getElementById('bottomNav');
-  const fill     = document.getElementById('progressFill');
-  const stepLbl  = document.getElementById('stepLabel');
-  const pctLbl   = document.getElementById('stepPct');
-  const btnBack  = document.getElementById('btnBack');
-  const btnNext  = document.getElementById('btnNext');
-  const dotsEl   = document.getElementById('dots');
+  const content = document.getElementById('mainContent');
+  const shell   = document.getElementById('progressShell');
+  const nav     = document.getElementById('bottomNav');
+  const fill    = document.getElementById('progressFill');
+  const stepLbl = document.getElementById('stepLabel');
+  const pctLbl  = document.getElementById('stepPct');
+  const btnBack = document.getElementById('btnBack');
+  const btnNext = document.getElementById('btnNext');
+  const dotsEl  = document.getElementById('dots');
 
   // ── INTRO ──
   if (currentStep === -1) {
@@ -623,7 +558,7 @@ function render() {
         <div class="intro-pills">
           <span class="pill">Pro Hair + Makeup</span>
           <span class="pill">Designer Gowns</span>
-          <span class="pill">In-Studio & Outdoors</span>
+          <span class="pill">In-Studio &amp; Outdoors</span>
           <span class="pill">Fully Guided</span>
         </div>
         <button class="intro-cta" onclick="startQuiz()">
@@ -632,9 +567,12 @@ function render() {
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <p class="intro-trust">Takes 20 seconds &nbsp;·&nbsp; No commitment/personal information required</p>
+        <p class="intro-trust">Takes 20 seconds &nbsp;·&nbsp; No commitment or personal information required</p>
+        <div class="reviews-wrap">
+          <div class="elfsight-app-f0f8b71d-1a73-49e1-89f2-58b5df023681" data-elfsight-app-lazy></div>
+        </div>
       </div>
-      <div class="footer">© Two Wild Souls Photography · Metro Detroit</div>`;
+      <div class="footer">&copy; Two Wild Souls Photography &middot; Metro Detroit</div>`;
     return;
   }
 
@@ -648,8 +586,8 @@ function render() {
     dotsEl.innerHTML    = '';
 
     const { dest, finalParams, pkgKey, quizData } = calculate();
-    const pkg = PACKAGES[pkgKey];
-    const week = quizData.week;
+    const pkg    = PACKAGES[pkgKey];
+    const week   = quizData.week;
     const isLate = quizData.status === 'late';
 
     content.innerHTML = `
@@ -657,7 +595,7 @@ function render() {
         <div class="redirect-spinner"></div>
         <p class="redirect-package">${pkg.emoji} ${pkg.name}</p>
         <p class="redirect-tagline">${pkg.tagline}</p>
-        <p class="redirect-sub">Building your personalized page…</p>
+        <p class="redirect-sub">Building your personalized page&hellip;</p>
         <div class="redirect-summary">
           <div class="summary-row">
             <span class="summary-label">Due date</span>
@@ -697,9 +635,8 @@ function render() {
   pctLbl.textContent    = pct + '%';
   btnBack.style.display = currentStep === 0 ? 'none' : '';
   btnNext.disabled      = step.type === 'options' && !state[step.id];
-  btnNext.textContent   = currentStep === TOTAL - 1 ? 'See My Results →' : 'Continue →';
+  btnNext.textContent   = currentStep === TOTAL - 1 ? 'See My Results \u2192' : 'Continue \u2192';
 
-  // Dots
   dotsEl.innerHTML = '';
   for (let i = 0; i < TOTAL; i++) {
     const d = document.createElement('div');
@@ -707,7 +644,6 @@ function render() {
     dotsEl.appendChild(d);
   }
 
-  // Fire Pixel step event
   try { fbq('trackCustom', 'QuizStep', { step: currentStep + 1, step_name: step.id }); } catch(e) {}
 
   if (step.type === 'date') {
@@ -746,7 +682,6 @@ function render() {
   }
 }
 
-// ─── ACTIONS ──────────────────────────────────────────────
 function startQuiz() {
   currentStep = 0;
   render();
@@ -806,7 +741,6 @@ function goBack() {
   }
 }
 
-// ─── INIT ─────────────────────────────────────────────────
 render();
 </script>
 </body>
