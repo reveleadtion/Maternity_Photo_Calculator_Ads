@@ -262,9 +262,7 @@ const packages = {
     }
 };
 
-// ─── ENCODING HELPER ─────────────────────────────────────────────────────────
-// Packs all quiz result data into a single opaque base64 string.
-// Meta's classifier only sees: ?d=<random-looking-string>
+// ─── ENCODING HELPER ──────────────────────────────────────────────────────────
 function encodeQuizData(data) {
     return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
 }
@@ -300,7 +298,6 @@ function goToStep(n) {
     if (target) target.classList.add('active');
     currentStep = n;
     updateProgress();
-    // Fire QuizStep funnel event
     try { fbq('trackCustom', 'QuizStep', { step: n, step_name: STEP_NAMES[n] || '' }); } catch(e) {}
 }
 
@@ -430,7 +427,7 @@ function selectCalDay(date, btn) {
     btn.classList.add('selected');
 }
 
-// ─── CALCULATION & REDIRECT ──────────────────���───────────────────────────────
+// ─── CALCULATION & REDIRECT ───────────────────────────────────────────────────
 function calculate() {
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
     const pkgKey = getRecommendedPackage();
@@ -495,8 +492,7 @@ function calculate() {
             bookByStr = 'Today';
         }
 
-        // ── ENCODE all quiz data into one opaque blob ──────────────────────
-        // The landing page reads `d` and decodes it. Meta only sees ?d=xyz
+        // ── Encode all quiz data — now includes duedate for accurate timeline dates ──
         const quizData = {
             week:    currentWeek,
             status:  context,
@@ -505,7 +501,8 @@ function calculate() {
             type:    isLate ? 'newborn' : 'maternity',
             style:   style,
             setting: setting,
-            package: pkgKey
+            package: pkgKey,
+            duedate: due.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'})
         };
         const encoded = encodeQuizData(quizData);
 
