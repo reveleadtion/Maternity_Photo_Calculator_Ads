@@ -27,6 +27,13 @@ fbq('track','PageView');
 <script defer src="/_vercel/insights/script.js"></script>
 
 <!-- Elfsight Google Reviews -->
+<!-- Preconnect to Elfsight domains so DNS/TCP is ready before script runs -->
+<link rel="preconnect" href="https://static.elfsight.com">
+<link rel="preconnect" href="https://apps.elfsight.com">
+<link rel="preconnect" href="https://service.elfsight.com">
+<link rel="dns-prefetch" href="https://static.elfsight.com">
+<link rel="dns-prefetch" href="https://apps.elfsight.com">
+<link rel="dns-prefetch" href="https://service.elfsight.com">
 <script src="https://static.elfsight.com/platform/platform.js" async></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -500,7 +507,7 @@ function render() {
       <div class="intro-block">
         <p class="intro-eyebrow">Personalized Maternity Consultation</p>
         <h1 class="intro-headline">Find your <em>perfect</em><br>session window.</h1>
-        <p class="intro-body">Answer 5 quick questions and we'll build your custom recommendation &mdash; your ideal week range, booking urgency, and starting quote.</p>
+        <p class="intro-body">In 20 Seconds we'll build your custom recommendation with your ideal week range, booking urgency, and quote.</p>
         <div class="intro-pills">
           <span class="pill">Pro Hair + Makeup</span>
           <span class="pill">Designer Gowns</span>
@@ -513,9 +520,9 @@ function render() {
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <p class="intro-trust">Takes 20 seconds &nbsp;&middot;&nbsp; No commitment or personal information required</p>
+        <p class="intro-trust">Takes 20 seconds &nbsp;&middot;&nbsp; No personal information required</p>
         <div class="reviews-wrap">
-          <div class="elfsight-app-f0f8b71d-1a73-49e1-89f2-58b5df023681" data-elfsight-app-lazy></div>
+          <div class="elfsight-app-f0f8b71d-1a73-49e1-89f2-58b5df023681"></div>
         </div>
       </div>
       <div class="footer">&copy; Two Wild Souls Photography &middot; Metro Detroit</div>`;
