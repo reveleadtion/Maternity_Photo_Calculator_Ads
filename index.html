@@ -27,7 +27,6 @@ fbq('track','PageView');
 <script defer src="/_vercel/insights/script.js"></script>
 
 <!-- Elfsight Google Reviews -->
-<!-- Preconnect to Elfsight domains so DNS/TCP is ready before script runs -->
 <link rel="preconnect" href="https://static.elfsight.com">
 <link rel="preconnect" href="https://apps.elfsight.com">
 <link rel="preconnect" href="https://service.elfsight.com">
@@ -337,7 +336,6 @@ main { padding: 0 20px 120px; max-width: 540px; margin: 0 auto; }
 
 <script>
 // ─── DEBUG MODE ───────────────────────────────────────────
-// Set to true to pause before redirect and show the full URL
 const DEBUG = window.location.search.includes('debug=1');
 
 const MATERNITY_URL = 'https://twowildsoulsphotography.com/detroit-maternity-photographer-ads-custom';
@@ -394,6 +392,20 @@ const STEPS = [
 const state = { dueDate: null, firstBaby: null, multiples: null, style: null, whoJoins: null };
 let currentStep = -1;
 const TOTAL = STEPS.length;
+
+// ─── VERCEL FEATURE FLAGS ─────────────────────────────────
+// Writes quiz state into the DOM as a Vercel-readable feature flag meta tag.
+// Vercel Web Analytics automatically picks this up and enriches all page
+// views and client-side events with the flag values.
+function emitVercelFlags(flags) {
+  let meta = document.querySelector('meta[name="vercel-flag-values"]');
+  if (!meta) {
+    meta = document.createElement('meta');
+    meta.name = 'vercel-flag-values';
+    document.head.appendChild(meta);
+  }
+  meta.content = JSON.stringify(flags);
+}
 
 function encodeQuizData(data) {
   return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
@@ -457,7 +469,6 @@ function calculate() {
     bookByStr = 'Today';
   }
 
-  // whoJoins may be null if user was fast-tracked past questions (late booking)
   const pkgKey = state.whoJoins === 'momOnly' ? 'portraits' : 'whiteGlove';
   const dest   = isLate ? NEWBORN_URL : MATERNITY_URL;
 
@@ -544,6 +555,19 @@ function render() {
     const isLate = quizData.status === 'late';
     const redirectDelay = isLate ? 4500 : 1800;
 
+    // ── Emit completion flags ──────────────────────────────
+    emitVercelFlags({
+      'quiz-step':       'complete',
+      'quiz-status':     quizData.status,   // early | inWindow | pastWindow | late
+      'quiz-type':       quizData.type,     // maternity | newborn
+      'quiz-package':    pkgKey,            // portraits | whiteGlove
+      'quiz-week':       String(quizData.week),
+      'quiz-first-baby': state.firstBaby || 'unknown',
+      'quiz-multiples':  state.multiples || 'unknown',
+      'quiz-style':      state.style     || 'unknown',
+      'quiz-who-joins':  state.whoJoins  || 'unknown'
+    });
+
     if (isLate) {
       content.innerHTML = `
         <div class="redirect-screen">
@@ -598,7 +622,6 @@ function render() {
     const finalURL = dest + '?' + finalParams.toString();
 
     if (DEBUG) {
-      // Debug mode: show the full URL instead of redirecting
       const debugBox = document.createElement('div');
       debugBox.style.cssText = 'margin:20px auto;max-width:360px;background:white;border:2px solid #C7B27A;border-radius:8px;padding:20px;text-align:left;font-size:12px;word-break:break-all;';
       debugBox.innerHTML = '<p style="font-weight:600;margin-bottom:8px;color:#2E2F2C">&#x1F50D; DEBUG: Redirect URL</p>'
@@ -637,6 +660,20 @@ function render() {
   }
 
   try { fbq('trackCustom', 'QuizStep', { step: currentStep + 1, step_name: step.id }); } catch(e) {}
+
+  // ── Emit per-step flags ────────────────────────────────
+  // Builds up progressively: each step includes all answers captured so far.
+  emitVercelFlags({
+    'quiz-step':      String(currentStep + 1),
+    'quiz-step-name': step.id,
+    'quiz-pct':       String(pct),
+    // Answers accumulate as user progresses:
+    ...(state.dueDate   && { 'quiz-week':       String(currentPregnancyWeek(state.dueDate)) }),
+    ...(state.firstBaby && { 'quiz-first-baby': state.firstBaby }),
+    ...(state.multiples && { 'quiz-multiples':  state.multiples }),
+    ...(state.style     && { 'quiz-style':      state.style }),
+    ...(state.whoJoins  && { 'quiz-who-joins':  state.whoJoins })
+  });
 
   if (step.type === 'date') {
     content.innerHTML = `
@@ -685,9 +722,9 @@ function startQuiz() {
 }
 
 function handleDateChange() {
-  var val = document.getElementById('dateInput').value;
-  var msg = document.getElementById('valMsg');
-  var btn = document.getElementById('btnNext');
+  var val  = document.getElementById('dateInput').value;
+  var msg  = document.getElementById('valMsg');
+  var btn  = document.getElementById('btnNext');
   var warn = document.getElementById('lateWarning');
 
   if (!val) { btn.disabled = true; return; }
@@ -697,7 +734,6 @@ function handleDateChange() {
   btn.disabled  = false;
 
   if (week >= 33) {
-    // Show inline warning — Continue still works, routes to newborn
     if (warn) warn.classList.add('show');
     btn.textContent = 'Continue to Newborn \u2192';
   } else {
@@ -705,6 +741,14 @@ function handleDateChange() {
     btn.textContent = currentStep === TOTAL - 1 ? 'See My Results \u2192' : 'Continue \u2192';
   }
   if (msg) msg.style.display = 'none';
+
+  // Re-emit flags now that we have a week value
+  emitVercelFlags({
+    'quiz-step':      String(currentStep + 1),
+    'quiz-step-name': 'dueDate',
+    'quiz-pct':       String(Math.round(((currentStep + 1) / TOTAL) * 100)),
+    'quiz-week':      String(week)
+  });
 }
 
 function selectOpt(id, value, el) {
@@ -726,7 +770,6 @@ function goNext() {
       return;
     }
     state.dueDate = val;
-    // If already past the maternity window, skip remaining questions entirely
     if (currentPregnancyWeek(val) >= 33) {
       currentStep = TOTAL;
       render();
