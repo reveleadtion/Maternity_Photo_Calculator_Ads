@@ -256,6 +256,13 @@ main { padding: 0 20px 120px; max-width: 540px; margin: 0 auto; }
 }
 .redirect-tagline { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
 .redirect-sub { font-size: 13px; color: var(--text2); margin-bottom: 28px; }
+
+/* ── Rotating phrase ─────────────────────────────────── */
+.redirect-phrase {
+  font-size: 13px; color: var(--text2); margin-bottom: 28px;
+  transition: opacity 0.45s ease;
+  min-height: 20px;
+}
 .redirect-summary {
   background: white; border: 1px solid rgba(46,47,44,0.12); border-radius: 8px;
   padding: 20px 24px; width: 100%; max-width: 340px; text-align: left;
@@ -515,7 +522,7 @@ function render() {
           </div>
           <div class="redirect-routing">
             <div class="redirect-spinner" style="width:32px;height:32px;border-width:2px;margin-bottom:14px"></div>
-            <p class="redirect-sub">Taking you to our newborn experience&hellip;</p>
+            <p class="redirect-phrase" id="tws-rotating-phrase">Taking you to our newborn experience&hellip;</p>
           </div>
         </div>`;
     } else {
@@ -524,7 +531,7 @@ function render() {
           <div class="redirect-spinner"></div>
           <p class="redirect-package">${pkg.emoji} ${pkg.name}</p>
           <p class="redirect-tagline">${pkg.tagline}</p>
-          <p class="redirect-sub">Building your personalized page&hellip;</p>
+          <p class="redirect-phrase" id="tws-rotating-phrase">Calculating your window&hellip;</p>
           <div class="redirect-summary">
             <div class="summary-row"><span class="summary-label">Due date</span><span class="summary-value">${formatDateStr(state.dueDate)}</span></div>
             <div class="summary-row"><span class="summary-label">Currently</span><span class="summary-value">Week ${week}</span></div>
@@ -533,6 +540,40 @@ function render() {
           </div>
         </div>`;
     }
+
+    // ── Rotating phrases ──────────────────────────────────────────
+    var PHRASES_MATERNITY = [
+      'Calculating your window\u2026',
+      'Building your quote\u2026',
+      'Matching you to the right experience\u2026',
+      'Checking date availability\u2026',
+      'Personalizing your roadmap\u2026',
+      'Almost ready\u2026'
+    ];
+    var PHRASES_NEWBORN = [
+      'Taking you to our newborn experience\u2026',
+      'Reviewing your timeline\u2026',
+      'Preparing your results\u2026',
+      'Almost ready\u2026'
+    ];
+    function startPhraseRotator(isLate) {
+      var el = document.getElementById('tws-rotating-phrase');
+      if (!el) return;
+      var phrases = isLate ? PHRASES_NEWBORN : PHRASES_MATERNITY;
+      var idx = 0;
+      // First phrase already set in the HTML — start cycling from index 1
+      var interval = setInterval(function() {
+        idx = (idx + 1) % phrases.length;
+        el.style.opacity = '0';
+        setTimeout(function() {
+          if (!el.parentNode) { clearInterval(interval); return; }
+          el.textContent = phrases[idx];
+          el.style.opacity = '1';
+        }, 450);
+      }, 1800);
+      return interval;
+    }
+    startPhraseRotator(isLate);
 
     if (DEBUG) {
       const debugBox = document.createElement('div');
