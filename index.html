@@ -1,29 +1,1209 @@
-<style>@import url(https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap);:root{--tws-forest:#2E2F2C;--tws-green:#3F4438;--tws-sage:#7C8A5A;--tws-gold:#C7B27A;--tws-cream:#FAFAF7;--tws-warm:#F0EDE8;--tws-muted:#6B6E6A;--tws-border:#DDD9D3;--tws-urgent:#b03010;--tws-warn:#bf5f18}.tws *{box-sizing:border-box}.tws a{text-decoration:none!important}@keyframes twsFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes twsSlide{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}.tws-hero{font-family:'DM Sans',sans-serif;text-align:center;padding:32px 20px 28px;max-width:620px;margin:0 auto}.tws-hero__eyebrow{font-size:9px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--tws-gold);margin-bottom:12px;display:block;animation:.55s .05s both twsFade}.tws-hero__headline{font-family:'Playfair Display',Georgia,serif;font-size:clamp(26px,6vw,42px);font-weight:400;line-height:1.2;color:var(--tws-forest);margin-bottom:6px;letter-spacing:-.01em;animation:.55s .1s both twsFade}.tws-hero__headline em{font-style:italic;color:var(--tws-sage)}.tws-hero__divider{width:32px;height:1px;background:var(--tws-gold);margin:10px auto 14px;opacity:.5;animation:.55s .15s both twsFade}.tws-hero__sub{font-size:14px;font-weight:300;line-height:1.6;color:var(--tws-muted);margin:0 0 14px;animation:.55s .18s both twsFade}.tws-hero__badge{display:none;font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:6px 16px;border-radius:40px;margin-bottom:8px;border:1.5px solid currentColor;animation:.55s .22s both twsFade}.tws-hero__badge.u-urgent{color:var(--tws-urgent);background:#fdf0ec;border-color:#e07050}.tws-hero__badge.u-warning{color:var(--tws-warn);background:#fdf3ec;border-color:#e8a070}.tws-hero__badge.u-open{color:var(--tws-sage);background:#eef2e8;border-color:#8aaa60}.tws-hero__badge.u-soft{color:var(--tws-muted);background:var(--tws-warm);border-color:#c8c5be}.tws-hero__spots{display:none;margin:0 auto 16px;max-width:380px;animation:.55s .26s both twsFade}.tws-hero__spots-label{font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}.tws-hero__spots-label span:first-child{color:var(--tws-muted)}.tws-hero__spots-count{font-size:12px;font-weight:600;letter-spacing:.05em}.tws-hero__spots-count.s1{color:var(--tws-urgent)}.tws-hero__spots-count.s2{color:#c0420e}.tws-hero__spots-count.s3{color:var(--tws-warn)}.tws-hero__spots-count.s4{color:#8a9a50}.tws-hero__spots-count.s6{color:var(--tws-sage)}.tws-hero__pips{display:flex;gap:5px;justify-content:center}.tws-hero__pip{flex:1;height:6px;border-radius:3px;background:#e8e5de;transition:background .4s,transform .3s}.tws-hero__pip.filled.p-urgent{background:var(--tws-urgent)}.tws-hero__pip.filled.p-warn-hot{background:#c0420e}.tws-hero__pip.filled.p-warn{background:var(--tws-warn)}.tws-hero__pip.filled.p-mild{background:#8a9a50}.tws-hero__pip.filled.p-open{background:var(--tws-sage)}.tws-hero__bookby{font-size:12px;font-weight:300;color:#999;margin:0 0 14px;display:none;animation:.55s .28s both twsFade}.tws-hero__bookby strong{color:var(--tws-urgent);font-weight:500}.tws-hero__nudge{display:none;font-size:11px;font-weight:300;font-style:italic;color:#aaa;margin:8px 0 0}.tws-hero__cta-wrap{margin:18px auto 0;display:flex;flex-direction:column;align-items:stretch;gap:10px;max-width:420px;animation:.55s .34s both twsFade}.tws-hero__cta{display:inline-block;background:var(--tws-green)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font-family:'DM Sans',sans-serif!important;font-size:9.5px!important;font-weight:500!important;letter-spacing:.22em!important;text-transform:uppercase!important;padding:15px 40px!important;border-radius:2px!important;cursor:pointer!important;transition:background .2s,transform .18s!important;box-shadow:0 4px 20px rgba(63,68,56,.22)!important;width:100%!important}.tws-hero__cta:hover{background:var(--tws-sage)!important;transform:translateY(-1px)!important}.tws-hero__cta.u-urgent{background:var(--tws-urgent)!important}.tws-hero__cta.u-urgent:hover{background:#8b2008!important}.tws-hero__cta.is-newborn{background:#c94b4b!important}.tws-hero__cta.is-newborn:hover{background:#a03838!important}.tws-hero__pkg{display:none;align-items:center;gap:12px;background:var(--tws-green);border-radius:4px;padding:14px 18px;color:#fff;cursor:pointer;text-align:left;width:100%;transition:background .2s,transform .18s,box-shadow .18s;box-shadow:0 4px 20px rgba(63,68,56,.22)}.tws-hero__pkg:hover{background:var(--tws-sage);transform:translateY(-1px)}.tws-hero__pkg.u-urgent{background:var(--tws-urgent)}.tws-hero__pkg.u-urgent:hover{background:#8b2008}.tws-hero__pkg__icon{font-size:24px;flex-shrink:0;line-height:1}.tws-hero__pkg__body{flex:1;min-width:0}.tws-hero__pkg__label{font-size:8px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.6);display:block;margin-bottom:3px}.tws-hero__pkg__name{font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:400;font-style:italic;color:#fff;display:block;line-height:1.2;margin-bottom:2px}.tws-hero__pkg__tagline{font-size:10px;font-weight:300;color:rgba(255,255,255,.65);display:block;margin-bottom:5px}.tws-hero__pkg__pricing{display:inline-block;font-size:8.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);border-top:1px solid rgba(255,255,255,.15);padding-top:5px;margin-top:1px}.tws-hero__pkg__arrow{font-size:20px;color:rgba(255,255,255,.7);flex-shrink:0}.tws-optin{display:none;background:var(--tws-warm);border:1.5px solid var(--tws-gold);border-radius:4px;padding:22px 24px;text-align:left;animation:.55s .34s both twsFade}.tws-optin__pricing-pill{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:500;letter-spacing:.08em;color:var(--tws-sage);background:#eef2e8;border:1px solid #c0ce9a;border-radius:20px;padding:5px 13px;margin-bottom:14px;text-decoration:none!important;transition:background .18s}.tws-optin__pricing-pill:hover{background:#e4ecd8}.tws-optin__pricing-pill svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0}.tws-optin__eyebrow{font-size:9px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--tws-gold);display:block;margin-bottom:6px}.tws-optin__title{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:400;color:var(--tws-forest);margin:0 0 8px;line-height:1.25}.tws-optin__title em{font-style:italic;color:var(--tws-sage)}.tws-optin__body{font-size:13px;font-weight:300;color:var(--tws-muted);line-height:1.65;margin:0 0 16px}.tws-optin__fields{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}.tws-optin__field{width:100%;padding:11px 14px;border:1.5px solid var(--tws-border);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;background:#fff;color:var(--tws-forest);transition:border-color .18s;outline:0}.tws-optin__field:focus{border-color:var(--tws-sage)}.tws-optin__field::placeholder{color:#bbb}.tws-optin__submit{width:100%;background:var(--tws-gold);color:#1a1a18;font-family:'DM Sans',sans-serif;font-size:9.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;padding:14px;border:none;border-radius:2px;cursor:pointer;transition:background .2s,transform .18s;box-shadow:0 4px 16px rgba(199,178,122,.3)}.tws-optin__submit:hover{background:#b8a066;transform:translateY(-1px)}.tws-optin__submit:disabled{opacity:.6;cursor:not-allowed;transform:none}.tws-optin__trust{font-size:10.5px;font-weight:300;color:#aaa;text-align:center;margin-top:10px}.tws-optin__success{display:none;text-align:center;padding:8px 0}.tws-optin__success-icon{font-size:28px;display:block;margin-bottom:8px}.tws-optin__success-title{font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:400;color:var(--tws-forest);margin:0 0 6px}.tws-optin__success-body{font-size:13px;font-weight:300;color:var(--tws-muted);line-height:1.6;margin:0}.tws-optin__error{font-size:11px;color:var(--tws-urgent);margin-top:8px;display:none}.tws-section-gap{height:48px}.tws-road{max-width:860px;margin:0 auto;padding:8px 20px 56px;font-family:'DM Sans',sans-serif}.tws-road__label{font-size:9px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--tws-gold);text-align:center;margin-bottom:36px;display:block}.tws-road__timeline{position:relative;margin-bottom:44px}.tws-road__timeline::before{content:'';position:absolute;left:26px;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--tws-gold),var(--tws-border),transparent)}.tws-road__mile{display:flex;gap:24px;position:relative;opacity:0;transform:translateY(14px);animation:.5s forwards twsSlide}.tws-road__mile:first-child{animation-delay:.08s}.tws-road__mile:nth-child(2){animation-delay:.18s}.tws-road__mile:nth-child(3){animation-delay:.28s}.tws-road__mile:nth-child(4){animation-delay:.38s}.tws-road__mile:nth-child(5){animation-delay:.46s}.tws-road__dot-wrap{flex:0 0 52px;display:flex;flex-direction:column;align-items:center;padding-top:3px}.tws-road__dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--tws-border);background:var(--tws-cream);flex-shrink:0;position:relative;z-index:1}.tws-road__dot.done{background:var(--tws-sage);border-color:var(--tws-sage)}.tws-road__dot.active{background:var(--tws-gold);border-color:var(--tws-gold);box-shadow:0 0 0 4px rgba(199,178,122,.2)}.tws-road__dot.warn{background:var(--tws-urgent);border-color:var(--tws-urgent);box-shadow:0 0 0 4px rgba(176,48,16,.15)}.tws-road__dot-line{width:1px;flex:1;min-height:28px;background:var(--tws-border);margin-top:6px}.tws-road__mile:last-child .tws-road__dot-line{display:none}.tws-road__content{flex:1;padding-bottom:28px}.tws-road__mile:last-child .tws-road__content{padding-bottom:0}.tws-road__when{font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--tws-muted);margin-bottom:4px;display:block}.tws-road__when.active{color:var(--tws-gold)}.tws-road__when.warn{color:var(--tws-urgent)}.tws-road__title{font-family:'Playfair Display',Georgia,serif;font-size:19px;font-weight:400;color:var(--tws-forest);line-height:1.25;margin-bottom:6px}.tws-road__title em{font-style:italic;color:var(--tws-sage)}.tws-road__body{font-size:13px;font-weight:300;color:var(--tws-muted);line-height:1.7;margin:0}.tws-road__mile.is-now .tws-road__content{background:var(--tws-warm);border:1.5px solid var(--tws-gold);border-radius:3px;padding:18px 20px;margin-bottom:28px;position:relative}.tws-road__mile.is-now .tws-road__content::before{content:'You Are Here';position:absolute;top:-9px;left:16px;background:var(--tws-gold);color:#fff;font-size:7.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:2px 8px;border-radius:20px}.tws-road__mile.is-urgent .tws-road__content{background:#fdf0ec;border:1.5px solid #e07050;border-radius:3px;padding:18px 20px;margin-bottom:28px;position:relative}.tws-road__mile.is-urgent .tws-road__content::before{content:'Act Now';position:absolute;top:-9px;left:16px;background:var(--tws-urgent);color:#fff;font-size:7.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:2px 8px;border-radius:20px}.tws-road__exp{border-left:3px solid var(--tws-green);background:var(--tws-warm);padding:28px 32px;border-radius:0 3px 3px 0;margin-bottom:12px}.tws-road__exp.warn{border-left-color:var(--tws-urgent);background:#fdf0ec}.tws-road__exp-label{font-size:9px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--tws-green);margin-bottom:12px;display:block}.tws-road__exp.warn .tws-road__exp-label{color:var(--tws-urgent)}.tws-road__exp-body{font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:400;line-height:1.85;color:#444;margin:0 0 20px}.tws-road__cta{display:inline-block!important;background:var(--tws-green)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font-family:'DM Sans',sans-serif!important;font-size:9.5px!important;font-weight:500!important;letter-spacing:.22em!important;text-transform:uppercase!important;padding:14px 36px!important;border-radius:2px!important;cursor:pointer!important;border:none!important;transition:background .2s,transform .18s!important;box-shadow:0 4px 16px rgba(63,68,56,.2)!important;margin-right:10px!important;margin-top:4px!important}.tws-road__cta:hover{background:var(--tws-sage)!important;transform:translateY(-1px)!important}.tws-road__cta.newborn{background:var(--tws-urgent)!important;box-shadow:0 4px 16px rgba(176,48,16,.2)!important}.tws-road__cta.newborn:hover{background:#8b2008!important}.tws-road__pkg{display:flex;align-items:center;gap:12px;background:var(--tws-green);border-radius:4px;padding:14px 18px;color:#fff;cursor:pointer;text-align:left;width:100%;max-width:420px;transition:background .2s,transform .18s,box-shadow .18s;box-shadow:0 4px 20px rgba(63,68,56,.22);text-decoration:none!important}.tws-road__pkg:hover{background:var(--tws-sage);transform:translateY(-1px)}.tws-road__pkg__icon{font-size:24px;flex-shrink:0;line-height:1}.tws-road__pkg__body{flex:1;min-width:0}.tws-road__pkg__label{font-size:8px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.6);display:block;margin-bottom:3px}.tws-road__pkg__name{font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:400;font-style:italic;color:#fff;display:block;line-height:1.2;margin-bottom:2px}.tws-road__pkg__tagline{font-size:10px;font-weight:300;color:rgba(255,255,255,.65);display:block;margin-bottom:5px}.tws-road__pkg__pricing{display:inline-block;font-size:8.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);border-top:1px solid rgba(255,255,255,.15);padding-top:5px;margin-top:1px}.tws-road__pkg__arrow{font-size:20px;color:rgba(255,255,255,.7);flex-shrink:0}.tws-road__includes{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--tws-border);border:1px solid var(--tws-border);border-radius:3px;overflow:hidden;margin-top:40px}.tws-road__inc-item{background:var(--tws-cream);padding:20px 14px;text-align:center}.tws-road__inc-icon{font-size:20px;display:block;margin-bottom:8px}.tws-road__inc-title{font-family:'Playfair Display',Georgia,serif;font-size:13px;font-weight:400;color:var(--tws-forest);display:block;margin-bottom:4px}.tws-road__inc-desc{font-size:10.5px;font-weight:300;color:var(--tws-muted);line-height:1.5;display:block}.tws-quiz-card{display:none;margin:48px auto 0;max-width:860px;border:1.5px solid var(--tws-border);border-radius:4px;overflow:hidden;animation:.55s .4s both twsFade}.tws-quiz-card__inner{display:flex;align-items:center;gap:32px;padding:32px 36px;background:var(--tws-cream)}.tws-quiz-card__icon{font-size:36px;flex-shrink:0;line-height:1;opacity:.85}.tws-quiz-card__body{flex:1;min-width:0}.tws-quiz-card__label{font-size:9px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--tws-gold);display:block;margin-bottom:8px}.tws-quiz-card__title{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:400;line-height:1.25;color:var(--tws-forest);margin:0 0 8px}.tws-quiz-card__title em{font-style:italic;color:var(--tws-sage)}.tws-quiz-card__desc{font-size:13px;font-weight:300;line-height:1.6;color:var(--tws-muted);margin:0}.tws-quiz-card__cta{flex-shrink:0;display:inline-block!important;background:var(--tws-forest)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font-family:'DM Sans',sans-serif!important;font-size:9px!important;font-weight:500!important;letter-spacing:.22em!important;text-transform:uppercase!important;padding:14px 28px!important;border-radius:2px!important;white-space:nowrap;transition:background .2s,transform .18s!important;box-shadow:0 4px 16px rgba(46,47,44,.18)!important;text-decoration:none!important}.tws-quiz-card__cta:hover{background:var(--tws-green)!important;transform:translateY(-1px)!important}.tws-quiz-card__footer{background:var(--tws-warm);border-top:1px solid var(--tws-border);padding:10px 36px;display:flex;align-items:center;gap:20px}.tws-quiz-card__pill{font-size:9.5px;font-weight:400;color:var(--tws-muted);display:flex;align-items:center;gap:6px}.tws-quiz-card__pill::before{content:'✓';font-size:10px;color:var(--tws-sage);font-weight:600}@media(max-width:640px){.tws-road{padding:4px 14px 40px}.tws-road__timeline::before{left:19px}.tws-road__dot-wrap{flex:0 0 38px}.tws-road__exp{padding:20px 18px}.tws-road__exp-body{font-size:16px;line-height:1.75}.tws-road__includes{grid-template-columns:repeat(2,1fr)}.tws-quiz-card__inner{flex-direction:column;gap:20px;padding:24px 20px;text-align:center}.tws-quiz-card__icon{font-size:28px}.tws-quiz-card__cta{width:100%!important;text-align:center!important}.tws-quiz-card__footer{padding:10px 20px;flex-wrap:wrap;gap:12px;justify-content:center}}@keyframes twsModalIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}@keyframes twsModalOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(12px) scale(.97)}}.tws-modal-backdrop{display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,20,18,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:12px}.tws-modal-backdrop.is-open{display:flex}.tws-modal-backdrop.is-closing .tws-modal{animation:.22s forwards twsModalOut}.tws-modal{position:relative;width:100%;max-width:780px;height:min(82vh,680px);background:var(--tws-cream);border-radius:4px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.38);animation:.28s cubic-bezier(.22,.9,.36,1) both twsModalIn;display:flex;flex-direction:column}.tws-modal__header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 13px;background:var(--tws-green);flex-shrink:0}.tws-modal__header-label{font-family:'DM Sans',sans-serif;font-size:9px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.75)}.tws-modal__close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;line-height:1;transition:background .18s;flex-shrink:0}.tws-modal__close:hover{background:rgba(255,255,255,.22)}.tws-modal__iframe{flex:1;width:100%;border:none;display:block;background:var(--tws-cream)}.tws-modal__loading{position:absolute;inset:48px 0 0;display:flex;align-items:center;justify-content:center;background:var(--tws-cream);pointer-events:none;transition:opacity .3s}.tws-modal__loading.is-hidden{opacity:0}.tws-modal__spinner{width:28px;height:28px;border-radius:50%;border:2px solid var(--tws-border);border-top-color:var(--tws-sage);animation:.7s linear infinite twsSpin}@keyframes twsSpin{to{transform:rotate(360deg)}}@media(max-width:640px){.tws-modal-backdrop{align-items:stretch;justify-content:stretch;padding:0}.tws-modal{height:100vh;height:100dvh;max-width:100%;border-radius:0}}</style><div class="tws tws-hero" id="tws-hero"><span class="tws-hero__eyebrow" id="tws-eyebrow">Maternity Photography · Metro Detroit</span><h1 class="tws-hero__headline" id="tws-headline">Loading your results…</h1><div class="tws-hero__divider"></div><p class="tws-hero__sub" id="tws-sub"></p><div class="tws-hero__badge" id="tws-badge"></div><div class="tws-hero__spots" id="tws-spots"><div class="tws-hero__spots-label"><span>Calculated By Due Date</span><span class="tws-hero__spots-count" id="tws-spots-count"></span></div><div class="tws-hero__pips" id="tws-pips"></div></div><p class="tws-hero__bookby" id="tws-bookby"></p><p class="tws-hero__nudge" id="tws-nudge"></p><div class="tws-hero__cta-wrap"><a href="#pricing" id="tws-cta" class="tws-hero__cta">See Investment Details &amp; Reserve Your Date</a><a href="#pricing" id="tws-pkg" class="tws-hero__pkg"><span class="tws-hero__pkg__icon" id="tws-pkg-icon"></span><span class="tws-hero__pkg__body"><span class="tws-hero__pkg__label">Your Recommended Experience</span><span class="tws-hero__pkg__name" id="tws-pkg-name"></span><span class="tws-hero__pkg__tagline" id="tws-pkg-tagline"></span><span class="tws-hero__pkg__pricing">See pricing ›</span></span><span class="tws-hero__pkg__arrow">›</span></a><div id="tws-optin" class="tws-optin" style="display:none;"><a id="tws-optin-pill" href="#pricing" class="tws-optin__pricing-pill"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><span id="tws-optin-pill-text">Sessions from $490 · See full pricing</span></a><span class="tws-optin__eyebrow">Your Window Opens Around Week 14</span><h3 class="tws-optin__title">You're Early — <em>Good Timing</em></h3><p class="tws-optin__body">We'll send a preparation guide now and reach out personally when your booking window opens. No inbox clutter — just one well-timed nudge.</p><div id="tws-optin-form"><div class="tws-optin__fields"><input id="tws-optin-name"  class="tws-optin__field" type="text"  placeholder="First name" autocomplete="given-name" /><input id="tws-optin-email" class="tws-optin__field" type="email" placeholder="Email address" autocomplete="email" /><input id="tws-optin-phone" class="tws-optin__field" type="tel"   placeholder="Phone number (optional)" autocomplete="tel" /></div><button id="tws-optin-btn" class="tws-optin__submit">Send Me the Guide</button><p class="tws-optin__trust">By submitting, you agree to receive a preparation guide by email and, if you provide your phone number, a personal call or text from Two Wild Souls when your booking window opens. Message &amp; data rates may apply. Reply STOP to opt out of texts at any time.</p><p class="tws-optin__error" id="tws-optin-error"></p></div><div id="tws-optin-success" class="tws-optin__success" style="display:none;"><span class="tws-optin__success-icon">🌿</span><p class="tws-optin__success-title">You're on the list.</p><p class="tws-optin__success-body">We'll be in touch when your window opens — nothing to think about until then.</p></div></div></div>
-</div><div class="tws-section-gap"></div><div class="tws tws-road" id="tws-road"><span class="tws-road__label">Your Personalized Maternity Session Roadmap</span><div class="tws-road__timeline" id="tws-timeline"></div><div class="tws-road__exp" id="tws-exp"><span class="tws-road__exp-label" id="tws-exp-label">Your Next Step</span><p class="tws-road__exp-body" id="tws-exp-body"></p></div><div class="tws-road__includes"><div class="tws-road__inc-item"><span class="tws-road__inc-icon">💄</span><span class="tws-road__inc-title">Hair &amp; Makeup</span><span class="tws-road__inc-desc">Professional styling included — arrive ready to feel completely yourself</span></div><div class="tws-road__inc-item"><span class="tws-road__inc-icon">👗</span><span class="tws-road__inc-title">Designer Gowns</span><span class="tws-road__inc-desc">Full access to our curated maternity gown collection — no shopping needed</span></div><div class="tws-road__inc-item"><span class="tws-road__inc-icon">🤝</span><span class="tws-road__inc-title">Fully Guided</span><span class="tws-road__inc-desc">Every pose, expression, and moment directed so you look and feel incredible</span></div><div class="tws-road__inc-item"><span class="tws-road__inc-icon">📦</span><span class="tws-road__inc-title">Heirloom Delivery</span><span class="tws-road__inc-desc">Albums, wall portraits, and prints — designed and delivered for you</span></div></div><div class="tws-quiz-card" id="tws-quiz-card"><div class="tws-quiz-card__inner"><span class="tws-quiz-card__icon">🗓️</span><div class="tws-quiz-card__body"><span class="tws-quiz-card__label">Not Sure Where You Stand?</span><h3 class="tws-quiz-card__title">Take the Quiz — We'll Build Your <em>Custom Session Roadmap</em></h3><p class="tws-quiz-card__desc">Answer a few quick questions and we'll calculate your ideal timing window, a personalized starting quote, and exactly what to expect — all on this page.</p></div><a class="tws-quiz-card__cta" href="https://moments.twowildsoulsphotography.com" id="tws-quiz-trigger">Take the Quiz →</a></div><div class="tws-quiz-card__footer"><span class="tws-quiz-card__pill">Takes about 2 minutes</span><span class="tws-quiz-card__pill">Personalized to your due date</span><span class="tws-quiz-card__pill">No obligation</span></div></div>
-</div><script>!function(){document.addEventListener("click",function(e){var t=e.target.closest('a[href*="#"]');if(t){var o=t.getAttribute("href")||"";if(0!==o.indexOf("http")){e.preventDefault();var a,n=o.split("#")[1];try{a=window.parent.document.getElementById(n)}catch(e){}(a=a||document.getElementById(n))&&a.scrollIntoView({behavior:"smooth",block:"start"})}}});var e=[{min:32,spots:1,total:6,pip:"p-urgent",sc:"s1",label:"1 of 6 available",uc:"u-urgent"},{min:30,spots:2,total:6,pip:"p-warn-hot",sc:"s2",label:"2 of 6 available",uc:"u-urgent"},{min:28,spots:3,total:6,pip:"p-warn",sc:"s3",label:"3 of 6 available",uc:"u-warning"},{min:26,spots:4,total:6,pip:"p-mild",sc:"s4",label:"4 of 6 available",uc:"u-open"},{min:0,spots:6,total:6,pip:"p-open",sc:"s6",label:"6 of 6 available",uc:"u-soft"}];var t={1:{ey:"Final Call — Last Spot",hl:"Week {w} — This Is Your <em>Last Chance</em>",sub:"Only 1 session remains and week 34 is our cutoff. Same-week confirmation required — reach out today.",badge:"Only 1 Session Available",uc:"u-urgent"},2:{ey:"Almost Full — Act Now",hl:"Week {w} — Your Window Is <em>Closing Fast</em>",sub:"Just 2 sessions left and you're approaching our week 34 cutoff. Don't wait.",badge:"Only 2 Sessions Available",uc:"u-urgent"},3:{ey:"Limited Availability",hl:"Week {w} — Your Window Is <em>Closing</em>",sub:"3 sessions remain for this period. Availability is tightening — book soon.",badge:"Only 3 Sessions Available",uc:"u-warning"},4:{ey:"Your Results Are In",hl:"Week {w} — Your Window Is <em>Open</em>",sub:"4 sessions are still available. Secure your date before spots fill.",badge:"4 Sessions Available",uc:"u-open"},6:{ey:"Your Results Are In",hl:"Week {w} — You Are <em>Early!</em>",sub:"You have great timing — 6 sessions are available and your ideal window is still ahead. Book your preferred date today!",badge:"6 Sessions Available",uc:"u-soft"}},o={maternity:{early:{ey:"Maternity Photography · Metro Detroit",hl:"Week {w} — The <em>Best Dates Go First</em>",sub:"Inquiring now means first pick of session dates, the full designer gown collection, and every detail handled before life gets loud. The women who wish they'd done this sooner are always the ones who thought they had more time at week {w}.",badge:"First Pick of Dates & Gowns Available Now",uc:"u-open",cta:"See Investment Details & Reserve Your Date",ctaC:"",newborn:!1},inWindow:{ey:"You're in the Sweet Spot",hl:"Week {w} — <em>Perfect Timing</em>",sub:"You're right in the ideal window ({win}). This is exactly when maternity portraits are meant to happen.",uc:"u-open",cta:"See Investment Details & Reserve Your Date",ctaC:"",newborn:!1},pastWindow:{ey:"Don't Wait — Book Today",hl:"Week {w} — Your Window Is <em>Closing</em>",sub:"You're past the ideal window but we can still make this happen — if you move today.",uc:"u-warning",cta:"See Investment Details & Secure Your Spot",ctaC:"",newborn:!0,nudge:"Not sure maternity will work out? Your newborn session will be just as breathtaking."},urgent:{ey:"Week 32 — Final Window",hl:"This Is Your <em>Last Chance</em>",sub:"Week 34 is our final cutoff. Same-week confirmation required — contact us today.",uc:"u-urgent",cta:"Reserve My Spot Before It's Gone",ctaC:"u-urgent",newborn:!1,nudge:"If timing doesn't work, your newborn session will be just as magical."},default:{ey:"Maternity Photography · Metro Detroit",hl:"Your Window Is <em>Open Right Now</em>",sub:"The women who love their maternity experience most are always the ones who inquired early — first pick of dates, the full gown collection, and nothing left to figure out as their window approaches. We take only 6 sessions per month.",badge:"First Pick of Dates & Gowns Available",uc:"u-soft",cta:"See Investment Details & Reserve Your Date",ctaC:"",newborn:!1}},newborn:{late:{ey:"Metro Detroit Newborn Photography",hl:"Maternity Has Closed — But the <em>Best Is Still Ahead</em>",sub:"Reserve your newborn session now so we're ready the moment baby arrives.",uc:"u-warning",cta:"Reserve Your Newborn Session",ctaC:"is-newborn",newborn:!1,isNB:!0},urgent:{ey:"Metro Detroit Newborn Photography",hl:"Week {w} — Baby Is <em>Almost Here</em>",sub:"Reserve now so we're ready the moment baby arrives. Only 6 sessions per month.",uc:"u-warning",cta:"Reserve Your Newborn Session",ctaC:"is-newborn",newborn:!1,isNB:!0},default:{ey:"Metro Detroit Newborn Photography",hl:"The First Days Are <em>Pure Magic</em>",sub:"Fully guided, stress-free newborn portraits in days 5–14. Only 6 sessions per month.",uc:"u-soft",cta:"Reserve Your Newborn Session",ctaC:"is-newborn",newborn:!1,isNB:!0}}},a={portraits:{name:"Portraits of Just Mom",tagline:"Intimate · Studio Only · All About You",emoji:"🪞"},whiteGlove:{name:"White Glove Experience",tagline:"Full Family · Studio & Outdoors · The Full Story",emoji:"✨"}};function n(e){return e&&!isNaN(e)?e.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"}):""}function s(e,t){var o=function(e){if(!e)return null;var t=new Date(e);if(/^\d{4}-\d{2}-\d{2}$/.test(e)){var o=e.split("-");t=new Date(parseInt(o[0]),parseInt(o[1])-1,parseInt(o[2]))}return isNaN(t.getTime())?null:t}(e);if(!o)return null;var a=864e5,n=new Date(o.getTime()-280*a);return new Date(n.getTime()+7*t*a)}function r(e,t){if(!e||!t||t.indexOf("-")<0)return"";var o,a=t.split("-"),r=s(e,parseInt(a[0],10)),i=s(e,parseInt(a[1],10));return r&&i?(r.getFullYear()===i.getFullYear()?(o=r)&&!isNaN(o)?o.toLocaleDateString("en-US",{month:"short",day:"numeric"}):"":n(r))+" – "+n(i):""}var i={early:[{when:"{wl} — Your Window Is Ahead",state:"active",title:"The <em>Best Dates Are Available Now</em>",body:"Early inquiries get first pick — preferred session dates, the full designer gown collection before it fills, and every detail handled well ahead of your window. The closer you get to weeks 28–32, the more these choices narrow. Reaching out now costs nothing and locks in your advantages."},{when:"After You Inquire",state:"future",title:"We <em>Handle Everything</em> From Here",body:"Once you reach out, we walk you through your style vision, hold your preferred date, and send a full preparation guide when your window approaches. There's nothing left to research, coordinate, or worry about — it's completely off your plate."},{when:"{wf} — Your Session",state:"future",title:"Your Maternity Session",body:"Weeks 28–32 are the sweet spot — bump at its most dramatic, and you're still comfortably mobile. Pro hair, makeup, designer gowns, every pose fully guided. The women who planned ahead always say the same thing: they're so glad they didn't wait."},{when:"After Baby Arrives",state:"future",title:"Newborn Session (Optional)",body:"Families who plan ahead love adding a newborn session in days 5–14. We handle all the details — you just show up with your new family."}],inWindow:[{when:"Before Your Session",state:"done",title:"Book Your Session",body:"You're in — and right on time. The planning is done; now it's time to look forward to your session day."},{when:"{wl} — Sweet Spot",state:"active",title:"You're in the <em>Ideal Window</em>",body:"Week {w} is exactly where you want to be. Your bump is full and beautiful, and you're likely still comfortably mobile for posing."},{when:"2–3 Weeks After Session",state:"future",title:"Gallery Reveal &amp; Product Selection",body:"We'll walk you through your gallery together — every image, every product option. Fully guided, no pressure."},{when:"After Baby Arrives",state:"future",title:"Portraits Delivered",body:"Albums, wall art, and gift prints handled start to finish. Your home is ready before the newborn chaos sets in."}],pastWindow:[{when:"Ideal Window",state:"done",title:"Past the Sweet Spot",body:"Weeks 28–32 have passed, but maternity sessions are still possible and still beautiful before week 32."},{when:"{wl} — Still Possible",state:"active",title:"There's Still <em>Time</em>",body:"You're past our ideal window, but we may still be able to make it work before our week 32 cutoff. Reaching out today is the only way to know."},{when:"After Baby Arrives",state:"future",title:"Newborn Session Waiting",body:"If timing doesn't work for maternity, your newborn session will be just as breathtaking. Days 5–14 are pure magic — book before baby arrives to guarantee your spot."}],urgent:[{when:"Ideal Window",state:"done",title:"Session Window Has Passed",body:"Your ideal maternity window is behind you, but week 32 is our absolute final cutoff — and we may still have availability."},{when:"{wl} — Final Cutoff",state:"warn",title:"Week 32 — <em>This Is It</em>",body:"You're at our absolute last week for maternity bookings. If we have a date open we can still deliver the full experience. Same-week confirmation required."},{when:"If Timing Doesn't Work",state:"future",title:"Your Newborn Session",body:"If maternity doesn't come together, newborn portraits in days 5–14 are some of our most breathtaking work. Reserve before baby arrives."}],late:[{when:"Maternity Window",state:"done",title:"Maternity Window Closing",body:"At week {w}, we're at our booking cutoff for maternity sessions. But this isn't the end of the story."},{when:"Days 5–14 After Birth",state:"active",title:"Your Newborn Session is <em>Next</em>",body:"Newborn portraits in the first two weeks are some of our most breathtaking work — and they require booking before baby arrives. Reserve your spot now."},{when:"After Your Session",state:"future",title:"Gallery &amp; Products Delivered",body:"A fully guided gallery reveal, every image curated, every product handled. You won't have to think about a single detail."}],newborn:[{when:"Now — Before Baby Arrives",state:"active",title:"Reserve Your Newborn Session <em>Today</em>",body:"Newborn sessions must be booked before baby arrives so we can pencil in your due date and be ready the moment you call. Days 5–14 are the magic window."},{when:"Days 5–14 After Birth",state:"future",title:"Your Newborn Session",body:"Baby's most curly, sleepy, brand-new self — captured before the world changes. Pro lighting, guided posing, designer wraps and props included."},{when:"After Your Session",state:"future",title:"Gallery Reveal &amp; Heirloom Delivery",body:"We'll walk you through every image together. Albums, wall art, gift prints — everything designed and delivered while you focus on your new family."}],default:[{when:"Your Session Window",state:"active",title:"Your Maternity Session",body:"Maternity sessions take place during weeks 24–34. Reach out to check current availability."},{when:"After Your Session",state:"future",title:"Gallery &amp; Product Selection",body:"A fully guided reveal experience — we walk you through every image and every product option."},{when:"After Baby Arrives",state:"future",title:"Portraits in Hand",body:"Everything handled, everything delivered, everything unforgettable."}]},l={early:{lbl:"Why the Women Who Plan Early Are Happiest",body:"Early inquiries get first pick of session dates, the full designer gown collection, and every detail handled before life gets loud. There's nothing to scramble for, nothing to settle on. The women who wish they'd done this sooner are always the ones who thought week {w} meant they had all the time in the world.",isNB:!1},inWindow:{lbl:"You're Right in the Sweet Spot",body:"Week {w} puts you exactly where you want to be. Your bump is at its most dramatic and beautiful. With only 6 spots per month, now is the time to confirm.",isNB:!1},pastWindow:{lbl:"Past the Ideal Window — But Not Too Late",body:"Your ideal window has passed, but maternity sessions are still possible before week 32. We'll need to move quickly — reach out today.",isNB:!1},urgent:{lbl:"Week 32 — This Is It",body:"You're at our absolute final week for maternity bookings. If we have availability we can still deliver the full experience — pro hair and makeup, designer gowns, fully guided. Same-week confirmation required.",isNB:!1},late:{lbl:"Maternity is Closing — Here's What's Next",body:"At week {w}, we're approaching our booking cutoff for maternity sessions. But newborn portraits in the first 5–14 days are some of our most breathtaking work. Reserve your spot now.",isNB:!0},newborn:{lbl:"Reserve Your Newborn Session Before Baby Arrives",body:"Newborn sessions must be booked before baby arrives so we can hold your due date and be on-call the moment you're ready. Days 5–14 are the magic window — curly, sleepy, brand-new.",isNB:!0},default:{lbl:"The Difference Early Planning Makes",body:"Every woman who's loved her maternity experience had one thing in common — she inquired before life got loud. First pick of dates, the full designer gown collection, hair and makeup included, and every detail handled from here. One inquiry is all it takes to have this completely sorted.",isNB:!1}};function d(e){return document.getElementById(e)}function u(e,t,o){var a=document.createElement("a");return a.className="tws-road__cta"+(e?" "+e:""),a.textContent=t,a.href=o,a.style.setProperty("color","#fff","important"),a.style.setProperty("-webkit-text-fill-color","#fff","important"),a}function w(n){var s=n.week,w=n.status,c=n.type,p=n.duedate,y=n.window,h=n.bookby,m=s?"Week "+s:"Currently",b=r(p,y)||(y?"Weeks "+y:"Weeks 28–32"),f=h&&"Today"!==h?"Book by "+h:"Coming Up",g=o[c]||o.maternity,v=g[w]||g.default,k="newborn"!==c?function(t){var o=parseInt(t,10);if(isNaN(o))return null;for(var a=0;a<e.length;a++)if(o>=e[a].min)return e[a];return null}(s):null,_=k?t[k.spots]:null,S="early"===w||"default"===w,x=!S&&_?_:null;d("tws-eyebrow").textContent=x?x.ey:v.ey,d("tws-headline").innerHTML=(x?x.hl:v.hl).replace(/{w}/g,s||"").replace(/{win}/g,b),d("tws-sub").textContent=(x?x.sub:v.sub).replace(/{w}/g,s||"").replace(/{win}/g,b);var N,A,C=d("tws-badge");if(S?(N=v.badge||"First Pick of Dates & Gowns Available",A=v.uc||"u-open"):(N=x?x.badge:k?k.spots+" Session"+(1!==k.spots?"s":"")+" Available":v.uc&&"Only 6 Sessions Per Month",A=x?x.uc:k?k.uc:v.uc||"u-soft"),C.textContent=N||"",C.className="tws-hero__badge "+A,C.style.display=N?"inline-block":"none",k&&!S){var W=d("tws-spots"),Y=d("tws-spots-count"),I=d("tws-pips");W.style.display="block",Y.textContent=k.label,Y.className="tws-hero__spots-count "+k.sc,I.innerHTML="";for(var D=0;D<k.total;D++){var B=document.createElement("div");B.className="tws-hero__pip"+(D<k.spots?" filled "+k.pip:""),B.style.animationDelay=.32+.055*D+"s",I.appendChild(B)}}if(h&&"newborn"!==c){var T=d("tws-bookby"),E="Today"===h;if(!E){var L=new Date(h),P=new Date;P.setHours(0,0,0,0),!isNaN(L)&&L<P&&(E=!0)}T.innerHTML=E?"Confirm availability <strong>today</strong>":"Book by <strong>"+h+"</strong> to guarantee your date.",T.style.display="block"}if(v.nudge){var M=d("tws-nudge");M.textContent=v.nudge,M.style.display="block"}var R=n.package;if(!R){var F=(n.style||"").toLowerCase(),O=(n.setting||"").toLowerCase();"momonly"===F||"mom_only"===F||"solo"===F||"justmom"===F||"just_mom"===F?R="portraits":"full"!==F&&"both"!==O&&"outdoor"!==O&&"outdoors"!==O||(R="whiteGlove")}var j=a[R],q="";try{q=window.parent.location.pathname+window.parent.location.search}catch(e){}q=q||window.location.pathname+window.location.search;var H=d("tws-cta"),G=d("tws-pkg"),z=d("tws-optin"),U=d("tws-hero-nb");U&&U.parentNode.removeChild(U);var $=parseInt(s,10);if(!isNaN($)&&$<14&&"newborn"!==c){window._twsOptinData={week:s,status:w,duedate:n.duedate,package:R||""};var J=d("tws-optin-week");J&&(J.textContent=s);var Q=d("tws-optin-pill"),V=d("tws-optin-pill-text");if(Q&&V){var K={portraits:"$490",whiteGlove:"$1,290"}[R];V.textContent=K&&a[R]?a[R].name+" from "+K+" · See full pricing":"Sessions from $490 · See full pricing",Q.href=q+"#pricing"}var X=d("tws-optin-form"),Z=d("tws-optin-success");X&&(X.style.display=""),Z&&(Z.style.display="none"),H.style.display="none",G.style.display="none",z.style.display="block",d("tws-sub").style.display="none",d("tws-badge").style.display="none"}else if(z&&(z.style.display="none"),d("tws-sub").style.display="",j&&"newborn"!==c)H.style.display="none",d("tws-pkg-icon").textContent=j.emoji,d("tws-pkg-name").textContent=j.name,d("tws-pkg-tagline").textContent=j.tagline,G.style.display="flex",v.ctaC&&G.classList.add(v.ctaC),G.href=q+"#pricing";else if(H.textContent=v.cta,v.ctaC&&H.classList.add(v.ctaC),H.href=v.isNB?"https://twowildsoulsphotography.com/detroit-newborn-photographer-ads":q+"#pricing",H.style.display="",G.style.display="none",v.newborn){var ee=document.createElement("a");ee.id="tws-hero-nb",ee.className="tws-hero__cta is-newborn",ee.textContent="Explore Newborn Sessions Instead",ee.href="https://twowildsoulsphotography.com/detroit-newborn-photographer-ads",ee.style.setProperty("text-decoration","none","important"),H.parentNode.appendChild(ee)}var te=(i["newborn"===c?"newborn":w||"default"]||i.default).map(function(e){return{when:e.when.replace(/{wl}/g,m).replace(/{wf}/g,b).replace(/{bf}/g,f).replace(/{w}/g,s||""),state:e.state,title:e.title.replace(/{w}/g,s||""),body:e.body.replace(/{w}/g,s||"")}}),oe=d("tws-timeline");oe.innerHTML="",te.forEach(function(e,t){var o=t===te.length-1,a="tws-road__dot"+("done"===e.state?" done":"active"===e.state?" active":"warn"===e.state?" warn":""),n="tws-road__when"+("active"===e.state?" active":"warn"===e.state?" warn":""),s="tws-road__mile"+("active"===e.state?" is-now":"warn"===e.state?" is-urgent":""),r=document.createElement("div");r.className=s,r.innerHTML='<div class="tws-road__dot-wrap"><div class="'+a+'"></div>'+(o?"":'<div class="tws-road__dot-line"></div>')+'</div><div class="tws-road__content"><span class="'+n+'">'+e.when+'</span><h3 class="tws-road__title">'+e.title+'</h3><p class="tws-road__body">'+e.body+"</p></div>",oe.appendChild(r)});var ae=l["newborn"===c?"newborn":w||"default"]||l.default,ne=d("tws-exp");if(d("tws-exp-label").textContent=ae.lbl,d("tws-exp-body").textContent=ae.body.replace(/{w}/g,s||"").replace(/{wf}/g,b),ne.querySelectorAll(".tws-road__cta").forEach(function(e){e.parentNode.removeChild(e)}),"urgent"===w||"late"===w||"pastWindow"===w||"newborn"===c?ne.classList.add("warn"):ne.classList.remove("warn"),ae.isNB)ne.appendChild(u("newborn","Reserve Your Newborn Session","https://twowildsoulsphotography.com/detroit-newborn-photographer-ads"));else if("urgent"===w||"pastWindow"===w){ne.appendChild(u("","See Maternity Pricing",q+"#pricing"));var se=u("newborn","Reserve Your Newborn Session","https://twowildsoulsphotography.com/detroit-newborn-photographer-ads");se.style.marginTop="8px",ne.appendChild(se)}else if(j){var re=document.createElement("a");re.className="tws-road__pkg",re.href=q+"#pricing",re.innerHTML='<span class="tws-road__pkg__icon">'+j.emoji+'</span><span class="tws-road__pkg__body"><span class="tws-road__pkg__label">Your Recommended Experience</span><span class="tws-road__pkg__name">'+j.name+'</span><span class="tws-road__pkg__tagline">'+j.tagline+'</span><span class="tws-road__pkg__pricing">See pricing ›</span></span><span class="tws-road__pkg__arrow">›</span>',re.style.setProperty("color","#fff","important"),re.style.setProperty("-webkit-text-fill-color","#fff","important"),ne.appendChild(re)}else ne.appendChild(u("","See Investment Details & Reserve Your Date",q+"#pricing"));var ie=d("tws-quiz-card");if(ie){var le=w&&"default"!==w||s||n.duedate||n.package;ie.style.display=le?"none":"block"}}function c(){var e;try{e=window.parent.document}catch(t){e=document}if(!e.getElementById("tws-modal-backdrop")){var t=e.createElement("div");if(t.id="tws-modal-backdrop",t.className="tws-modal-backdrop",t.innerHTML='<div class="tws-modal" id="tws-modal" role="dialog" aria-modal="true" aria-label="Session Quiz"><div class="tws-modal__header"><span class="tws-modal__header-label">Your Custom Session Roadmap</span><button class="tws-modal__close" id="tws-modal-close" aria-label="Close quiz">&#x2715;</button></div><div class="tws-modal__loading" id="tws-modal-loading"><div class="tws-modal__spinner"></div></div><iframe class="tws-modal__iframe" id="tws-modal-iframe" src="" title="Session Quiz"></iframe></div>',e!==document){var o=["@keyframes twsModalIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}","@keyframes twsModalOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(12px) scale(.97)}}","@keyframes twsSpin{to{transform:rotate(360deg)}}",".tws-modal-backdrop{display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,20,18,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:12px}",".tws-modal-backdrop.is-open{display:flex}",".tws-modal-backdrop.is-closing .tws-modal{animation:twsModalOut .22s ease forwards}",".tws-modal{position:relative;width:100%;max-width:780px;height:min(82vh,680px);background:#FAFAF7;border-radius:4px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.38);animation:twsModalIn .28s cubic-bezier(.22,.9,.36,1) both;display:flex;flex-direction:column}",".tws-modal__header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 13px;background:#3F4438;flex-shrink:0}",'.tws-modal__header-label{font-family:"DM Sans",sans-serif;font-size:9px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.75)}',".tws-modal__close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;line-height:1;transition:background .18s;flex-shrink:0}",".tws-modal__close:hover{background:rgba(255,255,255,.22)}",".tws-modal__iframe{flex:1;width:100%;border:none;display:block;background:#FAFAF7}",".tws-modal__loading{position:absolute;inset:48px 0 0;display:flex;align-items:center;justify-content:center;background:#FAFAF7;pointer-events:none;transition:opacity .3s}",".tws-modal__loading.is-hidden{opacity:0}",".tws-modal__spinner{width:28px;height:28px;border-radius:50%;border:2px solid #DDD9D3;border-top-color:#7C8A5A;animation:twsSpin .7s linear infinite}","@media(max-width:640px){.tws-modal-backdrop{align-items:stretch;justify-content:stretch;padding:0}.tws-modal{height:100vh;height:100dvh;max-width:100%;border-radius:0}}"].join(""),a=e.createElement("style");a.textContent=o,e.head.appendChild(a)}e.body.appendChild(t);var n=e.getElementById("tws-modal-iframe"),s=e.getElementById("tws-modal-loading"),r=e.getElementById("tws-modal-close"),i=!1;r.addEventListener("click",l),t.addEventListener("click",function(e){e.target===t&&l()}),e.addEventListener("keydown",function(e){"Escape"===e.key&&t.classList.contains("is-open")&&l()}),window.addEventListener("message",function(e){try{var t=e.origin||"";if(t.indexOf("twowildsoulsphotography.com")<0&&t.indexOf("moments.")<0)return}catch(e){return}var o=e.data||{};if("quiz-complete"===o.type||!0===o.twsQuizDone){var a=o.url||o.redirectUrl||"";if(a)try{window.top.location.href=a}catch(e){window.location.href=a}else l()}}),d(document);try{e!==document&&d(e)}catch(e){}}function l(){t.classList.add("is-closing"),setTimeout(function(){t.classList.remove("is-open","is-closing"),e.body.style.overflow=""},220)}function d(o){var a=o.getElementById("tws-quiz-trigger");a&&a.addEventListener("click",function(o){o.preventDefault(),t.classList.add("is-open"),e.body.style.overflow="hidden",i||(n.src="https://moments.twowildsoulsphotography.com",n.addEventListener("load",function(){s&&s.classList.add("is-hidden")},{once:!0}),i=!0)})}}function p(e){w(function(e){var t={week:"",status:"default",window:"",bookby:"",type:"maternity",duedate:"",package:"",style:"",setting:""};try{var o=new URLSearchParams(e).get("d");if(o){for(var a,n,s=o.replace(/-/g,"+").replace(/_/g,"/");s.length%4;)s+="=";try{a=(new TextDecoder).decode(Uint8Array.from(atob(s),function(e){return e.charCodeAt(0)}))}catch(e){a=decodeURIComponent(escape(atob(s)))}try{n=JSON.parse(a)}catch(e){var r=a.replace(/,\s*"[^"]*$/,"").replace(/,\s*$/,"")+"}";n=JSON.parse(r)}return Object.assign({},t,n)}}catch(e){console.warn("[TWS] decode failed",e)}var i=new URLSearchParams(e);return Object.assign({},t,{week:i.get("week")||"",status:i.get("status")||"default",window:i.get("window")||"",bookby:i.get("bookby")||"",type:i.get("type")||"maternity",duedate:i.get("duedate")||"",package:i.get("package")||"",style:i.get("style")||"",setting:i.get("setting")||""})}(e))}window._twsOptinData={},document.addEventListener("click",function(e){e.target&&"tws-optin-btn"===e.target.id&&twsOptinSubmit()});var y=function(){try{var e=window.parent.location.search;if(e&&e.length>1)return e}catch(e){}return window.location.search}();if(y&&y.length>1)return p(y),void c();window.addEventListener("message",function(e){e.data&&e.data.twsSearch&&p(e.data.twsSearch)});var h=document.referrer||"";if(h.indexOf("?")>-1)return p("?"+h.split("?")[1]),void c();p("?type=maternity&status=default"),c()}();</script><script>
+<!-- ═══════════════════════════════════════════════════════════════
+     TWO WILD SOULS — Combined Hero + Roadmap Embed
+     Single embed · Drop into one Code Widget · No dependencies
+     ═══════════════════════════════════════════════════════════════ -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --tws-forest: #2E2F2C; --tws-green:  #3F4438; --tws-sage:   #7C8A5A;
+  --tws-gold:   #C7B27A; --tws-cream:  #FAFAF7; --tws-warm:   #F0EDE8;
+  --tws-muted:  #6B6E6A; --tws-border: #DDD9D3;
+  --tws-urgent: #b03010; --tws-warn:   #bf5f18;
+}
+
+/* ── Shared ─────────────────────────────────────────────────────── */
+.tws * { box-sizing: border-box; }
+.tws a { text-decoration: none !important; }
+@keyframes twsFade  { from { opacity:0; transform:translateY(8px)  } to { opacity:1; transform:none } }
+@keyframes twsSlide { from { opacity:0; transform:translateY(14px) } to { opacity:1; transform:none } }
+
+/* ── Hero ───────────────────────────────────────────────────────── */
+.tws-hero {
+  font-family: 'DM Sans', sans-serif;
+  text-align: center;
+  padding: 32px 20px 28px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+.tws-hero__eyebrow {
+  font-size: 9px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--tws-gold); margin-bottom: 12px; display: block;
+  animation: twsFade .55s .05s both;
+}
+.tws-hero__headline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(26px,6vw,42px); font-weight: 400; line-height: 1.2;
+  color: var(--tws-forest); margin-bottom: 6px; letter-spacing: -.01em;
+  animation: twsFade .55s .10s both;
+}
+.tws-hero__headline em { font-style: italic; color: var(--tws-sage); }
+.tws-hero__divider {
+  width: 32px; height: 1px; background: var(--tws-gold);
+  margin: 10px auto 14px; opacity: .5;
+  animation: twsFade .55s .15s both;
+}
+.tws-hero__sub {
+  font-size: 14px; font-weight: 300; line-height: 1.6;
+  color: var(--tws-muted); margin: 0 0 14px;
+  animation: twsFade .55s .18s both;
+}
+.tws-hero__badge {
+  display: none; font-size: 9.5px; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; padding: 6px 16px; border-radius: 40px;
+  margin-bottom: 8px; border: 1.5px solid currentColor;
+  animation: twsFade .55s .22s both;
+}
+.tws-hero__badge.u-urgent { color:var(--tws-urgent); background:#fdf0ec; border-color:#e07050; }
+.tws-hero__badge.u-warning { color:var(--tws-warn);   background:#fdf3ec; border-color:#e8a070; }
+.tws-hero__badge.u-open   { color:var(--tws-sage);   background:#eef2e8; border-color:#8aaa60; }
+.tws-hero__badge.u-soft   { color:var(--tws-muted);  background:var(--tws-warm); border-color:#c8c5be; }
+
+/* Spots bar */
+.tws-hero__spots { display:none; margin:0 auto 16px; max-width:380px; animation:twsFade .55s .26s both; }
+.tws-hero__spots-label {
+  font-size:10px; font-weight:500; letter-spacing:.15em; text-transform:uppercase;
+  margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;
+}
+.tws-hero__spots-label span:first-child { color:var(--tws-muted); }
+.tws-hero__spots-count { font-size:12px; font-weight:600; letter-spacing:.05em; }
+.tws-hero__spots-count.s1 { color:var(--tws-urgent); }
+.tws-hero__spots-count.s2 { color:#c0420e; }
+.tws-hero__spots-count.s3 { color:var(--tws-warn); }
+.tws-hero__spots-count.s4 { color:#8a9a50; }
+.tws-hero__spots-count.s6 { color:var(--tws-sage); }
+.tws-hero__pips { display:flex; gap:5px; justify-content:center; }
+.tws-hero__pip {
+  flex:1; height:6px; border-radius:3px; background:#e8e5de;
+  transition: background .4s ease, transform .3s ease;
+}
+.tws-hero__pip.filled.p-urgent     { background:var(--tws-urgent); }
+.tws-hero__pip.filled.p-warn-hot   { background:#c0420e; }
+.tws-hero__pip.filled.p-warn       { background:var(--tws-warn); }
+.tws-hero__pip.filled.p-mild       { background:#8a9a50; }
+.tws-hero__pip.filled.p-open       { background:var(--tws-sage); }
+
+.tws-hero__bookby {
+  font-size:12px; font-weight:300; color:#999; margin:0 0 14px; display:none;
+  animation: twsFade .55s .28s both;
+}
+.tws-hero__bookby strong { color:var(--tws-urgent); font-weight:500; }
+.tws-hero__nudge {
+  display:none; font-size:11px; font-weight:300; font-style:italic;
+  color:#aaa; margin:8px 0 0;
+}
+
+/* Hero CTAs */
+.tws-hero__cta-wrap {
+  margin: 18px auto 0; display:flex; flex-direction:column;
+  align-items:stretch; gap:10px; max-width:420px;
+  animation: twsFade .55s .34s both;
+}
+.tws-hero__cta {
+  display:inline-block; background:var(--tws-green) !important;
+  color:#fff !important; -webkit-text-fill-color:#fff !important;
+  font-family:'DM Sans',sans-serif !important; font-size:9.5px !important;
+  font-weight:500 !important; letter-spacing:.22em !important;
+  text-transform:uppercase !important; padding:15px 40px !important;
+  border-radius:2px !important; cursor:pointer !important;
+  transition:background .2s,transform .18s !important;
+  box-shadow:0 4px 20px rgba(63,68,56,.22) !important;
+  width:100% !important;
+}
+.tws-hero__cta:hover { background:var(--tws-sage) !important; transform:translateY(-1px) !important; }
+.tws-hero__cta.u-urgent  { background:var(--tws-urgent) !important; }
+.tws-hero__cta.u-urgent:hover { background:#8b2008 !important; }
+.tws-hero__cta.is-newborn { background:#c94b4b !important; }
+.tws-hero__cta.is-newborn:hover { background:#a03838 !important; }
+
+/* Package card CTA */
+.tws-hero__pkg {
+  display:none; align-items:center; gap:12px;
+  background:var(--tws-green); border-radius:4px; padding:14px 18px;
+  color:#fff; cursor:pointer; text-align:left; width:100%;
+  transition:background .2s,transform .18s,box-shadow .18s;
+  box-shadow:0 4px 20px rgba(63,68,56,.22);
+}
+.tws-hero__pkg:hover { background:var(--tws-sage); transform:translateY(-1px); }
+.tws-hero__pkg.u-urgent { background:var(--tws-urgent); }
+.tws-hero__pkg.u-urgent:hover { background:#8b2008; }
+.tws-hero__pkg__icon { font-size:24px; flex-shrink:0; line-height:1; }
+.tws-hero__pkg__body { flex:1; min-width:0; }
+.tws-hero__pkg__label {
+  font-size:8px; font-weight:500; letter-spacing:.22em; text-transform:uppercase;
+  color:rgba(255,255,255,.6); display:block; margin-bottom:3px;
+}
+.tws-hero__pkg__name {
+  font-family:'Playfair Display',Georgia,serif; font-size:16px;
+  font-weight:400; font-style:italic; color:#fff; display:block;
+  line-height:1.2; margin-bottom:2px;
+}
+.tws-hero__pkg__tagline {
+  font-size:10px; font-weight:300; color:rgba(255,255,255,.65);
+  display:block; margin-bottom:5px;
+}
+.tws-hero__pkg__pricing {
+  display:inline-block; font-size:8.5px; font-weight:500; letter-spacing:.14em;
+  text-transform:uppercase; color:rgba(255,255,255,.55);
+  border-top:1px solid rgba(255,255,255,.15); padding-top:5px; margin-top:1px;
+}
+.tws-hero__pkg__arrow { font-size:20px; color:rgba(255,255,255,.7); flex-shrink:0; }
+
+/* ── Early opt-in card ──────────────────────────────────────────── */
+.tws-optin {
+  display:none; background:var(--tws-warm); border:1.5px solid var(--tws-gold);
+  border-radius:4px; padding:22px 24px; text-align:left;
+  animation:twsFade .55s .34s both;
+}
+.tws-optin__pricing-pill {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:10px; font-weight:500; letter-spacing:.08em;
+  color:var(--tws-sage); background:#eef2e8; border:1px solid #c0ce9a;
+  border-radius:20px; padding:5px 13px; margin-bottom:14px;
+  text-decoration:none !important; transition:background .18s;
+}
+.tws-optin__pricing-pill:hover { background:#e4ecd8; }
+.tws-optin__pricing-pill svg { width:11px; height:11px; fill:none; stroke:currentColor; stroke-width:2; flex-shrink:0; }
+.tws-optin__eyebrow {
+  font-size:9px; font-weight:500; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--tws-gold); display:block; margin-bottom:6px;
+}
+.tws-optin__title {
+  font-family:'Playfair Display',Georgia,serif; font-size:20px;
+  font-weight:400; color:var(--tws-forest); margin:0 0 8px; line-height:1.25;
+}
+.tws-optin__title em { font-style:italic; color:var(--tws-sage); }
+.tws-optin__body {
+  font-size:13px; font-weight:300; color:var(--tws-muted);
+  line-height:1.65; margin:0 0 16px;
+}
+.tws-optin__fields { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+.tws-optin__field {
+  width:100%; padding:11px 14px; border:1.5px solid var(--tws-border);
+  border-radius:2px; font-family:'DM Sans',sans-serif; font-size:13px;
+  font-weight:300; background:#fff; color:var(--tws-forest);
+  transition:border-color .18s; outline:none;
+}
+.tws-optin__field:focus { border-color:var(--tws-sage); }
+.tws-optin__field::placeholder { color:#bbb; }
+.tws-optin__submit {
+  width:100%; background:var(--tws-gold); color:#1a1a18;
+  font-family:'DM Sans',sans-serif; font-size:9.5px; font-weight:500;
+  letter-spacing:.22em; text-transform:uppercase; padding:14px;
+  border:none; border-radius:2px; cursor:pointer;
+  transition:background .2s,transform .18s;
+  box-shadow:0 4px 16px rgba(199,178,122,.3);
+}
+.tws-optin__submit:hover { background:#b8a066; transform:translateY(-1px); }
+.tws-optin__submit:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+.tws-optin__trust {
+  font-size:10.5px; font-weight:300; color:#aaa;
+  text-align:center; margin-top:10px;
+}
+.tws-optin__success {
+  display:none; text-align:center; padding:8px 0;
+}
+.tws-optin__success-icon { font-size:28px; display:block; margin-bottom:8px; }
+.tws-optin__success-title {
+  font-family:'Playfair Display',Georgia,serif; font-size:18px;
+  font-weight:400; color:var(--tws-forest); margin:0 0 6px;
+}
+.tws-optin__success-body {
+  font-size:13px; font-weight:300; color:var(--tws-muted); line-height:1.6; margin:0;
+}
+.tws-optin__error {
+  font-size:11px; color:var(--tws-urgent); margin-top:8px; display:none;
+}
+
+/* ── Divider between sections ───────────────────────────────────── */
+.tws-section-gap { height: 48px; }
+
+/* ── Roadmap ─────────────────────────────────────────────────────── */
+.tws-road {
+  max-width:860px; margin:0 auto;
+  padding:8px 20px 56px;
+  font-family:'DM Sans',sans-serif;
+}
+.tws-road__label {
+  font-size:9px; font-weight:500; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--tws-gold); text-align:center; margin-bottom:36px; display:block;
+}
+.tws-road__timeline { position:relative; margin-bottom:44px; }
+.tws-road__timeline::before {
+  content:''; position:absolute; left:26px; top:8px; bottom:8px; width:1px;
+  background:linear-gradient(to bottom,var(--tws-gold),var(--tws-border),transparent);
+}
+.tws-road__mile {
+  display:flex; gap:24px; position:relative;
+  opacity:0; transform:translateY(14px);
+  animation:twsSlide .5s ease forwards;
+}
+.tws-road__mile:nth-child(1){animation-delay:.08s} .tws-road__mile:nth-child(2){animation-delay:.18s}
+.tws-road__mile:nth-child(3){animation-delay:.28s} .tws-road__mile:nth-child(4){animation-delay:.38s}
+.tws-road__mile:nth-child(5){animation-delay:.46s}
+.tws-road__dot-wrap { flex:0 0 52px; display:flex; flex-direction:column; align-items:center; padding-top:3px; }
+.tws-road__dot {
+  width:14px; height:14px; border-radius:50%; border:2px solid var(--tws-border);
+  background:var(--tws-cream); flex-shrink:0; position:relative; z-index:1;
+}
+.tws-road__dot.done   { background:var(--tws-sage);   border-color:var(--tws-sage); }
+.tws-road__dot.active { background:var(--tws-gold);   border-color:var(--tws-gold); box-shadow:0 0 0 4px rgba(199,178,122,.2); }
+.tws-road__dot.warn   { background:var(--tws-urgent); border-color:var(--tws-urgent); box-shadow:0 0 0 4px rgba(176,48,16,.15); }
+.tws-road__dot-line   { width:1px; flex:1; min-height:28px; background:var(--tws-border); margin-top:6px; }
+.tws-road__mile:last-child .tws-road__dot-line { display:none; }
+.tws-road__content { flex:1; padding-bottom:28px; }
+.tws-road__mile:last-child .tws-road__content { padding-bottom:0; }
+.tws-road__when { font-size:9px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--tws-muted); margin-bottom:4px; display:block; }
+.tws-road__when.active { color:var(--tws-gold); }
+.tws-road__when.warn   { color:var(--tws-urgent); }
+.tws-road__title { font-family:'Playfair Display',Georgia,serif; font-size:19px; font-weight:400; color:var(--tws-forest); line-height:1.25; margin-bottom:6px; }
+.tws-road__title em { font-style:italic; color:var(--tws-sage); }
+.tws-road__body { font-size:13px; font-weight:300; color:var(--tws-muted); line-height:1.7; margin:0; }
+.tws-road__mile.is-now .tws-road__content {
+  background:var(--tws-warm); border:1.5px solid var(--tws-gold);
+  border-radius:3px; padding:18px 20px; margin-bottom:28px; position:relative;
+}
+.tws-road__mile.is-now .tws-road__content::before {
+  content:'You Are Here'; position:absolute; top:-9px; left:16px;
+  background:var(--tws-gold); color:#fff; font-size:7.5px; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase; padding:2px 8px; border-radius:20px;
+}
+.tws-road__mile.is-urgent .tws-road__content {
+  background:#fdf0ec; border:1.5px solid #e07050;
+  border-radius:3px; padding:18px 20px; margin-bottom:28px; position:relative;
+}
+.tws-road__mile.is-urgent .tws-road__content::before {
+  content:'Act Now'; position:absolute; top:-9px; left:16px;
+  background:var(--tws-urgent); color:#fff; font-size:7.5px; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase; padding:2px 8px; border-radius:20px;
+}
+
+/* Excerpt block */
+.tws-road__exp {
+  border-left:3px solid var(--tws-green); background:var(--tws-warm);
+  padding:28px 32px; border-radius:0 3px 3px 0; margin-bottom:12px;
+}
+.tws-road__exp.warn { border-left-color:var(--tws-urgent); background:#fdf0ec; }
+.tws-road__exp-label {
+  font-size:9px; font-weight:500; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--tws-green); margin-bottom:12px; display:block;
+}
+.tws-road__exp.warn .tws-road__exp-label { color:var(--tws-urgent); }
+.tws-road__exp-body {
+  font-family:'Playfair Display',Georgia,serif; font-size:18px;
+  font-weight:400; line-height:1.85; color:#444; margin:0 0 20px;
+}
+.tws-road__cta {
+  display:inline-block !important; background:var(--tws-green) !important;
+  color:#fff !important; -webkit-text-fill-color:#fff !important;
+  font-family:'DM Sans',sans-serif !important; font-size:9.5px !important;
+  font-weight:500 !important; letter-spacing:.22em !important;
+  text-transform:uppercase !important; padding:14px 36px !important;
+  border-radius:2px !important; cursor:pointer !important; border:none !important;
+  transition:background .2s,transform .18s !important;
+  box-shadow:0 4px 16px rgba(63,68,56,.2) !important;
+  margin-right:10px !important; margin-top:4px !important;
+}
+.tws-road__cta:hover { background:var(--tws-sage) !important; transform:translateY(-1px) !important; }
+.tws-road__cta.newborn { background:var(--tws-urgent) !important; box-shadow:0 4px 16px rgba(176,48,16,.2) !important; }
+.tws-road__cta.newborn:hover { background:#8b2008 !important; }
+
+/* Package card in roadmap exp block */
+.tws-road__pkg {
+  display:flex; align-items:center; gap:12px;
+  background:var(--tws-green); border-radius:4px; padding:14px 18px;
+  color:#fff; cursor:pointer; text-align:left; width:100%; max-width:420px;
+  transition:background .2s,transform .18s,box-shadow .18s;
+  box-shadow:0 4px 20px rgba(63,68,56,.22);
+  text-decoration:none !important;
+}
+.tws-road__pkg:hover { background:var(--tws-sage); transform:translateY(-1px); }
+.tws-road__pkg__icon { font-size:24px; flex-shrink:0; line-height:1; }
+.tws-road__pkg__body { flex:1; min-width:0; }
+.tws-road__pkg__label {
+  font-size:8px; font-weight:500; letter-spacing:.22em; text-transform:uppercase;
+  color:rgba(255,255,255,.6); display:block; margin-bottom:3px;
+}
+.tws-road__pkg__name {
+  font-family:'Playfair Display',Georgia,serif; font-size:16px;
+  font-weight:400; font-style:italic; color:#fff; display:block;
+  line-height:1.2; margin-bottom:2px;
+}
+.tws-road__pkg__tagline {
+  font-size:10px; font-weight:300; color:rgba(255,255,255,.65);
+  display:block; margin-bottom:5px;
+}
+.tws-road__pkg__pricing {
+  display:inline-block; font-size:8.5px; font-weight:500; letter-spacing:.14em;
+  text-transform:uppercase; color:rgba(255,255,255,.55);
+  border-top:1px solid rgba(255,255,255,.15); padding-top:5px; margin-top:1px;
+}
+.tws-road__pkg__arrow { font-size:20px; color:rgba(255,255,255,.7); flex-shrink:0; }
+
+/* Included grid */
+.tws-road__includes {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+  background:var(--tws-border); border:1px solid var(--tws-border);
+  border-radius:3px; overflow:hidden; margin-top:40px;
+}
+.tws-road__inc-item { background:var(--tws-cream); padding:20px 14px; text-align:center; }
+.tws-road__inc-icon  { font-size:20px; display:block; margin-bottom:8px; }
+.tws-road__inc-title { font-family:'Playfair Display',Georgia,serif; font-size:13px; font-weight:400; color:var(--tws-forest); display:block; margin-bottom:4px; }
+.tws-road__inc-desc  { font-size:10.5px; font-weight:300; color:var(--tws-muted); line-height:1.5; display:block; }
+
+/* ── Quiz CTA card ──────────────────────────────────────────────── */
+.tws-quiz-card {
+  display:none;
+  margin: 48px auto 0; max-width: 860px;
+  border: 1.5px solid var(--tws-border);
+  border-radius: 4px; overflow: hidden;
+  animation: twsFade .55s .4s both;
+}
+.tws-quiz-card__inner {
+  display: flex; align-items: center; gap: 32px;
+  padding: 32px 36px;
+  background: var(--tws-cream);
+}
+.tws-quiz-card__icon {
+  font-size: 36px; flex-shrink: 0; line-height: 1;
+  opacity: .85;
+}
+.tws-quiz-card__body { flex: 1; min-width: 0; }
+.tws-quiz-card__label {
+  font-size: 9px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--tws-gold); display: block; margin-bottom: 8px;
+}
+.tws-quiz-card__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px; font-weight: 400; line-height: 1.25;
+  color: var(--tws-forest); margin: 0 0 8px;
+}
+.tws-quiz-card__title em { font-style: italic; color: var(--tws-sage); }
+.tws-quiz-card__desc {
+  font-size: 13px; font-weight: 300; line-height: 1.6;
+  color: var(--tws-muted); margin: 0;
+}
+.tws-quiz-card__cta {
+  flex-shrink: 0;
+  display: inline-block !important;
+  background: var(--tws-forest) !important;
+  color: #fff !important; -webkit-text-fill-color: #fff !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 9px !important; font-weight: 500 !important;
+  letter-spacing: .22em !important; text-transform: uppercase !important;
+  padding: 14px 28px !important; border-radius: 2px !important;
+  white-space: nowrap;
+  transition: background .2s, transform .18s !important;
+  box-shadow: 0 4px 16px rgba(46,47,44,.18) !important;
+  text-decoration: none !important;
+}
+.tws-quiz-card__cta:hover {
+  background: var(--tws-green) !important;
+  transform: translateY(-1px) !important;
+}
+.tws-quiz-card__footer {
+  background: var(--tws-warm);
+  border-top: 1px solid var(--tws-border);
+  padding: 10px 36px;
+  display: flex; align-items: center; gap: 20px;
+}
+.tws-quiz-card__pill {
+  font-size: 9.5px; font-weight: 400; color: var(--tws-muted);
+  display: flex; align-items: center; gap: 6px;
+}
+.tws-quiz-card__pill::before {
+  content: '✓'; font-size: 10px; color: var(--tws-sage); font-weight: 600;
+}
+
+@media(max-width:640px){
+  .tws-road { padding:4px 14px 40px; }
+  .tws-road__timeline::before { left:19px; }
+  .tws-road__dot-wrap { flex:0 0 38px; }
+  .tws-road__exp { padding:20px 18px; }
+  .tws-road__exp-body { font-size:16px; line-height:1.75; }
+  .tws-road__includes { grid-template-columns:repeat(2,1fr); }
+  .tws-quiz-card__inner { flex-direction:column; gap:20px; padding:24px 20px; text-align:center; }
+  .tws-quiz-card__icon { font-size:28px; }
+  .tws-quiz-card__cta { width:100% !important; text-align:center !important; }
+  .tws-quiz-card__footer { padding:10px 20px; flex-wrap:wrap; gap:12px; justify-content:center; }
+}
+/* ── Quiz modal ─────────────────────────────────────────────────── */
+@keyframes twsModalIn  { from { opacity:0; transform:translateY(16px) scale(.97) } to { opacity:1; transform:none } }
+@keyframes twsModalOut { from { opacity:1; transform:none } to { opacity:0; transform:translateY(12px) scale(.97) } }
+
+.tws-modal-backdrop {
+  display: none;
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(20,20,18,.72);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  align-items: center; justify-content: center;
+  padding: 12px;
+}
+.tws-modal-backdrop.is-open { display: flex; }
+.tws-modal-backdrop.is-closing .tws-modal { animation: twsModalOut .22s ease forwards; }
+
+.tws-modal {
+  position: relative;
+  width: 100%; max-width: 780px;
+  height: min(82vh, 680px);
+  background: var(--tws-cream);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,.38);
+  animation: twsModalIn .28s cubic-bezier(.22,.9,.36,1) both;
+  display: flex; flex-direction: column;
+}
+.tws-modal__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px 13px;
+  background: var(--tws-green);
+  flex-shrink: 0;
+}
+.tws-modal__header-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(255,255,255,.75);
+}
+.tws-modal__close {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255,255,255,.12); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 16px; line-height: 1;
+  transition: background .18s;
+  flex-shrink: 0;
+}
+.tws-modal__close:hover { background: rgba(255,255,255,.22); }
+.tws-modal__iframe {
+  flex: 1; width: 100%; border: none; display: block;
+  background: var(--tws-cream);
+}
+.tws-modal__loading {
+  position: absolute; inset: 48px 0 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--tws-cream); pointer-events: none;
+  transition: opacity .3s;
+}
+.tws-modal__loading.is-hidden { opacity: 0; }
+.tws-modal__spinner {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid var(--tws-border);
+  border-top-color: var(--tws-sage);
+  animation: twsSpin .7s linear infinite;
+}
+@keyframes twsSpin { to { transform: rotate(360deg); } }
+
+@media(max-width:640px){
+  .tws-modal-backdrop { align-items: stretch; justify-content: stretch; padding: 0; }
+  .tws-modal { height: 100vh; height: 100dvh; max-width: 100%; border-radius: 0; }
+}
+</style>
+
+<!-- ── HERO ──────────────────────────────────────────────────────── -->
+<div class="tws tws-hero" id="tws-hero">
+  <span class="tws-hero__eyebrow" id="tws-eyebrow">Maternity Photography · Metro Detroit</span>
+  <h1 class="tws-hero__headline" id="tws-headline">Loading your results…</h1>
+  <div class="tws-hero__divider"></div>
+  <p class="tws-hero__sub" id="tws-sub"></p>
+  <div class="tws-hero__badge" id="tws-badge"></div>
+
+  <div class="tws-hero__spots" id="tws-spots">
+    <div class="tws-hero__spots-label">
+      <span>Calculated By Due Date</span>
+      <span class="tws-hero__spots-count" id="tws-spots-count"></span>
+    </div>
+    <div class="tws-hero__pips" id="tws-pips"></div>
+  </div>
+
+  <p class="tws-hero__bookby" id="tws-bookby"></p>
+  <p class="tws-hero__nudge" id="tws-nudge"></p>
+
+  <div class="tws-hero__cta-wrap">
+    <a href="#pricing" id="tws-cta" class="tws-hero__cta">See Investment Details &amp; Reserve Your Date</a>
+    <a href="#pricing" id="tws-pkg" class="tws-hero__pkg">
+      <span class="tws-hero__pkg__icon" id="tws-pkg-icon"></span>
+      <span class="tws-hero__pkg__body">
+        <span class="tws-hero__pkg__label">Your Recommended Experience</span>
+        <span class="tws-hero__pkg__name" id="tws-pkg-name"></span>
+        <span class="tws-hero__pkg__tagline" id="tws-pkg-tagline"></span>
+        <span class="tws-hero__pkg__pricing">See pricing ›</span>
+      </span>
+      <span class="tws-hero__pkg__arrow">›</span>
+    </a>
+    <!-- Early opt-in card — shown by JS for week < 14, maternity only -->
+    <div id="tws-optin" class="tws-optin" style="display:none;">
+      <a id="tws-optin-pill" href="#pricing" class="tws-optin__pricing-pill">
+        <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        <span id="tws-optin-pill-text">Sessions from $490 · See full pricing</span>
+      </a>
+      <span class="tws-optin__eyebrow">Your Window Opens Around Week 14</span>
+      <h3 class="tws-optin__title">You're Early — <em>Good Timing</em></h3>
+      <p class="tws-optin__body">We'll send a preparation guide now and reach out personally when your booking window opens. No inbox clutter — just one well-timed nudge.</p>
+      <div id="tws-optin-form">
+        <div class="tws-optin__fields">
+          <input id="tws-optin-name"  class="tws-optin__field" type="text"  placeholder="First name" autocomplete="given-name" />
+          <input id="tws-optin-email" class="tws-optin__field" type="email" placeholder="Email address" autocomplete="email" />
+          <input id="tws-optin-phone" class="tws-optin__field" type="tel"   placeholder="Phone number (optional)" autocomplete="tel" />
+        </div>
+        <button id="tws-optin-btn" class="tws-optin__submit">Send Me the Guide</button>
+        <p class="tws-optin__trust">By submitting, you agree to receive a preparation guide by email and, if you provide your phone number, a personal call or text from Two Wild Souls when your booking window opens. Message &amp; data rates may apply. Reply STOP to opt out of texts at any time.</p>
+        <p class="tws-optin__error" id="tws-optin-error"></p>
+      </div>
+      <div id="tws-optin-success" class="tws-optin__success" style="display:none;">
+        <span class="tws-optin__success-icon">🌿</span>
+        <p class="tws-optin__success-title">You're on the list.</p>
+        <p class="tws-optin__success-body">We'll be in touch when your window opens — nothing to think about until then.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tws-section-gap"></div>
+
+<!-- ── ROADMAP ───────────────────────────────────────────────────── -->
+<div class="tws tws-road" id="tws-road">
+  <span class="tws-road__label">Your Personalized Maternity Session Roadmap</span>
+  <div class="tws-road__timeline" id="tws-timeline"></div>
+  <div class="tws-road__exp" id="tws-exp">
+    <span class="tws-road__exp-label" id="tws-exp-label">Your Next Step</span>
+    <p class="tws-road__exp-body" id="tws-exp-body"></p>
+  </div>
+  <div class="tws-road__includes">
+    <div class="tws-road__inc-item">
+      <span class="tws-road__inc-icon">💄</span>
+      <span class="tws-road__inc-title">Hair &amp; Makeup</span>
+      <span class="tws-road__inc-desc">Professional styling included — arrive ready to feel completely yourself</span>
+    </div>
+    <div class="tws-road__inc-item">
+      <span class="tws-road__inc-icon">👗</span>
+      <span class="tws-road__inc-title">Designer Gowns</span>
+      <span class="tws-road__inc-desc">Full access to our curated maternity gown collection — no shopping needed</span>
+    </div>
+    <div class="tws-road__inc-item">
+      <span class="tws-road__inc-icon">🤝</span>
+      <span class="tws-road__inc-title">Fully Guided</span>
+      <span class="tws-road__inc-desc">Every pose, expression, and moment directed so you look and feel incredible</span>
+    </div>
+    <div class="tws-road__inc-item">
+      <span class="tws-road__inc-icon">📦</span>
+      <span class="tws-road__inc-title">Heirloom Delivery</span>
+      <span class="tws-road__inc-desc">Albums, wall portraits, and prints — designed and delivered for you</span>
+    </div>
+  </div>
+
+  <!-- ── Quiz CTA — shown only when no quiz params present ── -->
+  <div class="tws-quiz-card" id="tws-quiz-card">
+    <div class="tws-quiz-card__inner">
+      <span class="tws-quiz-card__icon">🗓️</span>
+      <div class="tws-quiz-card__body">
+        <span class="tws-quiz-card__label">Not Sure Where You Stand?</span>
+        <h3 class="tws-quiz-card__title">Take the Quiz — We'll Build Your <em>Custom Session Roadmap</em></h3>
+        <p class="tws-quiz-card__desc">Answer a few quick questions and we'll calculate your ideal timing window, a personalized starting quote, and exactly what to expect — all on this page.</p>
+      </div>
+      <a class="tws-quiz-card__cta" href="https://moments.twowildsoulsphotography.com" id="tws-quiz-trigger">Take the Quiz →</a>
+    </div>
+    <div class="tws-quiz-card__footer">
+      <span class="tws-quiz-card__pill">Takes about 2 minutes</span>
+      <span class="tws-quiz-card__pill">Personalized to your due date</span>
+      <span class="tws-quiz-card__pill">No obligation</span>
+    </div>
+  </div>
+</div>
+
+<script>
+!function(){
+
+  /* ── Smooth scroll ──────────────────────────────────────────── */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="#"]');
+    if(!a) return;
+    var href=a.getAttribute('href')||'';
+    if(href.indexOf('http')===0) return;
+    e.preventDefault();
+    var id=href.split('#')[1], t;
+    try{t=window.parent.document.getElementById(id);}catch(x){}
+    t=t||document.getElementById(id);
+    if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  /* ── Decoder ────────────────────────────────────────────────── */
+  function decode(search){
+    var FB={week:'',status:'default',window:'',bookby:'',type:'maternity',duedate:'',package:'',style:'',setting:''};
+    try{
+      var raw=new URLSearchParams(search).get('d');
+      if(raw){
+        var pad=raw.replace(/-/g,'+').replace(/_/g,'/');
+        while(pad.length%4) pad+='=';
+        var str;
+        try{ str=new TextDecoder().decode(Uint8Array.from(atob(pad),function(c){return c.charCodeAt(0);})); }
+        catch(e){ str=decodeURIComponent(escape(atob(pad))); }
+        var obj;
+        try{ obj=JSON.parse(str); }
+        catch(e){
+          var s=str.replace(/,\s*"[^"]*$/,'').replace(/,\s*$/,'')+'}';
+          obj=JSON.parse(s);
+        }
+        return Object.assign({},FB,obj);
+      }
+    }catch(e){ console.warn('[TWS] decode failed',e); }
+    var p=new URLSearchParams(search);
+    return Object.assign({},FB,{
+      week:p.get('week')||'', status:p.get('status')||'default',
+      window:p.get('window')||'', bookby:p.get('bookby')||'',
+      type:p.get('type')||'maternity', duedate:p.get('duedate')||'',
+      package:p.get('package')||'', style:p.get('style')||'', setting:p.get('setting')||''
+    });
+  }
+
+  /* ── Spots logic ────────────────────────────────────────────── */
+  var SPOTS=[
+    {min:32,spots:1,total:6,pip:'p-urgent',   sc:'s1',label:'1 of 6 available',uc:'u-urgent' },
+    {min:30,spots:2,total:6,pip:'p-warn-hot', sc:'s2',label:'2 of 6 available',uc:'u-urgent' },
+    {min:28,spots:3,total:6,pip:'p-warn',     sc:'s3',label:'3 of 6 available',uc:'u-warning'},
+    {min:26,spots:4,total:6,pip:'p-mild',     sc:'s4',label:'4 of 6 available',uc:'u-open'  },
+    {min:0, spots:6,total:6,pip:'p-open',     sc:'s6',label:'6 of 6 available',uc:'u-soft'  }
+  ];
+  function getSpotsInfo(w){
+    var n=parseInt(w,10); if(isNaN(n)) return null;
+    for(var i=0;i<SPOTS.length;i++) if(n>=SPOTS[i].min) return SPOTS[i];
+    return null;
+  }
+
+  var WEEK_TIERS={
+    1:{ey:'Final Call — Last Spot',     hl:'Week {w} — This Is Your <em>Last Chance</em>',       sub:'Only 1 session remains and week 34 is our cutoff. Same-week confirmation required — reach out today.',  badge:'Only 1 Session Available', uc:'u-urgent' },
+    2:{ey:'Almost Full — Act Now',      hl:'Week {w} — Your Window Is <em>Closing Fast</em>',    sub:'Just 2 sessions left and you\'re approaching our week 34 cutoff. Don\'t wait.',                          badge:'Only 2 Sessions Available', uc:'u-urgent' },
+    3:{ey:'Limited Availability',       hl:'Week {w} — Your Window Is <em>Closing</em>',         sub:'3 sessions remain for this period. Availability is tightening — book soon.',                            badge:'Only 3 Sessions Available', uc:'u-warning'},
+    4:{ey:'Your Results Are In',        hl:'Week {w} — Your Window Is <em>Open</em>',            sub:'4 sessions are still available. Secure your date before spots fill.',                                   badge:'4 Sessions Available',      uc:'u-open'  },
+    6:{ey:'Your Results Are In',        hl:'Week {w} — You Are <em>Early!</em>',                 sub:'You have great timing — 6 sessions are available and your ideal window is still ahead. Book your preferred date today!', badge:'6 Sessions Available', uc:'u-soft'}
+  };
+
+  /* ── Hero copy map ──────────────────────────────────────────── */
+  var HERO={
+    maternity:{
+      early:{
+        ey:  'Maternity Photography · Metro Detroit',
+        hl:  'Week {w} — The <em>Best Dates Go First</em>',
+        sub: 'Inquiring now means first pick of session dates, the full designer gown collection, and every detail handled before life gets loud. The women who wish they\'d done this sooner are always the ones who thought they had more time at week {w}.',
+        badge: 'First Pick of Dates & Gowns Available Now',
+        uc:  'u-open',
+        cta: 'See Investment Details & Reserve Your Date',
+        ctaC:'',
+        newborn:false
+      },
+      inWindow:  {ey:'You\'re in the Sweet Spot',        hl:'Week {w} — <em>Perfect Timing</em>',             sub:'You\'re right in the ideal window ({win}). This is exactly when maternity portraits are meant to happen.',uc:'u-open',cta:'See Investment Details & Reserve Your Date',ctaC:'',newborn:false},
+      pastWindow:{ey:'Don\'t Wait — Book Today',         hl:'Week {w} — Your Window Is <em>Closing</em>',     sub:'You\'re past the ideal window but we can still make this happen — if you move today.',         uc:'u-warning',cta:'See Investment Details & Secure Your Spot',   ctaC:'',        newborn:true, nudge:'Not sure maternity will work out? Your newborn session will be just as breathtaking.'},
+      urgent:    {ey:'Week 32 — Final Window',           hl:'This Is Your <em>Last Chance</em>',              sub:'Week 34 is our final cutoff. Same-week confirmation required — contact us today.',             uc:'u-urgent', cta:'Reserve My Spot Before It\'s Gone',             ctaC:'u-urgent',newborn:false,nudge:'If timing doesn\'t work, your newborn session will be just as magical.'},
+      'default': {
+        ey:  'Maternity Photography · Metro Detroit',
+        hl:  'Your Window Is <em>Open Right Now</em>',
+        sub: 'The women who love their maternity experience most are always the ones who inquired early — first pick of dates, the full gown collection, and nothing left to figure out as their window approaches. We take only 6 sessions per month.',
+        badge: 'First Pick of Dates & Gowns Available',
+        uc:  'u-soft',
+        cta: 'See Investment Details & Reserve Your Date',
+        ctaC:'',
+        newborn:false
+      }
+    },
+    newborn:{
+      late:    {ey:'Metro Detroit Newborn Photography',hl:'Maternity Has Closed — But the <em>Best Is Still Ahead</em>',sub:'Reserve your newborn session now so we\'re ready the moment baby arrives.',uc:'u-warning',cta:'Reserve Your Newborn Session',ctaC:'is-newborn',newborn:false,isNB:true},
+      urgent:  {ey:'Metro Detroit Newborn Photography',hl:'Week {w} — Baby Is <em>Almost Here</em>',sub:'Reserve now so we\'re ready the moment baby arrives. Only 6 sessions per month.',uc:'u-warning',cta:'Reserve Your Newborn Session',ctaC:'is-newborn',newborn:false,isNB:true},
+      'default':{ey:'Metro Detroit Newborn Photography',hl:'The First Days Are <em>Pure Magic</em>',sub:'Fully guided, stress-free newborn portraits in days 5–14. Only 6 sessions per month.',uc:'u-soft',cta:'Reserve Your Newborn Session',ctaC:'is-newborn',newborn:false,isNB:true}
+    }
+  };
+
+  var PKGS={
+    portraits:  {name:'Portraits of Just Mom', tagline:'Intimate · Studio Only · All About You',           emoji:'🪞'},
+    whiteGlove: {name:'White Glove Experience',tagline:'Full Family · Studio & Outdoors · The Full Story', emoji:'✨'}
+  };
+
+  /* ── Roadmap data ───────────────────────────────────────────── */
+  function fmtShort(d){return d&&!isNaN(d)?d.toLocaleDateString('en-US',{month:'short',day:'numeric'}):''}
+  function fmtLong(d) {return d&&!isNaN(d)?d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}):''}
+  function parseDate(str){
+    if(!str) return null;
+    var d=new Date(str);
+    if(/^\d{4}-\d{2}-\d{2}$/.test(str)){
+      var p=str.split('-');
+      d=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));
+    }
+    return isNaN(d.getTime())?null:d;
+  }
+  function weekToDate(due,w){
+    var d=parseDate(due); if(!d) return null;
+    var MS=24*60*60*1000;
+    var conception=new Date(d.getTime()-280*MS);
+    return new Date(conception.getTime()+w*7*MS);
+  }
+  function windowStr(duedate,winParam){
+    if(!duedate||!winParam||winParam.indexOf('-')<0) return '';
+    var pts=winParam.split('-');
+    var sd=weekToDate(duedate,parseInt(pts[0],10)), ed=weekToDate(duedate,parseInt(pts[1],10));
+    if(!sd||!ed) return '';
+    return (sd.getFullYear()===ed.getFullYear()?fmtShort(sd):fmtLong(sd))+' \u2013 '+fmtLong(ed);
+  }
+
+  var MILES={
+    early:[
+      {
+        when:  '{wl} — Your Window Is Ahead',
+        state: 'active',
+        title: 'The <em>Best Dates Are Available Now</em>',
+        body:  'Early inquiries get first pick — preferred session dates, the full designer gown collection before it fills, and every detail handled well ahead of your window. The closer you get to weeks 28–32, the more these choices narrow. Reaching out now costs nothing and locks in your advantages.'
+      },
+      {
+        when:  'After You Inquire',
+        state: 'future',
+        title: 'We <em>Handle Everything</em> From Here',
+        body:  'Once you reach out, we walk you through your style vision, hold your preferred date, and send a full preparation guide when your window approaches. There\'s nothing left to research, coordinate, or worry about — it\'s completely off your plate.'
+      },
+      {
+        when:  '{wf} — Your Session',
+        state: 'future',
+        title: 'Your Maternity Session',
+        body:  'Weeks 28–32 are the sweet spot — bump at its most dramatic, and you\'re still comfortably mobile. Pro hair, makeup, designer gowns, every pose fully guided. The women who planned ahead always say the same thing: they\'re so glad they didn\'t wait.'
+      },
+      {
+        when:  'After Baby Arrives',
+        state: 'future',
+        title: 'Newborn Session (Optional)',
+        body:  'Families who plan ahead love adding a newborn session in days 5–14. We handle all the details — you just show up with your new family.'
+      }
+    ],
+    inWindow:[
+      {when:'Before Your Session',   state:'done',  title:'Book Your Session',body:'You\'re in — and right on time. The planning is done; now it\'s time to look forward to your session day.'},
+      {when:'{wl} — Sweet Spot',     state:'active',title:'You\'re in the <em>Ideal Window</em>',body:'Week {w} is exactly where you want to be. Your bump is full and beautiful, and you\'re likely still comfortably mobile for posing.'},
+      {when:'2–3 Weeks After Session',state:'future',title:'Gallery Reveal &amp; Product Selection',body:'We\'ll walk you through your gallery together — every image, every product option. Fully guided, no pressure.'},
+      {when:'After Baby Arrives',    state:'future',title:'Portraits Delivered',body:'Albums, wall art, and gift prints handled start to finish. Your home is ready before the newborn chaos sets in.'}
+    ],
+    pastWindow:[
+      {when:'Ideal Window',          state:'done',  title:'Past the Sweet Spot',body:'Weeks 28–32 have passed, but maternity sessions are still possible and still beautiful before week 32.'},
+      {when:'{wl} — Still Possible', state:'active',title:'There\'s Still <em>Time</em>',body:'You\'re past our ideal window, but we may still be able to make it work before our week 32 cutoff. Reaching out today is the only way to know.'},
+      {when:'After Baby Arrives',    state:'future',title:'Newborn Session Waiting',body:'If timing doesn\'t work for maternity, your newborn session will be just as breathtaking. Days 5–14 are pure magic — book before baby arrives to guarantee your spot.'}
+    ],
+    urgent:[
+      {when:'Ideal Window',          state:'done',  title:'Session Window Has Passed',body:'Your ideal maternity window is behind you, but week 32 is our absolute final cutoff — and we may still have availability.'},
+      {when:'{wl} — Final Cutoff',   state:'warn',  title:'Week 32 — <em>This Is It</em>',body:'You\'re at our absolute last week for maternity bookings. If we have a date open we can still deliver the full experience. Same-week confirmation required.'},
+      {when:'If Timing Doesn\'t Work',state:'future',title:'Your Newborn Session',body:'If maternity doesn\'t come together, newborn portraits in days 5–14 are some of our most breathtaking work. Reserve before baby arrives.'}
+    ],
+    late:[
+      {when:'Maternity Window',      state:'done',  title:'Maternity Window Closing',body:'At week {w}, we\'re at our booking cutoff for maternity sessions. But this isn\'t the end of the story.'},
+      {when:'Days 5–14 After Birth', state:'active',title:'Your Newborn Session is <em>Next</em>',body:'Newborn portraits in the first two weeks are some of our most breathtaking work — and they require booking before baby arrives. Reserve your spot now.'},
+      {when:'After Your Session',    state:'future',title:'Gallery &amp; Products Delivered',body:'A fully guided gallery reveal, every image curated, every product handled. You won\'t have to think about a single detail.'}
+    ],
+    newborn:[
+      {when:'Now — Before Baby Arrives',state:'active',title:'Reserve Your Newborn Session <em>Today</em>',body:'Newborn sessions must be booked before baby arrives so we can pencil in your due date and be ready the moment you call. Days 5–14 are the magic window.'},
+      {when:'Days 5–14 After Birth', state:'future',title:'Your Newborn Session',body:'Baby\'s most curly, sleepy, brand-new self — captured before the world changes. Pro lighting, guided posing, designer wraps and props included.'},
+      {when:'After Your Session',    state:'future',title:'Gallery Reveal &amp; Heirloom Delivery',body:'We\'ll walk you through every image together. Albums, wall art, gift prints — everything designed and delivered while you focus on your new family.'}
+    ],
+    'default':[
+      {when:'Your Session Window',   state:'active',title:'Your Maternity Session',body:'Maternity sessions take place during weeks 24–34. Reach out to check current availability.'},
+      {when:'After Your Session',    state:'future',title:'Gallery &amp; Product Selection',body:'A fully guided reveal experience — we walk you through every image and every product option.'},
+      {when:'After Baby Arrives',    state:'future',title:'Portraits in Hand',body:'Everything handled, everything delivered, everything unforgettable.'}
+    ]
+  };
+
+  var EXP={
+    early:{
+      lbl: 'Why the Women Who Plan Early Are Happiest',
+      body: 'Early inquiries get first pick of session dates, the full designer gown collection, and every detail handled before life gets loud. There\'s nothing to scramble for, nothing to settle on. The women who wish they\'d done this sooner are always the ones who thought week {w} meant they had all the time in the world.',
+      isNB: false
+    },
+    inWindow:   {lbl:'You\'re Right in the Sweet Spot',         body:'Week {w} puts you exactly where you want to be. Your bump is at its most dramatic and beautiful. With only 6 spots per month, now is the time to confirm.',isNB:false},
+    pastWindow: {lbl:'Past the Ideal Window — But Not Too Late',body:'Your ideal window has passed, but maternity sessions are still possible before week 32. We\'ll need to move quickly — reach out today.',isNB:false},
+    urgent:     {lbl:'Week 32 — This Is It',                    body:'You\'re at our absolute final week for maternity bookings. If we have availability we can still deliver the full experience — pro hair and makeup, designer gowns, fully guided. Same-week confirmation required.',isNB:false},
+    late:       {lbl:'Maternity is Closing — Here\'s What\'s Next',body:'At week {w}, we\'re approaching our booking cutoff for maternity sessions. But newborn portraits in the first 5–14 days are some of our most breathtaking work. Reserve your spot now.',isNB:true},
+    newborn:    {lbl:'Reserve Your Newborn Session Before Baby Arrives',body:'Newborn sessions must be booked before baby arrives so we can hold your due date and be on-call the moment you\'re ready. Days 5–14 are the magic window — curly, sleepy, brand-new.',isNB:true},
+    'default':  {
+      lbl:  'The Difference Early Planning Makes',
+      body: 'Every woman who\'s loved her maternity experience had one thing in common — she inquired before life got loud. First pick of dates, the full designer gown collection, hair and makeup included, and every detail handled from here. One inquiry is all it takes to have this completely sorted.',
+      isNB: false
+    }
+  };
+
+  /* ── Helpers ─────────────────────────────────────────────────── */
+  function $id(id){return document.getElementById(id);}
+  function pageSearch(){
+    try{var s=window.parent.location.search;if(s&&s.length>1)return s;}catch(e){}
+    return window.location.search;
+  }
+  function makeCta(cls,text,href){
+    var a=document.createElement('a');
+    a.className='tws-road__cta'+( cls?' '+cls:'');
+    a.textContent=text; a.href=href;
+    a.style.setProperty('color','#fff','important');
+    a.style.setProperty('-webkit-text-fill-color','#fff','important');
+    return a;
+  }
+
+  /* ── Opt-in data store (populated by render) ─────────────────── */
+  window._twsOptinData = {};
+
+  /* ── Main render ─────────────────────────────────────────────── */
+  function render(q){
+    var week=q.week, status=q.status, type=q.type,
+        duedate=q.duedate, winParam=q.window, bookby=q.bookby,
+        wl=week?'Week '+week:'Currently',
+        wf=windowStr(duedate,winParam)||(winParam?'Weeks '+winParam:'Weeks 28\u201332'),
+        bf=bookby&&bookby!=='Today'?'Book by '+bookby:'Coming Up';
+
+    /* --- HERO --- */
+    var typeMap=HERO[type]||HERO.maternity;
+    var u=typeMap[status]||typeMap['default'];
+    var spotsInfo=(type!=='newborn')?getSpotsInfo(week):null;
+    var tier=spotsInfo?WEEK_TIERS[spotsInfo.spots]:null;
+
+    var isEarly=(status==='early'||status==='default');
+    var effectiveTier=(!isEarly&&tier)?tier:null;
+
+    $id('tws-eyebrow').textContent  = effectiveTier?effectiveTier.ey:u.ey;
+    $id('tws-headline').innerHTML   = (effectiveTier?effectiveTier.hl:u.hl).replace(/{w}/g,week||'').replace(/{win}/g,wf);
+    $id('tws-sub').textContent      = (effectiveTier?effectiveTier.sub:u.sub).replace(/{w}/g,week||'').replace(/{win}/g,wf);
+
+    // Badge
+    var badgeEl=$id('tws-badge');
+    var badgeText, badgeUc;
+    if(isEarly){
+      badgeText = u.badge || 'First Pick of Dates & Gowns Available';
+      badgeUc   = u.uc || 'u-open';
+    } else {
+      badgeText = effectiveTier ? effectiveTier.badge : (spotsInfo ? spotsInfo.spots+' Session'+(spotsInfo.spots!==1?'s':'')+' Available' : (u.uc&&'Only 6 Sessions Per Month'));
+      badgeUc   = effectiveTier ? effectiveTier.uc : (spotsInfo ? spotsInfo.uc : u.uc||'u-soft');
+    }
+    badgeEl.textContent=badgeText||'';
+    badgeEl.className='tws-hero__badge '+badgeUc;
+    badgeEl.style.display=badgeText?'inline-block':'none';
+
+    // Spots bar — suppress for early/default
+    if(spotsInfo && !isEarly){
+      var spotsEl=$id('tws-spots'), countEl=$id('tws-spots-count'), pipsEl=$id('tws-pips');
+      spotsEl.style.display='block';
+      countEl.textContent=spotsInfo.label; countEl.className='tws-hero__spots-count '+spotsInfo.sc;
+      pipsEl.innerHTML='';
+      for(var i=0;i<spotsInfo.total;i++){
+        var pip=document.createElement('div');
+        pip.className='tws-hero__pip'+(i<spotsInfo.spots?' filled '+spotsInfo.pip:'');
+        pip.style.animationDelay=(0.32+i*.055)+'s';
+        pipsEl.appendChild(pip);
+      }
+    }
+
+    // Bookby
+    if(bookby&&type!=='newborn'){
+      var byEl=$id('tws-bookby'), isToday=(bookby==='Today');
+      if(!isToday){var d=new Date(bookby),now=new Date();now.setHours(0,0,0,0);if(!isNaN(d)&&d<now)isToday=true;}
+      byEl.innerHTML=isToday?'Confirm availability <strong>today</strong>':'Book by <strong>'+bookby+'</strong> to guarantee your date.';
+      byEl.style.display='block';
+    }
+
+    // Nudge
+    if(u.nudge){var nudgeEl=$id('tws-nudge');nudgeEl.textContent=u.nudge;nudgeEl.style.display='block';}
+
+    // Package key resolution
+    var pkgKey=q.package;
+    if(!pkgKey){
+      var st=(q.style||'').toLowerCase(), se=(q.setting||'').toLowerCase();
+      if(st==='momonly'||st==='mom_only'||st==='solo'||st==='justmom'||st==='just_mom') pkgKey='portraits';
+      else if(st==='full'||se==='both'||se==='outdoor'||se==='outdoors') pkgKey='whiteGlove';
+    }
+    var pkg=PKGS[pkgKey], pg='';
+    try{pg=window.parent.location.pathname+window.parent.location.search;}catch(e){}
+    pg=pg||window.location.pathname+window.location.search;
+
+    var ctaEl=$id('tws-cta'), pkgEl=$id('tws-pkg');
+    var optinEl=$id('tws-optin');
+
+    // Remove stale newborn CTA
+    var oldNb=$id('tws-hero-nb');if(oldNb)oldNb.parentNode.removeChild(oldNb);
+
+    // ── Early opt-in card: week < 14, maternity only ──────────────
+    var weekNum=parseInt(week,10);
+    var showOptin=!isNaN(weekNum)&&weekNum<14&&type!=='newborn';
+
+    if(showOptin){
+      // Store data for Klaviyo submit
+      window._twsOptinData={week:week,status:status,duedate:q.duedate,package:pkgKey||''};
+
+      // Week number in body
+      var wkSpan=$id('tws-optin-week');
+      if(wkSpan) wkSpan.textContent=week;
+
+      // Pricing pill
+      var OPTIN_PRICES={portraits:'$490',whiteGlove:'$1,290'};
+      var pillEl=$id('tws-optin-pill'), pillTxt=$id('tws-optin-pill-text');
+      if(pillEl&&pillTxt){
+        var pkgPrice=OPTIN_PRICES[pkgKey];
+        if(pkgPrice&&PKGS[pkgKey]){
+          pillTxt.textContent=PKGS[pkgKey].name+' from '+pkgPrice+' · See full pricing';
+        } else {
+          pillTxt.textContent='Sessions from $490 · See full pricing';
+        }
+        pillEl.href=pg+'#pricing';
+      }
+
+      // Reset form state on re-render
+      var formEl=$id('tws-optin-form'), successEl=$id('tws-optin-success');
+      if(formEl) formEl.style.display='';
+      if(successEl) successEl.style.display='none';
+
+      // Hide normal CTAs, show opt-in card
+      ctaEl.style.display='none';
+      pkgEl.style.display='none';
+      optinEl.style.display='block';
+      // Suppress hero sub + badge — card has its own copy
+      $id('tws-sub').style.display='none';
+      $id('tws-badge').style.display='none';
+
+    } else {
+      // Normal CTA flow
+      if(optinEl) optinEl.style.display='none';
+      $id('tws-sub').style.display='';
+
+      if(pkg&&type!=='newborn'){
+        ctaEl.style.display='none';
+        $id('tws-pkg-icon').textContent=pkg.emoji;
+        $id('tws-pkg-name').textContent=pkg.name;
+        $id('tws-pkg-tagline').textContent=pkg.tagline;
+        pkgEl.style.display='flex';
+        if(u.ctaC) pkgEl.classList.add(u.ctaC);
+        pkgEl.href=pg+'#pricing';
+      } else {
+        ctaEl.textContent=u.cta;
+        if(u.ctaC) ctaEl.classList.add(u.ctaC);
+        ctaEl.href=u.isNB?'https://twowildsoulsphotography.com/detroit-newborn-photographer-ads':pg+'#pricing';
+        ctaEl.style.display='';
+        pkgEl.style.display='none';
+        if(u.newborn){
+          var nb=document.createElement('a');
+          nb.id='tws-hero-nb'; nb.className='tws-hero__cta is-newborn';
+          nb.textContent='Explore Newborn Sessions Instead';
+          nb.href='https://twowildsoulsphotography.com/detroit-newborn-photographer-ads';
+          nb.style.setProperty('text-decoration','none','important');
+          ctaEl.parentNode.appendChild(nb);
+        }
+      }
+    }
+
+    /* --- ROADMAP --- */
+    var mileKey=type==='newborn'?'newborn':(status||'default');
+    var miles=(MILES[mileKey]||MILES['default']).map(function(m){
+      return {
+        when: m.when.replace(/{wl}/g,wl).replace(/{wf}/g,wf).replace(/{bf}/g,bf).replace(/{w}/g,week||''),
+        state:m.state,
+        title:m.title.replace(/{w}/g,week||''),
+        body: m.body.replace(/{w}/g,week||'')
+      };
+    });
+
+    var tl=$id('tws-timeline'); tl.innerHTML='';
+    miles.forEach(function(m,i){
+      var last=i===miles.length-1;
+      var dc='tws-road__dot'+(m.state==='done'?' done':m.state==='active'?' active':m.state==='warn'?' warn':'');
+      var wc='tws-road__when'+(m.state==='active'?' active':m.state==='warn'?' warn':'');
+      var mc='tws-road__mile'+(m.state==='active'?' is-now':m.state==='warn'?' is-urgent':'');
+      var row=document.createElement('div'); row.className=mc;
+      row.innerHTML='<div class="tws-road__dot-wrap"><div class="'+dc+'"></div>'+(last?'':'<div class="tws-road__dot-line"></div>')+'</div><div class="tws-road__content"><span class="'+wc+'">'+m.when+'</span><h3 class="tws-road__title">'+m.title+'</h3><p class="tws-road__body">'+m.body+'</p></div>';
+      tl.appendChild(row);
+    });
+
+    var expKey=type==='newborn'?'newborn':(status||'default');
+    var exp=EXP[expKey]||EXP['default'];
+    var expEl=$id('tws-exp');
+    $id('tws-exp-label').textContent=exp.lbl;
+    $id('tws-exp-body').textContent=exp.body.replace(/{w}/g,week||'').replace(/{wf}/g,wf);
+    expEl.querySelectorAll('.tws-road__cta').forEach(function(b){b.parentNode.removeChild(b);});
+    var urgent=(status==='urgent'||status==='late'||status==='pastWindow'||type==='newborn');
+    if(urgent) expEl.classList.add('warn'); else expEl.classList.remove('warn');
+
+    if(exp.isNB){
+      expEl.appendChild(makeCta('newborn','Reserve Your Newborn Session','https://twowildsoulsphotography.com/detroit-newborn-photographer-ads'));
+    } else if(status==='urgent'||status==='pastWindow'){
+      expEl.appendChild(makeCta('','See Maternity Pricing',pg+'#pricing'));
+      var nb2=makeCta('newborn','Reserve Your Newborn Session','https://twowildsoulsphotography.com/detroit-newborn-photographer-ads');
+      nb2.style.marginTop='8px'; expEl.appendChild(nb2);
+    } else if(pkg){
+      var pkgCard=document.createElement('a');
+      pkgCard.className='tws-road__pkg';
+      pkgCard.href=pg+'#pricing';
+      pkgCard.innerHTML=
+        '<span class="tws-road__pkg__icon">'+pkg.emoji+'</span>'+
+        '<span class="tws-road__pkg__body">'+
+          '<span class="tws-road__pkg__label">Your Recommended Experience</span>'+
+          '<span class="tws-road__pkg__name">'+pkg.name+'</span>'+
+          '<span class="tws-road__pkg__tagline">'+pkg.tagline+'</span>'+
+          '<span class="tws-road__pkg__pricing">See pricing ›</span>'+
+        '</span>'+
+        '<span class="tws-road__pkg__arrow">›</span>';
+      pkgCard.style.setProperty('color','#fff','important');
+      pkgCard.style.setProperty('-webkit-text-fill-color','#fff','important');
+      expEl.appendChild(pkgCard);
+    } else {
+      expEl.appendChild(makeCta('','See Investment Details & Reserve Your Date',pg+'#pricing'));
+    }
+
+    /* --- QUIZ CARD --- */
+    var quizCard=$id('tws-quiz-card');
+    if(quizCard){
+      var hasPersonalisation=(status&&status!=='default')||week||q.duedate||q.package;
+      quizCard.style.display=hasPersonalisation?'none':'block';
+    }
+  }
+
+  /* ── Quiz modal ─────────────────────────────────────────────── */
+  function initModal(){
+    var QUIZ_URL='https://moments.twowildsoulsphotography.com';
+    var targetDoc;
+    try{ targetDoc=window.parent.document; }catch(e){ targetDoc=document; }
+    if(targetDoc.getElementById('tws-modal-backdrop')) return;
+
+    var backdrop=targetDoc.createElement('div');
+    backdrop.id='tws-modal-backdrop';
+    backdrop.className='tws-modal-backdrop';
+    backdrop.innerHTML=
+      '<div class="tws-modal" id="tws-modal" role="dialog" aria-modal="true" aria-label="Session Quiz">'+
+        '<div class="tws-modal__header">'+
+          '<span class="tws-modal__header-label">Your Custom Session Roadmap</span>'+
+          '<button class="tws-modal__close" id="tws-modal-close" aria-label="Close quiz">&#x2715;</button>'+
+        '</div>'+
+        '<div class="tws-modal__loading" id="tws-modal-loading">'+
+          '<div class="tws-modal__spinner"></div>'+
+        '</div>'+
+        '<iframe class="tws-modal__iframe" id="tws-modal-iframe" src="" title="Session Quiz"></iframe>'+
+      '</div>';
+
+    if(targetDoc!==document){
+      var modalStyles=[
+        '@keyframes twsModalIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}',
+        '@keyframes twsModalOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(12px) scale(.97)}}',
+        '@keyframes twsSpin{to{transform:rotate(360deg)}}',
+        '.tws-modal-backdrop{display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,20,18,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:12px}',
+        '.tws-modal-backdrop.is-open{display:flex}',
+        '.tws-modal-backdrop.is-closing .tws-modal{animation:twsModalOut .22s ease forwards}',
+        '.tws-modal{position:relative;width:100%;max-width:780px;height:min(82vh,680px);background:#FAFAF7;border-radius:4px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.38);animation:twsModalIn .28s cubic-bezier(.22,.9,.36,1) both;display:flex;flex-direction:column}',
+        '.tws-modal__header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 13px;background:#3F4438;flex-shrink:0}',
+        '.tws-modal__header-label{font-family:"DM Sans",sans-serif;font-size:9px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.75)}',
+        '.tws-modal__close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;line-height:1;transition:background .18s;flex-shrink:0}',
+        '.tws-modal__close:hover{background:rgba(255,255,255,.22)}',
+        '.tws-modal__iframe{flex:1;width:100%;border:none;display:block;background:#FAFAF7}',
+        '.tws-modal__loading{position:absolute;inset:48px 0 0;display:flex;align-items:center;justify-content:center;background:#FAFAF7;pointer-events:none;transition:opacity .3s}',
+        '.tws-modal__loading.is-hidden{opacity:0}',
+        '.tws-modal__spinner{width:28px;height:28px;border-radius:50%;border:2px solid #DDD9D3;border-top-color:#7C8A5A;animation:twsSpin .7s linear infinite}',
+        '@media(max-width:640px){.tws-modal-backdrop{align-items:stretch;justify-content:stretch;padding:0}.tws-modal{height:100vh;height:100dvh;max-width:100%;border-radius:0}}'
+      ].join('');
+      var styleEl=targetDoc.createElement('style');
+      styleEl.textContent=modalStyles;
+      targetDoc.head.appendChild(styleEl);
+    }
+
+    targetDoc.body.appendChild(backdrop);
+
+    var iframe=targetDoc.getElementById('tws-modal-iframe');
+    var loading=targetDoc.getElementById('tws-modal-loading');
+    var closeBtn=targetDoc.getElementById('tws-modal-close');
+    var iframeLoaded=false;
+
+    function openModal(){
+      backdrop.classList.add('is-open');
+      targetDoc.body.style.overflow='hidden';
+      if(!iframeLoaded){
+        iframe.src=QUIZ_URL;
+        iframe.addEventListener('load',function(){
+          if(loading) loading.classList.add('is-hidden');
+        },{once:true});
+        iframeLoaded=true;
+      }
+    }
+
+    function closeModal(){
+      backdrop.classList.add('is-closing');
+      setTimeout(function(){
+        backdrop.classList.remove('is-open','is-closing');
+        targetDoc.body.style.overflow='';
+      },220);
+    }
+
+    closeBtn.addEventListener('click',closeModal);
+    backdrop.addEventListener('click',function(e){ if(e.target===backdrop) closeModal(); });
+    targetDoc.addEventListener('keydown',function(e){ if(e.key==='Escape'&&backdrop.classList.contains('is-open')) closeModal(); });
+
+    window.addEventListener('message',function(e){
+      try{
+        var origin=e.origin||'';
+        if(origin.indexOf('twowildsoulsphotography.com')<0&&origin.indexOf('moments.')<0) return;
+      }catch(x){ return; }
+      var data=e.data||{};
+      var isDone=(data.type==='quiz-complete'||data.twsQuizDone===true);
+      if(!isDone) return;
+      var dest=data.url||data.redirectUrl||'';
+      if(dest){
+        try{ window.top.location.href=dest; }catch(x){ window.location.href=dest; }
+      } else {
+        closeModal();
+      }
+    });
+
+    function wireTrigger(doc){
+      var trigger=doc.getElementById('tws-quiz-trigger');
+      if(trigger){
+        trigger.addEventListener('click',function(e){ e.preventDefault(); openModal(); });
+      }
+    }
+    wireTrigger(document);
+    try{ if(targetDoc!==document) wireTrigger(targetDoc); }catch(e){}
+  }
+
+  /* ── Bootstrap ──────────────────────────────────────────────────── */
+  function init(search){ render(decode(search)); }
+
+  // Wire opt-in button via addEventListener (Showit strips onclick attributes)
+  document.addEventListener('click', function(e){
+    if(e.target && e.target.id === 'tws-optin-btn') twsOptinSubmit();
+  });
+
+  var s=pageSearch();
+  if(s&&s.length>1){ init(s); initModal(); return; }
+  window.addEventListener('message',function(e){ if(e.data&&e.data.twsSearch) init(e.data.twsSearch); });
+  var ref=document.referrer||'';
+  if(ref.indexOf('?')>-1){ init('?'+ref.split('?')[1]); initModal(); return; }
+  init('?type=maternity&status=default'); initModal();
+
+}();
+</script>
+
+<!-- ── Klaviyo opt-in submit ─────────────────────────────────────── -->
+<script>
 var TWS_KL_KEY     = 'WgMSBs';
 var TWS_KL_LIST_ID = 'V3bUGq';
+
+// Calculates the calendar date when the visitor hits week 14
+// (due date minus 26 weeks = week 14 from conception)
 function twsCalcWindowDate(duedateStr){
   if(!duedateStr) return '';
   var d=new Date(duedateStr);
   if(isNaN(d.getTime())) return '';
+  // week 14 = duedate minus (40 - 14) * 7 days = minus 182 days
   d.setDate(d.getDate()-182);
-  return d.toISOString().split('T')[0];
+  return d.toISOString().split('T')[0]; // "YYYY-MM-DD"
 }
+
 function twsOptinSubmit(){
   var name  = (document.getElementById('tws-optin-name') ||{}).value||'';
   var email = (document.getElementById('tws-optin-email')||{}).value||'';
   var phone = (document.getElementById('tws-optin-phone')||{}).value||'';
   var errEl = document.getElementById('tws-optin-error');
   var btn   = document.getElementById('tws-optin-btn');
+
   if(errEl) errEl.style.display='none';
   if(!name.trim()){ if(errEl){errEl.textContent='Please enter your first name.';errEl.style.display='block';} return; }
   if(!email.trim()||email.indexOf('@')<0){ if(errEl){errEl.textContent='Please enter a valid email.';errEl.style.display='block';} return; }
+
   if(btn){ btn.disabled=true; btn.textContent='Sending…'; }
+
   var d=window._twsOptinData||{};
   var windowOpensDate=twsCalcWindowDate(d.duedate||'');
   var BASE='https://a.klaviyo.com/client/';
   var HEADS={'Content-Type':'application/json','revision':'2023-12-15'};
+
+  // Build profile attributes — add phone_number only if provided
   var profileAttrs={
     email:      email.trim(),
     first_name: name.trim(),
@@ -37,10 +1217,13 @@ function twsOptinSubmit(){
     }
   };
   if(phone.trim()) profileAttrs.phone_number = phone.trim();
+
   var subPayload={data:{type:'subscription',attributes:{
     custom_source:'early_optin_embed',
     profile:{data:{type:'profile',attributes:profileAttrs}}
   },relationships:{list:{data:{type:'list',id:TWS_KL_LIST_ID}}}}};
+
+
   function showSuccess(){
     var f=document.getElementById('tws-optin-form');
     var s=document.getElementById('tws-optin-success');
@@ -51,9 +1234,11 @@ function twsOptinSubmit(){
     if(btn){ btn.disabled=false; btn.textContent='Send Me the Guide'; }
     if(errEl){ errEl.textContent='Something went wrong — please try again.'; errEl.style.display='block'; }
   }
+
   fetch(BASE+'subscriptions/?company_id='+TWS_KL_KEY,{method:'POST',headers:HEADS,body:JSON.stringify(subPayload)})
   .then(function(r){
     if(!r.ok && r.status!==202) throw new Error('sub '+r.status);
+
     showSuccess();
   })
   .catch(showError);
