@@ -14,18 +14,18 @@
      and any hardcoded URL risks a 404 that tanks Best Practices score.
      The preconnects warm the TCP+TLS handshake so the CSS and font files
      download as fast as possible once the async stylesheet fires.
-     font-display=swap in the URL param ensures text stays visible during load.
+     font-display=optional in the URL param ensures text stays visible during load.
      ──────────────────────────────────────────────────────────────────────────-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <!-- Non-blocking Google Fonts load -->
 <link rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=optional"
   media="print" onload="this.media='all'">
 <noscript>
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=optional">
 </noscript>
 
 <!-- ── FACEBOOK PIXEL ─────────────────────────────────────────────────────────
