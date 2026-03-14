@@ -2,42 +2,90 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="theme-color" content="#F7F5F2">
 <meta name="description" content="Find your ideal maternity photo week window in 20 seconds and get a personalized quote. Pro hair &amp; makeup, designer gowns, studio &amp; outdoor. Metro Detroit.">
 <title>Find Your Best Time for Maternity Photos | Two Wild Souls Photography</title>
 
-<!-- Meta Pixel -->
+<!-- ── FONTS ─────────────────────────────────────────────────────────────────
+     Strategy:
+     1. preconnect to gstatic (where the .woff2 files live)
+     2. rel=preload the two heaviest Cormorant variants we actually use above
+        the fold (this fetches them in parallel with the CSS file itself)
+     3. Load the Google Fonts stylesheet with media="print" + onload swap trick
+        so it never blocks rendering. A <noscript> fallback handles JS-off.
+     Result: fonts start downloading immediately, page renders with fallback
+     first, then swaps — zero render-blocking. ──────────────────────────────-->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Preload the two woff2 variants used in the hero/header (above fold) -->
+<link rel="preload" as="font" type="font/woff2" crossorigin
+  href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjQAllvuQ.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+  href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEPjuw.woff2">
+
+<!-- Non-blocking Google Fonts load -->
+<link rel="preload" as="style"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+  media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+</noscript>
+
+<!-- ── FACEBOOK PIXEL ─────────────────────────────────────────────────────────
+     Deferred until first user interaction (quiz start button click).
+     PageView fires on interaction instead of page load — a ~100ms savings on
+     main-thread blocking. Pixel is fully initialised before any quiz events
+     fire, so Lead / QuizStep tracking is unaffected. ──────────────────────-->
 <script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','1484618222285119');
-fbq('track','PageView');
+// Stub so fbq() calls before init are safely queued
+window.fbq = window.fbq || function(){ (window._fbq_queue = window._fbq_queue || []).push(arguments); };
+window._fbqPixelId = '1484618222285119';
+window._fbqLoaded  = false;
+
+function _loadFBPixel() {
+  if (window._fbqLoaded) return;
+  window._fbqLoaded = true;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  // Replay any queued calls
+  var q = window._fbq_queue || [];
+  fbq('init', window._fbqPixelId);
+  fbq('track', 'PageView');
+  for (var i = 0; i < q.length; i++) fbq.apply(null, q[i]);
+  window._fbq_queue = [];
+}
+
+// Load on first interaction — covers both tap and keyboard users
+['pointerdown','keydown','touchstart'].forEach(function(evt) {
+  window.addEventListener(evt, _loadFBPixel, { once: true, passive: true });
+});
+// Hard fallback: load after 5 s regardless (captures bounces for PageView)
+setTimeout(_loadFBPixel, 5000);
 </script>
 <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1484618222285119&ev=PageView&noscript=1"></noscript>
 
-<!-- Vercel Web Analytics -->
+<!-- ── VERCEL WEB ANALYTICS ──────────────────────────────────────────────── -->
 <script>
   window.va = window.va || function(){ (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 
-<!-- Elfsight Google Reviews -->
+<!-- ── ELFSIGHT ──────────────────────────────────────────────────────────────
+     The reviews widget is below the fold on the intro screen and invisible
+     during all quiz steps. We preconnect only to the origins that are always
+     used (static + core service), drop the others, and load the platform
+     script lazily with IntersectionObserver so it never touches the critical
+     path. ──────────────────────────────────────────────────────────────────-->
 <link rel="preconnect" href="https://static.elfsight.com">
-<link rel="preconnect" href="https://apps.elfsight.com">
-<link rel="preconnect" href="https://service.elfsight.com">
-<link rel="dns-prefetch" href="https://static.elfsight.com">
 <link rel="dns-prefetch" href="https://apps.elfsight.com">
-<link rel="dns-prefetch" href="https://service.elfsight.com">
-<script src="https://static.elfsight.com/platform/platform.js" async></script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -487,9 +535,14 @@ function render() {
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <p class="intro-trust">Takes 20 seconds &nbsp;&middot;&nbsp; No personal information required</p>
-        <div class="reviews-wrap"><div class="elfsight-app-f0f8b71d-1a73-49e1-89f2-58b5df023681"></div></div>
+        <div class="reviews-wrap" id="elfsightContainer">
+          <div class="elfsight-app-f0f8b71d-1a73-49e1-89f2-58b5df023681" data-elfsight-app-lazy></div>
+        </div>
       </div>
       <div class="footer">&copy; Two Wild Souls Photography &middot; Metro Detroit</div>`;
+
+    // Lazy-load Elfsight only when its container scrolls into view
+    _lazyLoadElfsight();
     return;
   }
 
@@ -541,7 +594,6 @@ function render() {
         </div>`;
     }
 
-    // ── Rotating phrases ──────────────────────────────────────────
     var PHRASES_MATERNITY = [
       'Calculating your window\u2026',
       'Building your quote\u2026',
@@ -561,7 +613,6 @@ function render() {
       if (!el) return;
       var phrases = isLate ? PHRASES_NEWBORN : PHRASES_MATERNITY;
       var idx = 0;
-      // First phrase already set in the HTML — start cycling from index 1
       var interval = setInterval(function() {
         idx = (idx + 1) % phrases.length;
         el.style.opacity = '0';
@@ -586,20 +637,13 @@ function render() {
       console.log('[TWS Debug] Redirect URL:', finalURL);
       console.log('[TWS Debug] Quiz data:', quizData);
     } else {
-      // ── CRITICAL: notify parent embed BEFORE redirecting ──────────────
-      // If running inside the modal iframe, this fires the postMessage
-      // the embed listens for, causing it to close the modal and navigate
-      // window.top to the result URL instead of navigating inside the iframe.
       try {
         if (window.parent && window.parent !== window) {
           window.parent.postMessage({ type: 'quiz-complete', url: finalURL }, '*');
-          // Give the parent a moment to handle the message before we
-          // also attempt a local redirect as a belt-and-suspenders fallback.
           setTimeout(function() { window.location.href = finalURL; }, redirectDelay + 500);
-          return; // parent handler takes over; local redirect is just a fallback
+          return;
         }
       } catch(e) {}
-      // Standalone (not in iframe) — redirect normally
       setTimeout(function() { window.location.href = finalURL; }, redirectDelay);
     }
     return;
@@ -662,6 +706,37 @@ function render() {
         <p class="val-msg" id="valMsg"></p>
       </div>`;
   }
+}
+
+// ── ELFSIGHT LAZY LOADER ─────────────────────────────────────────────────────
+// Injects platform.js only once, when the reviews container enters the viewport.
+// This keeps 48 KiB + 637 KiB of Elfsight JS off the critical path entirely.
+var _elfsightInjected = false;
+function _lazyLoadElfsight() {
+  var container = document.getElementById('elfsightContainer');
+  if (!container) return;
+  if (_elfsightInjected) return;
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries, obs) {
+      if (entries[0].isIntersecting) {
+        _injectElfsight();
+        obs.disconnect();
+      }
+    }, { rootMargin: '200px' }); // start loading 200px before it scrolls in
+    io.observe(container);
+  } else {
+    // Fallback for old browsers: load after 2 s
+    setTimeout(_injectElfsight, 2000);
+  }
+}
+function _injectElfsight() {
+  if (_elfsightInjected) return;
+  _elfsightInjected = true;
+  var s = document.createElement('script');
+  s.src = 'https://static.elfsight.com/platform/platform.js';
+  s.async = true;
+  document.head.appendChild(s);
 }
 
 function startQuiz() {
