@@ -7,19 +7,8 @@
 <meta name="description" content="Find your ideal maternity photo week window in 20 seconds and get a personalized quote. Pro hair &amp; makeup, designer gowns, studio &amp; outdoor. Metro Detroit.">
 <title>Find Your Best Time for Maternity Photos | Two Wild Souls Photography</title>
 
-<!-- ── FONTS ─────────────────────────────────────────────────────────────────
-     Strategy: preconnect to both Google Fonts origins, then load the
-     stylesheet asynchronously with the media="print" swap trick.
-     We do NOT preload specific .woff2 URLs — Google Fonts rotates file hashes
-     and any hardcoded URL risks a 404 that tanks Best Practices score.
-     The preconnects warm the TCP+TLS handshake so the CSS and font files
-     download as fast as possible once the async stylesheet fires.
-     font-display=optional in the URL param ensures text stays visible during load.
-     ──────────────────────────────────────────────────────────────────────────-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<!-- Non-blocking Google Fonts load -->
 <link rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=optional"
   media="print" onload="this.media='all'">
@@ -28,11 +17,6 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=optional">
 </noscript>
 
-<!-- ── FACEBOOK PIXEL ─────────────────────────────────────────────────────────
-     Standard synchronous Meta Pixel snippet. Deferred loading proved
-     unreliable — the pixel accounts for ~100ms of TBT on slow 4G, but that
-     is far less costly than silently dropping Lead / QuizStep events.
-     Reviews are now a static badge — no third-party JS. -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -45,7 +29,6 @@ fbq('track','PageView');
 <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1484618222285119&ev=PageView&noscript=1"></noscript>
 
-<!-- ── VERCEL WEB ANALYTICS ──────────────────────────────────────────────── -->
 <script>
   window.va = window.va || function(){ (window.vaq = window.vaq || []).push(arguments); };
 </script>
@@ -74,17 +57,13 @@ html, body {
   min-height: 100vh; -webkit-font-smoothing: antialiased;
 }
 
-/* ── HEADER ─────────────────────────────────────────── */
 header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px 20px; border-bottom: 1px solid var(--faint);
   position: sticky; top: 0; background: var(--bg); z-index: 100;
 }
 .logo-wrap { display: flex; flex-direction: column; gap: 2px; }
-.logo-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 15px; font-weight: 400; letter-spacing: 0.04em; color: var(--text);
-}
+.logo-name { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 400; letter-spacing: 0.04em; color: var(--text); }
 .logo-name em { font-style: italic; color: var(--gold); }
 .logo-sub { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text2); }
 .header-badge {
@@ -93,84 +72,51 @@ header {
   padding: 5px 10px; border-radius: 100px; white-space: nowrap;
 }
 
-/* ── PROGRESS BAR ───────────────────────────────────── */
 .progress-shell { background: var(--surface); padding: 14px 20px; border-bottom: 1px solid var(--faint); }
 .progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .progress-step-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text2); }
 .progress-pct { font-size: 11px; color: var(--accent); }
 .progress-track { height: 3px; background: var(--faint); border-radius: 2px; overflow: hidden; }
-.progress-fill {
-  height: 100%; background: linear-gradient(90deg, var(--accent), var(--gold));
-  border-radius: 2px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-}
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--gold)); border-radius: 2px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
 
-/* ── DOTS ───────────────────────────────────────────── */
 .dots { display: flex; justify-content: center; gap: 8px; padding: 10px 0 0; }
 .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(46,47,44,0.15); transition: all 0.3s; }
 .dot.active { background: var(--accent); transform: scale(1.4); }
 .dot.done   { background: var(--gold); transform: scale(1.1); }
 
-/* ── MAIN ───────────────────────────────────────────── */
 main { padding: 0 20px 120px; max-width: 540px; margin: 0 auto; }
 
-/* ── INTRO ──────────────────────────────────────────── */
 .intro-block { padding: 20px 0 6px; animation: fadeUp 0.5s ease both; }
 .intro-eyebrow { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-.intro-headline {
-  font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 7vw, 46px);
-  font-weight: 300; line-height: 1.1; color: var(--text); margin-bottom: 10px;
-}
+.intro-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 7vw, 46px); font-weight: 300; line-height: 1.1; color: var(--text); margin-bottom: 10px; }
 .intro-headline em { font-style: italic; color: var(--accent); }
 .intro-body { font-size: 13px; line-height: 1.6; color: var(--text2); margin-bottom: 14px; }
 .intro-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-.pill {
-  font-size: 10px; letter-spacing: 0.06em; color: var(--accent2);
-  border: 1px solid rgba(111,129,145,0.3); padding: 4px 10px; border-radius: 100px;
-}
+.pill { font-size: 10px; letter-spacing: 0.06em; color: var(--accent2); border: 1px solid rgba(111,129,145,0.3); padding: 4px 10px; border-radius: 100px; }
 
-/* ── REVIEWS BADGE ──────────────────────────────────── */
-.reviews-badge {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 6px; margin-top: 20px; padding: 16px;
-  background: white; border: 1px solid rgba(46,47,44,0.1);
-  border-radius: 8px;
-}
+.reviews-badge { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 20px; padding: 16px; background: white; border: 1px solid rgba(46,47,44,0.1); border-radius: 8px; }
 .reviews-stars { display: flex; gap: 3px; }
-.reviews-meta {
-  display: flex; align-items: center; gap: 7px;
-  font-size: 13px; color: var(--text2);
-}
+.reviews-meta { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text2); }
 .reviews-score { font-weight: 500; color: var(--text); font-size: 14px; }
 .reviews-divider { color: var(--faint); }
 .reviews-count { font-size: 12px; }
 
-/* ── INTRO CTA ──────────────────────────────────────── */
 .intro-cta {
   width: 100%; background: var(--cta); color: var(--bg); border: none;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-weight: 500; font-size: 14px;
   letter-spacing: 0.1em; text-transform: uppercase; padding: 18px; cursor: pointer;
-  transition: background 0.2s; display: flex; align-items: center;
-  justify-content: center; gap: 10px; border-radius: 6px;
+  transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 6px;
 }
 .intro-cta:hover { background: #2e3128; }
 .intro-trust { text-align: center; font-size: 12px; color: var(--text2); margin-top: 14px; }
 
-/* ── QUESTION ───────────────────────────────────────── */
 .question-wrap { padding: 36px 0 0; animation: fadeUp 0.4s ease both; }
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.question-headline {
-  font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 6.5vw, 36px);
-  font-weight: 300; line-height: 1.2; color: var(--text); margin-bottom: 8px;
-}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+.question-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 6.5vw, 36px); font-weight: 300; line-height: 1.2; color: var(--text); margin-bottom: 8px; }
 .question-hint { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 28px; font-style: italic; }
 
-/* ── DATE INPUT ─────────────────────────────────────── */
 .date-field-wrap { position: relative; cursor: pointer; margin-bottom: 8px; }
-.date-field-wrap:hover .date-field,
-.date-field-wrap:focus-within .date-field { border-color: var(--accent); }
+.date-field-wrap:hover .date-field, .date-field-wrap:focus-within .date-field { border-color: var(--accent); }
 .date-field {
   width: 100%; background: white; border: 1.5px solid rgba(46,47,44,0.18);
   color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 16px;
@@ -179,56 +125,32 @@ main { padding: 0 20px 120px; max-width: 540px; margin: 0 auto; }
 }
 .date-field::-webkit-calendar-picker-indicator { filter: opacity(0.4); padding: 4px; }
 
-/* ── LATE WARNING (shown inline on date step) ───────── */
-.late-warning {
-  display: none;
-  background: rgba(199,178,122,0.1);
-  border: 1px solid rgba(199,178,122,0.4);
-  border-left: 3px solid var(--gold);
-  border-radius: 6px;
-  padding: 14px 16px;
-  margin-top: 10px;
-  margin-bottom: 4px;
-}
+.late-warning { display: none; background: rgba(199,178,122,0.1); border: 1px solid rgba(199,178,122,0.4); border-left: 3px solid var(--gold); border-radius: 6px; padding: 14px 16px; margin-top: 10px; margin-bottom: 4px; }
 .late-warning.show { display: block; }
-.late-warning-title {
-  font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px;
-}
+.late-warning-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
 .late-warning-body { font-size: 12px; line-height: 1.6; color: var(--text2); }
 .late-warning-body strong { color: var(--text); }
 
-/* ── OPTIONS ────────────────────────────────────────── */
 .options-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
 .opt-btn {
   background: white; border: 1.5px solid rgba(46,47,44,0.18); color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15px; font-weight: 300;
   padding: 16px 20px; text-align: left; cursor: pointer; transition: all 0.2s ease;
-  display: flex; align-items: center; gap: 14px; border-radius: 6px;
-  -webkit-tap-highlight-color: transparent;
+  display: flex; align-items: center; gap: 14px; border-radius: 6px; -webkit-tap-highlight-color: transparent;
 }
-.opt-btn:active, .opt-btn.selected {
-  background: rgba(124,138,90,0.07); border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(124,138,90,0.15);
-}
-.opt-check {
-  width: 20px; height: 20px; border: 1.5px solid rgba(46,47,44,0.2);
-  border-radius: 50%; flex-shrink: 0; display: flex; align-items: center;
-  justify-content: center; transition: all 0.2s;
-}
+.opt-btn:active, .opt-btn.selected { background: rgba(124,138,90,0.07); border-color: var(--accent); box-shadow: 0 0 0 2px rgba(124,138,90,0.15); }
+.opt-check { width: 20px; height: 20px; border: 1.5px solid rgba(46,47,44,0.2); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
 .opt-btn.selected .opt-check { background: var(--accent); border-color: var(--accent); }
 .opt-btn.selected .opt-check::after { content: ''; width: 6px; height: 6px; background: white; border-radius: 50%; }
 .opt-text { flex: 1; }
 .opt-label { display: block; line-height: 1.3; }
 .opt-sub { display: block; font-size: 12px; color: var(--text2); margin-top: 3px; }
 
-/* ── VALIDATION ─────────────────────────────────────── */
 .val-msg { font-size: 12px; color: var(--error); padding: 0 0 8px; display: none; }
 
-/* ── BOTTOM NAV ─────────────────────────────────────── */
 .bottom-nav {
   position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg);
-  border-top: 1px solid var(--faint);
-  padding: 14px 20px max(14px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--faint); padding: 14px 20px max(14px, env(safe-area-inset-bottom));
   display: flex; gap: 10px; z-index: 200;
 }
 .btn-back {
@@ -242,68 +164,100 @@ main { padding: 0 20px 120px; max-width: 540px; margin: 0 auto; }
   flex: 1; background: var(--cta); color: var(--bg); border: none;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-weight: 500; font-size: 14px;
   letter-spacing: 0.1em; text-transform: uppercase; min-height: 52px;
-  cursor: pointer; transition: background 0.2s; border-radius: 6px;
-  -webkit-tap-highlight-color: transparent;
+  cursor: pointer; transition: background 0.2s; border-radius: 6px; -webkit-tap-highlight-color: transparent;
 }
 .btn-next:hover { background: #2e3128; }
 .btn-next:disabled { background: var(--surface); color: var(--text2); cursor: not-allowed; }
 
-/* ── REDIRECT SCREEN ────────────────────────────────── */
-.redirect-screen {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-height: 65vh; padding: 40px 20px; text-align: center; animation: fadeUp 0.5s ease both;
-}
-.redirect-spinner {
-  width: 48px; height: 48px; border-radius: 50%;
-  border: 3px solid var(--faint); border-top-color: var(--accent);
-  animation: spin 1s linear infinite; margin-bottom: 28px;
-}
+.redirect-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 65vh; padding: 40px 20px; text-align: center; animation: fadeUp 0.5s ease both; }
+.redirect-spinner { width: 48px; height: 48px; border-radius: 50%; border: 3px solid var(--faint); border-top-color: var(--accent); animation: spin 1s linear infinite; margin-bottom: 28px; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.redirect-package {
-  font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 5vw, 30px);
-  font-style: italic; font-weight: 300; color: var(--cta); margin-bottom: 6px; line-height: 1.2;
-}
+.redirect-package { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 5vw, 30px); font-style: italic; font-weight: 300; color: var(--cta); margin-bottom: 6px; line-height: 1.2; }
 .redirect-tagline { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
-.redirect-sub { font-size: 13px; color: var(--text2); margin-bottom: 28px; }
-
-/* ── Rotating phrase ─────────────────────────────────── */
-.redirect-phrase {
-  font-size: 13px; color: var(--text2); margin-bottom: 28px;
-  transition: opacity 0.45s ease;
-  min-height: 20px;
-}
-.redirect-summary {
-  background: white; border: 1px solid rgba(46,47,44,0.12); border-radius: 8px;
-  padding: 20px 24px; width: 100%; max-width: 340px; text-align: left;
-}
-.summary-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 8px 0; border-bottom: 1px solid var(--faint); font-size: 13px; gap: 12px;
-}
+.redirect-phrase { font-size: 13px; color: var(--text2); margin-bottom: 28px; transition: opacity 0.45s ease; min-height: 20px; }
+.redirect-summary { background: white; border: 1px solid rgba(46,47,44,0.12); border-radius: 8px; padding: 20px 24px; width: 100%; max-width: 340px; text-align: left; }
+.summary-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--faint); font-size: 13px; gap: 12px; }
 .summary-row:last-child { border-bottom: none; }
 .summary-label { color: var(--text2); flex-shrink: 0; }
 .summary-value { color: var(--text); text-align: right; font-weight: 400; }
 .summary-value.gold { color: var(--gold); font-weight: 500; }
 
-/* ── LATE REDIRECT NOTICE ───────────────────────────── */
-.redirect-notice {
-  background: white; border: 1px solid rgba(46,47,44,0.1);
-  border-left: 3px solid var(--gold); border-radius: 8px;
-  padding: 24px; max-width: 360px; text-align: left; margin-bottom: 32px;
-}
+.redirect-notice { background: white; border: 1px solid rgba(46,47,44,0.1); border-left: 3px solid var(--gold); border-radius: 8px; padding: 24px; max-width: 360px; text-align: left; margin-bottom: 32px; }
 .redirect-notice-icon { font-size: 24px; display: block; margin-bottom: 12px; }
-.redirect-notice-title {
-  font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400;
-  color: var(--text); margin-bottom: 12px; line-height: 1.2;
-}
+.redirect-notice-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--text); margin-bottom: 12px; line-height: 1.2; }
 .redirect-notice-body { font-size: 14px; line-height: 1.7; color: var(--text2); }
 .redirect-notice-body strong { color: var(--text); font-weight: 500; }
 .redirect-routing { display: flex; flex-direction: column; align-items: center; }
 
-/* ── FOOTER ─────────────────────────────────────────── */
+/* ── BLACKOUT SCREEN ─────────────────────────────────── */
+.blackout-screen { padding: 28px 0 60px; animation: fadeUp 0.5s ease both; }
+.blackout-icon { font-size: 32px; display: block; margin-bottom: 14px; }
+.blackout-badge {
+  display: inline-block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); background: rgba(199,178,122,0.12); border: 1px solid rgba(199,178,122,0.35);
+  padding: 5px 12px; border-radius: 100px; margin-bottom: 14px;
+}
+.blackout-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 7vw, 38px); font-weight: 300; line-height: 1.15;
+  color: var(--text); margin-bottom: 14px;
+}
+.blackout-headline em { font-style: italic; color: var(--accent); }
+.blackout-body { font-size: 15px; line-height: 1.75; color: var(--text2); margin-bottom: 16px; }
+.blackout-body strong { color: var(--text); font-weight: 500; }
+.blackout-reassure {
+  background: rgba(124,138,90,0.07); border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0; padding: 14px 16px; margin-bottom: 28px;
+  font-size: 14px; line-height: 1.65; color: var(--text2);
+}
+.blackout-reassure strong { color: var(--text); font-weight: 500; }
+.blackout-options-label {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text2); margin-bottom: 12px; display: block;
+}
+.blackout-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.blackout-opt {
+  display: grid; grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto auto; gap: 2px 8px;
+  align-items: start;
+  background: white; border: 1.5px solid rgba(46,47,44,0.14);
+  border-radius: 10px; padding: 16px 18px;
+  text-align: left; transition: all 0.22s ease; text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  /* larger tap target on mobile */
+  min-height: 76px;
+}
+.blackout-opt:active { transform: scale(0.985); }
+.blackout-opt:hover { border-color: var(--accent); background: rgba(124,138,90,0.04); box-shadow: 0 0 0 2px rgba(124,138,90,0.12); }
+.blackout-opt-label {
+  font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); grid-column: 1; grid-row: 1;
+}
+.blackout-opt-title {
+  font-family: 'Cormorant Garamond', serif; font-size: 19px;
+  font-weight: 400; color: var(--text); line-height: 1.2;
+  grid-column: 1; grid-row: 2;
+}
+.blackout-opt-sub {
+  font-size: 12px; color: var(--text2); line-height: 1.55;
+  grid-column: 1; grid-row: 3; margin-top: 4px;
+}
+.blackout-opt-arrow {
+  font-size: 20px; color: var(--accent);
+  grid-column: 2; grid-row: 1 / 4;
+  align-self: center; padding-left: 4px;
+}
+.blackout-divider {
+  text-align: center; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text2); opacity: 0.4; margin: 2px 0;
+}
+.blackout-footer {
+  font-size: 12px; color: var(--text2); text-align: center;
+  line-height: 1.7; padding: 0 4px;
+}
+
 .footer { text-align: center; margin-top: 40px; font-size: 11px; color: var(--text2); opacity: 0.6; }
 
-/* ── DESKTOP ────────────────────────────────────────── */
 @media (min-width: 600px) {
   header, .progress-shell { padding-left: 40px; padding-right: 40px; }
   main { padding: 0 40px 120px; }
@@ -313,11 +267,7 @@ main { padding: 0 20px 120px; max-width: 540px; margin: 0 auto; }
 @media (min-width: 900px) {
   body { display: flex; flex-direction: column; }
   main { flex: 1; max-width: 600px; width: 100%; margin: 0 auto; padding: 0 0 140px; }
-  .bottom-nav {
-    width: 600px; left: 50%; right: auto; transform: translateX(-50%);
-    border-left: 1px solid var(--faint); border-right: 1px solid var(--faint);
-    border-radius: 0 0 8px 8px;
-  }
+  .bottom-nav { width: 600px; left: 50%; right: auto; transform: translateX(-50%); border-left: 1px solid var(--faint); border-right: 1px solid var(--faint); border-radius: 0 0 8px 8px; }
   .btn-next { max-width: 260px; margin-left: auto; }
 }
 </style>
@@ -356,35 +306,191 @@ const DEBUG = window.location.search.includes('debug=1');
 const MATERNITY_URL = 'https://twowildsoulsphotography.com/detroit-maternity-photographer-ads-custom';
 const NEWBORN_URL   = 'https://twowildsoulsphotography.com/detroit-newborn-photographer-ads';
 
+// ── BLACKOUT WINDOW ──────────────────────────────────────────────────────────
+// Lead photographer on leave June 1 – July 31, 2026.
+// Last available session: May 31, 2026. Back: August 1, 2026.
+const BLACKOUT_START = new Date('2026-06-01T00:00:00');
+const BLACKOUT_END   = new Date('2026-07-31T23:59:59');
+
+function isMaternityBlackout(dueDateStr) {
+  // Check if the maternity session window (weeks 28–32) overlaps with blackout
+  const due = new Date(dueDateStr + 'T12:00:00');
+  const conception = new Date(due.getTime() - 280 * 86400000);
+  const week28 = new Date(conception.getTime() + 28 * 7 * 86400000);
+  const week32 = new Date(conception.getTime() + 32 * 7 * 86400000);
+  return week28 < BLACKOUT_END && week32 > BLACKOUT_START;
+}
+
+function isNewbornBlackout(dueDateStr) {
+  // Check if newborn session window (birth + 5–14 days) overlaps with blackout
+  const due = new Date(dueDateStr + 'T12:00:00');
+  const nb5  = new Date(due.getTime() + 5  * 86400000);
+  const nb14 = new Date(due.getTime() + 14 * 86400000);
+  return nb5 < BLACKOUT_END && nb14 > BLACKOUT_START;
+}
+
+function getBlackoutType(dueDateStr, isLateRoute) {
+  if (isLateRoute) return isNewbornBlackout(dueDateStr) ? 'newborn' : null;
+  return isMaternityBlackout(dueDateStr) ? 'maternity' : null;
+}
+
+function buildBlackoutURLs(quizData, isLateRoute) {
+  const incomingParams = new URLSearchParams(window.location.search);
+  const fbclid = incomingParams.get('fbclid');
+  const gclid  = incomingParams.get('gclid');
+  const dest = isLateRoute ? NEWBORN_URL : MATERNITY_URL;
+
+  /*
+   * For each option we synthesize a due date that puts the ideal session
+   * window in the target month, so the landing page calculates correctly.
+   *
+   * Maternity: session at week 30 (midpoint of 28–32 window)
+   *   due date = target session date + (40 - 30) * 7 days = target + 70 days
+   *
+   * Newborn: birth (due date) = target newborn session date - 7 days (midpoint of 5–14)
+   *
+   * May target:    May 15, 2026
+   * August target: August 15, 2026
+   */
+  function syntheticDueDate(targetDateStr, isNewborn) {
+    const target = new Date(targetDateStr + 'T12:00:00');
+    const MS = 86400000;
+    if (isNewborn) {
+      // due date ≈ 7 days before newborn session midpoint
+      const due = new Date(target.getTime() - 7 * MS);
+      return due.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    } else {
+      // due date = session date + 70 days (week 30 → due date)
+      const due = new Date(target.getTime() + 70 * MS);
+      return due.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    }
+  }
+
+  function makeURL(note, targetDate) {
+    const synDue = syntheticDueDate(targetDate, isLateRoute);
+    const d = Object.assign({}, quizData, {
+      blackout_note: note,
+      duedate: synDue,
+      // Strip week/status so landing page recalculates from the synthetic due date
+      week:   undefined,
+      status: undefined
+    });
+    // Clean up undefined keys
+    Object.keys(d).forEach(function(k) { if (d[k] === undefined) delete d[k]; });
+    const p = new URLSearchParams({ d: encodeQuizData(d) });
+    if (fbclid) p.append('fbclid', fbclid);
+    if (gclid)  p.append('gclid', gclid);
+    return dest + '?' + p.toString();
+  }
+
+  return {
+    may:    makeURL('book_may',    '2026-05-15'),
+    august: makeURL('book_august', '2026-08-15')
+  };
+}
+
+function renderBlackout(quizData, isLateRoute) {
+  const content = document.getElementById('mainContent');
+  const shell   = document.getElementById('progressShell');
+  const nav     = document.getElementById('bottomNav');
+  const fill    = document.getElementById('progressFill');
+  const stepLbl = document.getElementById('stepLabel');
+  const pctLbl  = document.getElementById('stepPct');
+  const dotsEl  = document.getElementById('dots');
+
+  shell.style.display = 'block'; nav.style.display = 'none';
+  fill.style.width = '100%'; stepLbl.textContent = 'Availability Notice'; pctLbl.textContent = ''; dotsEl.innerHTML = '';
+
+  const urls = buildBlackoutURLs(quizData, isLateRoute);
+  const sessionType = isLateRoute ? 'newborn' : 'maternity';
+
+  // Headline and opening copy vary by session type
+  const headline = isLateRoute
+    ? `We're fully booked for <em>newborn sessions</em> this June & July.`
+    : `We're fully booked for <em>maternity sessions</em> this June & July.`;
+
+  const openingCopy = isLateRoute
+    ? `We know how much it means to have those first days with your baby captured, the tiny curled fingers, the way they sleep on your chest. That's exactly why we want to be honest with you: <strong>we're fully booked for newborn sessions in June and July</strong>, and we'd rather tell you now than have you counting on us.`
+    : `You've taken the time to find the right photographer, and that matters to us. So we want to be upfront: <strong>we're fully booked for maternity sessions in June and July</strong>. Your window deserves our full attention, and we can't give that to a session we can't take.`;
+
+  const reassureCopy = isLateRoute
+    ? `The good news is your timing gives you real options. We have <strong>availability in May</strong> if baby arrives a little early, and we're <strong>back with some availability in August</strong>, ready to capture everything you've been imagining.`
+    : `The good news is we have real availability on both sides of this window. <strong>May has a few slots left</strong> if your session falls at the earlier end of your range, and <strong>August still has some availability</strong>, fully fresh, no rush, nothing compromised.`;
+
+  const mayTitle   = isLateRoute ? 'Newborn session in May' : 'Maternity session in May';
+  const augTitle   = isLateRoute ? 'Newborn session in August' : 'Maternity session in August';
+
+  const mayBody = isLateRoute
+    ? `If your due date shifts or baby arrives a bit early, we'll have everything ready. We hold your spot as soon as you reserve a date, no waiting, no scrambling.`
+    : `If your session window falls at the earlier end of your range, May can work! Same full experience — hair, makeup, gowns, everything. Just before the summer rush.`;
+
+  const augBody = isLateRoute
+    ? `If your baby arrives in August or later, we'd love nothing more than to be your first call.`
+    : `We have a few spots left in August. Your session gets planned for your ideal window, unhurried, fully prepared, and completely yours.`;
+
+  try { fbq('trackCustom', 'BlackoutShown', { session_type: sessionType }); } catch(e) {}
+
+  content.innerHTML = `
+    <div class="blackout-screen">
+      <span class="blackout-icon">🤍</span>
+      <span class="blackout-badge">A Note on Availability</span>
+      <h2 class="blackout-headline">${headline}</h2>
+      <p class="blackout-body">${openingCopy}</p>
+      <div class="blackout-reassure">${reassureCopy}</div>
+      <span class="blackout-options-label">Here's where we can take you</span>
+      <div class="blackout-options">
+        <a class="blackout-opt" href="${urls.may}">
+          <span class="blackout-opt-label">Available Now &mdash; May</span>
+          <span class="blackout-opt-title">${mayTitle}</span>
+          <span class="blackout-opt-sub">${mayBody}</span>
+          <span class="blackout-opt-arrow">&#8594;</span>
+        </a>
+        <div class="blackout-divider">or</div>
+        <a class="blackout-opt" href="${urls.august}">
+          <span class="blackout-opt-label">Available &mdash; August onward</span>
+          <span class="blackout-opt-title">${augTitle}</span>
+          <span class="blackout-opt-sub">${augBody}</span>
+          <span class="blackout-opt-arrow">&#8594;</span>
+        </a>
+      </div>
+      <p class="blackout-footer">
+        Both options include everything — pro hair &amp; makeup,<br>
+        designer gowns, fully guided. We'll work with your timeline.
+      </p>
+    </div>`;
+}
+
+// ── REST OF QUIZ ─────────────────────────────────────────────────────────────
+
 const PACKAGES = {
   portraits:  { name: 'Portraits of Just Mom',  tagline: 'Intimate \u00b7 Studio Only \u00b7 All About You',           emoji: '\uD83E\uDD0D' },
   whiteGlove: { name: 'White Glove Experience', tagline: 'Full Family \u00b7 Studio & Outdoors \u00b7 The Full Story', emoji: '\u2728' }
 };
 
 const STEPS = [
-  { id: 'dueDate',   type: 'date',    question: 'When is your due date?',          hint: "We'll calculate your ideal photo window from this." },
-  { id: 'firstBaby', type: 'options', question: 'Is this your first baby?',         hint: null,
+  { id: 'dueDate',   type: 'date',    question: 'When is your due date?', hint: "We'll calculate your ideal photo window from this." },
+  { id: 'firstBaby', type: 'options', question: 'Is this your first baby?', hint: null,
     options: [
-      { value: 'yes', label: 'Yes \u2014 first time!',          sub: 'Exciting new chapter' },
+      { value: 'yes', label: 'Yes \u2014 first time!', sub: 'Exciting new chapter' },
       { value: 'no',  label: "No \u2014 I've done this before", sub: 'Adding to the family' }
     ]
   },
-  { id: 'multiples', type: 'options', question: 'Are you expecting multiples?',     hint: null,
+  { id: 'multiples', type: 'options', question: 'Are you expecting multiples?', hint: null,
     options: [
       { value: 'yes', label: 'Yes \u2014 twins or more!', sub: null },
-      { value: 'no',  label: 'No \u2014 just one',        sub: null }
+      { value: 'no',  label: 'No \u2014 just one', sub: null }
     ]
   },
-  { id: 'style',     type: 'options', question: 'What look are you going for?',     hint: "We'll match your gown, lighting, and timing to this.",
+  { id: 'style', type: 'options', question: 'What look are you going for?', hint: "We'll match your gown, lighting, and timing to this.",
     options: [
-      { value: 'full',  label: 'Full, dramatic bump',        sub: 'Classic maternity look \u2014 beautifully round' },
+      { value: 'full',  label: 'Full, dramatic bump', sub: 'Classic maternity look \u2014 beautifully round' },
       { value: 'early', label: 'Earlier & more comfortable', sub: 'More energy, easier to move around' }
     ]
   },
-  { id: 'whoJoins',  type: 'options', question: "Who's joining you for photos?",   hint: 'This helps us match you to the right experience.',
+  { id: 'whoJoins', type: 'options', question: "Who's joining you for photos?", hint: 'This helps us match you to the right experience.',
     options: [
-      { value: 'momOnly', label: 'Just me \uD83E\uDD0D',            sub: 'Intimate studio portraits \u2014 all about you and your bump' },
-      { value: 'partner', label: 'Me + my partner \uD83D\uDC91',    sub: 'Include your husband or partner in some or all shots' },
+      { value: 'momOnly', label: 'Just me \uD83E\uDD0D', sub: 'Intimate studio portraits \u2014 all about you and your bump' },
+      { value: 'partner', label: 'Me + my partner \uD83D\uDC91', sub: 'Include your husband or partner in some or all shots' },
       { value: 'family',  label: 'The whole family \uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67', sub: 'Partner, kids, fur babies \u2014 everyone welcome' }
     ]
   }
@@ -466,7 +572,7 @@ function calculate() {
 
   try { fbq('track', 'Lead', { content_name: 'Calculator Complete', content_category: context, value: week, currency: 'USD' }); } catch(e) {}
 
-  return { dest, finalParams, pkgKey, quizData };
+  return { dest, finalParams, pkgKey, quizData, isLate };
 }
 
 function render() {
@@ -512,7 +618,6 @@ function render() {
         </div>
       </div>
       <div class="footer">&copy; Two Wild Souls Photography &middot; Metro Detroit</div>`;
-
     return;
   }
 
@@ -520,12 +625,17 @@ function render() {
     shell.style.display = 'block'; nav.style.display = 'none';
     fill.style.width = '100%'; stepLbl.textContent = 'Building your results'; pctLbl.textContent = '\u2713'; dotsEl.innerHTML = '';
 
-    const { dest, finalParams, pkgKey, quizData } = calculate();
-    const pkg    = PACKAGES[pkgKey];
-    const week   = quizData.week;
-    const isLate = quizData.status === 'late';
-    const redirectDelay = isLate ? 1500 : 500;
+    const { dest, finalParams, pkgKey, quizData, isLate } = calculate();
+
+    // ── BLACKOUT CHECK ──────────────────────────────────────────────────────
+    const blackoutType = getBlackoutType(state.dueDate, isLate);
+    if (blackoutType) { renderBlackout(quizData, isLate); return; }
+    // ────────────────────────────────────────────────────────────────────────
+
+    const pkg      = PACKAGES[pkgKey];
+    const week     = quizData.week;
     const finalURL = dest + '?' + finalParams.toString();
+    const redirectDelay = isLate ? 1500 : 500;
 
     emitVercelFlags({
       'quiz-step': 'complete', 'quiz-status': quizData.status, 'quiz-type': quizData.type,
@@ -564,20 +674,8 @@ function render() {
         </div>`;
     }
 
-    var PHRASES_MATERNITY = [
-      'Calculating your window\u2026',
-      'Building your quote\u2026',
-      'Matching you to the right experience\u2026',
-      'Checking date availability\u2026',
-      'Personalizing your roadmap\u2026',
-      'Almost ready\u2026'
-    ];
-    var PHRASES_NEWBORN = [
-      'Taking you to our newborn experience\u2026',
-      'Reviewing your timeline\u2026',
-      'Preparing your results\u2026',
-      'Almost ready\u2026'
-    ];
+    var PHRASES_MATERNITY = ['Calculating your window\u2026','Building your quote\u2026','Matching you to the right experience\u2026','Checking date availability\u2026','Personalizing your roadmap\u2026','Almost ready\u2026'];
+    var PHRASES_NEWBORN   = ['Taking you to our newborn experience\u2026','Reviewing your timeline\u2026','Preparing your results\u2026','Almost ready\u2026'];
     function startPhraseRotator(isLate) {
       var el = document.getElementById('tws-rotating-phrase');
       if (!el) return;
