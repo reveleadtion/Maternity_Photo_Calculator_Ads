@@ -555,13 +555,17 @@ function calculate() {
   const pkgKey = state.whoJoins === 'momOnly' ? 'portraits' : 'whiteGlove';
   const dest   = isLate ? NEWBORN_URL : MATERNITY_URL;
 
-  const quizData = {
-    week, status: context,
-    window:  (isLate || isUrgent) ? '' : (startWeek + '-' + endWeek),
-    bookby:  bookByStr, type: isLate ? 'newborn' : 'maternity',
-    style, setting, package: pkgKey,
-    duedate: formatDateStr(state.dueDate)
-  };
+//3/17/26 - Remove status and week:
+const quizData = {
+  window:  (isLate || isUrgent) ? '' : (startWeek + '-' + endWeek),
+  bookby:  bookByStr,
+  type:    isLate ? 'newborn' : 'maternity',
+  style,
+  setting,
+  package: pkgKey,
+  duedate: formatDateStr(state.dueDate)
+  // week and status intentionally omitted — embed calculates live
+};
 
   const incomingParams = new URLSearchParams(window.location.search);
   const fbclid = incomingParams.get('fbclid');
