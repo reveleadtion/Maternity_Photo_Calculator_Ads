@@ -1,3 +1,490 @@
+<!-- TWO WILD SOULS — MATERNITY POPUP v4
+     Changes from v3:
+     - Inline quiz REPLACED with iframe embed of moments.twowildsoulsphotography.com
+     - Popup opens with a branded intro screen first
+     - "Start" button loads the iframe (lazy — avoids loading until needed)
+     - Listens for window.postMessage from the moments page on quiz completion
+       Expected message format: { type: 'TWS_QUIZ_COMPLETE', url: '<results url>' }
+     - On receiving the message → window.location.href = url (full tab navigation)
+     - Fallback: if iframe navigation is detected going to the results page domain,
+       the parent also follows (catches cases where postMessage isn't available yet)
+     - All timer / suppress / ribbon / flag logic identical to v3
+     - TEST_MODE = true  → fires instantly, skips suppression
+     - TEST_MODE = false → 2 min delay, 7-day suppress (GO LIVE)
+
+     MANUAL TRIGGER:
+     - Set any Showit button URL to: javascript:twsOpen()
+-->
+<script>
+(function(){
+
+var TEST_MODE   = true;
+var FLAG_KEY    = 'tws_maternity_flag';
+var TIMER_KEY   = 'tws_maternity_timer_start';
+var DISMISS_KEY = 'tws_popup_dismissed';
+var DELAY_MS    = TEST_MODE ? 0 : 120000;
+var SUPPRESS_MS = 7 * 24 * 60 * 60 * 1000;
+var RIBBON_KEY  = 'tws_ribbon_active';
+var QUIZ_URL    = 'https://moments.twowildsoulsphotography.com/';
+var EXCLUDED    = [
+  'detroit-maternity-photographer-ads',
+  'personalized-maternity-results',
+  'personalized-senior-results',
+  'maternity-timing-calculator-when-to-take-maternity-photos',
+  'contact-two-wild-souls-photography'
+];
+
+/* ── State ── */
+var iframeLoaded = false;
+
+/* ── Page checks ── */
+function isQualifyingMaternityPage(){
+  var u    = window.location.href.toLowerCase();
+  var path = window.location.pathname.toLowerCase().replace(/\/$/, '');
+  for(var i = 0; i < EXCLUDED.length; i++){
+    if(u.indexOf('/' + EXCLUDED[i]) !== -1) return false;
+  }
+  var patterns = ['maternity-photography','maternity-boudoir'];
+  for(var p = 0; p < patterns.length; p++){
+    if(path.indexOf(patterns[p]) !== -1) return true;
+  }
+  var slugs = [
+    'what-to-wear-maternity-photos-detroit-style-guide',
+    'the-best-time-to-take-maternity-photos-in-metro-detroit',
+    'how-to-prepare-for-a-stunning-maternity-photoshoot-in-metro-detroit',
+    'rochester-studio-maternity-photography-what-to-expect',
+    'studio-vs-outdoor-maternity-photos-metro-detroit',
+    'maternity-photo-poses-detroit',
+    'top-metro-detroit-maternity-photo-session-locations',
+    'stress-free-maternity-photography-metro-detroit',
+    'what-to-wear-maternity-photoshoot-metro-detroit',
+    'best-maternity-and-newborn-photoshoot-experience-in-metro-detroit',
+    'royal-oak-michigan-newborn-and-maternity-photography',
+    'bloomfield-hills-maternity-newborn-photography-timeless-portraits',
+    'maternity-newborn-service-comparison',
+    'top-10-baby-registry-items-for-2026',
+    'pregnancy-maternity-must-haves-2026',
+    'the-ultimate-checklist-for-first-time-parents',
+    'capturing-the-magic-maternity-photos-that-truly-shine',
+    'detroit-maternity-photos-guide',
+    'metro-detroit-maternity-photo-inspiration-poses-outfits-locations',
+    'maternity-photos-at-rochester-michigan',
+    'maternity-guide-michigan',
+    'maternity-transformations-two-wild-souls',
+    'metro-detroit-moms-choose-two-wild-souls-maternity',
+    'belle-isle-fountain-maternity-photos',
+    'studio-maternity-session-in-royal-oak-mi',
+    'novi-maternity-photographer-best-parks-studio-options',
+    'michigan-winter-maternity-photoshoot-ideas-szg2w',
+    'birmingham-michigan-maternity-boudoir-photography'
+  ];
+  for(var s = 0; s < slugs.length; s++){
+    if(path.indexOf(slugs[s]) !== -1) return true;
+  }
+  return false;
+}
+
+function isDismissed(){
+  if(TEST_MODE) return false;
+  try{ var v = localStorage.getItem(DISMISS_KEY); return !!(v && (Date.now()-parseInt(v)) < SUPPRESS_MS); }catch(e){ return false; }
+}
+function setDismissed(){ try{ localStorage.setItem(DISMISS_KEY, Date.now().toString()); }catch(e){} }
+function setFlag(){ try{ localStorage.setItem(FLAG_KEY,'1'); }catch(e){} }
+function isFlagged(){ try{ return localStorage.getItem(FLAG_KEY)==='1'; }catch(e){ return false; } }
+function getTimerStart(){ try{ var v=localStorage.getItem(TIMER_KEY); return v?parseInt(v):null; }catch(e){ return null; } }
+function setTimerStart(){ try{ if(!localStorage.getItem(TIMER_KEY)) localStorage.setItem(TIMER_KEY,Date.now().toString()); }catch(e){} }
+function clearTimer(){ try{ localStorage.removeItem(TIMER_KEY); }catch(e){} }
+function setRibbonActive(){ try{ sessionStorage.setItem(RIBBON_KEY,'1'); }catch(e){} }
+function clearRibbonActive(){ try{ sessionStorage.removeItem(RIBBON_KEY); }catch(e){} }
+function isRibbonActive(){ try{ return sessionStorage.getItem(RIBBON_KEY)==='1'; }catch(e){ return false; } }
+function timeElapsed(){ var s=getTimerStart(); return s?Date.now()-s:0; }
+function isExcludedPage(){
+  var u=window.location.href.toLowerCase();
+  for(var i=0;i<EXCLUDED.length;i++){ if(u.indexOf('/'+EXCLUDED[i])!==-1) return true; }
+  return false;
+}
+
+/* ── Styles ── */
+function injectStyles(){
+  if(document.getElementById('twsPopStyles4')) return;
+  var s = document.createElement('style'); s.id = 'twsPopStyles4';
+  s.textContent = [
+    '@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap");',
+
+    /* ── Overlay ── */
+    '#twsPop{display:none;position:fixed;inset:0;background:rgba(30,31,28,0.7);z-index:99999;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}',
+    '#twsPop.open{display:flex;animation:twsOvIn 0.28s ease both;}',
+    '@keyframes twsOvIn{from{opacity:0}to{opacity:1}}',
+
+    /* ── Card ── */
+    '#twsCard{',
+      'position:relative;',
+      'width:100%;',
+      'max-width:520px;',           /* wider to give iframe more breathing room */
+      'height:auto;',
+      'max-height:92vh;',
+      'border-radius:10px;',
+      'background:#FAFAF8;',
+      'box-shadow:0 24px 70px rgba(30,31,28,0.4);',
+      'animation:twsCardIn 0.32s cubic-bezier(0.34,1.1,0.64,1) both;',
+      'display:flex;',
+      'flex-direction:column;',
+      'overflow:hidden;',           /* clip iframe to rounded corners */
+    '}',
+    '@keyframes twsCardIn{from{opacity:0;transform:translateY(22px) scale(0.96)}to{opacity:1;transform:none}}',
+
+    /* ── Close ── */
+    '#twsClose{position:absolute;top:12px;right:12px;z-index:10;background:rgba(255,255,255,0.92);border:1px solid #E5E2DC;border-radius:50%;width:30px;height:30px;font-size:13px;color:#6B6E6A;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;font-family:sans-serif;box-shadow:0 1px 4px rgba(0,0,0,0.1);}',
+    '#twsClose:hover{background:#fff;color:#2E2F2C;transform:scale(1.05);}',
+
+    /* ── INTRO SCREEN ── */
+    '#twsIntro{padding:0;display:flex;flex-direction:column;}',
+
+    '#twsIntroHead{',
+      'padding:32px 32px 24px;',
+      'background:linear-gradient(150deg,#3F4438 0%,#5a6147 60%,#4a5540 100%);',
+      'text-align:center;',
+      'position:relative;',
+      'overflow:hidden;',
+    '}',
+    /* Subtle botanical texture overlay */
+    '#twsIntroHead::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");opacity:1;}',
+
+    '#twsIntroHead .tws-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(199,178,122,0.18);border:1px solid rgba(199,178,122,0.35);border-radius:20px;padding:5px 13px;margin-bottom:14px;}',
+    '#twsIntroHead .tws-badge span{font-family:"DM Sans",sans-serif;font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(199,178,122,0.9);}',
+    '#twsIntroHead .tws-badge::before{content:"✦";font-size:8px;color:#C7B27A;opacity:0.8;}',
+
+    '#twsIntroHead h2{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:300;line-height:1.18;color:#fff;margin-bottom:8px;}',
+    '#twsIntroHead h2 em{font-style:italic;color:#C7B27A;}',
+    '#twsIntroHead p{font-family:"DM Sans",sans-serif;font-size:12.5px;font-weight:300;color:rgba(255,255,255,0.62);line-height:1.6;max-width:340px;margin:0 auto;}',
+
+    /* ── Stats strip ── */
+    '#twsStats{display:flex;border-top:1px solid rgba(255,255,255,0.08);margin-top:22px;}',
+    '.tws-stat{flex:1;padding:12px 8px;text-align:center;border-right:1px solid rgba(255,255,255,0.08);}',
+    '.tws-stat:last-child{border-right:none;}',
+    '.tws-stat .sv{font-family:"Cormorant Garamond",serif;font-size:19px;font-weight:400;color:#C7B27A;line-height:1;}',
+    '.tws-stat .sl{font-size:9px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:3px;}',
+
+    /* ── Intro body ── */
+    '#twsIntroBody{padding:22px 28px 26px;background:#FAFAF8;}',
+
+    '.tws-steps-preview{display:flex;flex-direction:column;gap:10px;margin-bottom:22px;}',
+    '.tws-sp-row{display:flex;align-items:center;gap:12px;}',
+    '.tws-sp-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#3F4438,#7C8A5A);display:flex;align-items:center;justify-content:center;flex-shrink:0;}',
+    '.tws-sp-num span{font-family:"DM Sans",sans-serif;font-size:10px;font-weight:500;color:#fff;}',
+    '.tws-sp-txt{font-family:"DM Sans",sans-serif;font-size:12.5px;color:#4A4D47;line-height:1.4;}',
+    '.tws-sp-txt strong{color:#2E2F2C;font-weight:500;}',
+
+    /* ── CTA button ── */
+    '#twsStartBtn{',
+      'width:100%;',
+      'padding:15px 24px;',
+      'background:linear-gradient(90deg,#3F4438,#5a6147);',
+      'border:none;',
+      'border-radius:7px;',
+      'font-family:"DM Sans",sans-serif;',
+      'font-size:11px;',
+      'font-weight:500;',
+      'letter-spacing:0.22em;',
+      'text-transform:uppercase;',
+      'color:#fff;',
+      'cursor:pointer;',
+      'transition:all 0.22s;',
+      'box-shadow:0 4px 16px rgba(63,68,56,0.22);',
+      'display:flex;align-items:center;justify-content:center;gap:10px;',
+    '}',
+    '#twsStartBtn:hover{background:linear-gradient(90deg,#7C8A5A,#C7B27A);transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,138,90,0.28);}',
+    '#twsStartBtn .btn-arrow{font-size:14px;transition:transform 0.2s;}',
+    '#twsStartBtn:hover .btn-arrow{transform:translateX(3px);}',
+
+    '.tws-privacy{text-align:center;margin-top:10px;font-size:10px;color:#A0A39F;letter-spacing:0.03em;}',
+
+    /* ── IFRAME VIEW ── */
+    '#twsIframeView{display:none;flex-direction:column;flex:1;}',
+    '#twsIframeView.active{display:flex;}',
+
+    /* Slim top bar shown while quiz is running */
+    '#twsIframeBar{',
+      'display:flex;align-items:center;justify-content:space-between;',
+      'padding:10px 16px;',
+      'background:#3F4438;',
+      'flex-shrink:0;',
+    '}',
+    '#twsIframeBar .tws-bar-brand{font-family:"Cormorant Garamond",serif;font-size:13px;color:rgba(255,255,255,0.75);letter-spacing:0.04em;}',
+    '#twsIframeBar .tws-bar-brand em{font-style:italic;color:#C7B27A;}',
+    '#twsIframeBar .tws-bar-close{background:none;border:none;color:rgba(255,255,255,0.5);font-size:18px;cursor:pointer;padding:0 4px;line-height:1;transition:color 0.15s;}',
+    '#twsIframeBar .tws-bar-close:hover{color:#fff;}',
+
+    /* iframe itself */
+    '#twsQuizFrame{',
+      'width:100%;',
+      'border:none;',
+      'flex:1;',
+      'min-height:560px;',        /* tall enough for the quiz without internal scroll */
+      'background:#fff;',
+    '}',
+
+    /* Loading shimmer shown before iframe paints */
+    '#twsFrameLoading{',
+      'position:absolute;inset:0;',
+      'background:#FAFAF8;',
+      'display:flex;flex-direction:column;align-items:center;justify-content:center;',
+      'gap:14px;',
+      'pointer-events:none;',
+      'transition:opacity 0.3s;',
+    '}',
+    '#twsFrameLoading.hidden{opacity:0;}',
+    '.tws-frame-spinner{width:34px;height:34px;border:2.5px solid rgba(124,138,90,0.2);border-top-color:#7C8A5A;border-radius:50%;animation:twsSpin 0.75s linear infinite;}',
+    '@keyframes twsSpin{to{transform:rotate(360deg)}}',
+    '.tws-frame-lbl{font-family:"Cormorant Garamond",serif;font-size:16px;font-style:italic;color:#3F4438;}',
+
+    /* ── Ribbon ── */
+    '#twsRibbon{position:fixed;right:0;top:50%;transform:translateY(-50%) translateX(100%);z-index:99997;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);}',
+    '#twsRibbon.visible{transform:translateY(-50%) translateX(0);}',
+    '#twsRibbon button{writing-mode:vertical-rl;text-orientation:mixed;background:linear-gradient(180deg,#7C8A5A,#5a6147);color:#fff;border:none;padding:24px 15px;font-family:"Cormorant Garamond",Georgia,serif;font-size:14px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;border-radius:6px 0 0 6px;box-shadow:-4px 0 20px rgba(30,31,28,0.22);transition:all 0.2s;min-width:48px;min-height:150px;}',
+    '#twsRibbon button:hover{background:linear-gradient(180deg,#C7B27A,#b09a68);}',
+
+    /* ── Footer ── */
+    '#twsPopFoot{padding:9px 24px;border-top:1px solid #EDEAE5;text-align:center;flex-shrink:0;}',
+    '#twsPopFoot p{font-size:9.5px;color:#9B9E99;letter-spacing:0.05em;}',
+
+    /* ── Mobile ── */
+    '@media(max-width:480px){',
+      '#twsPop{padding:0;align-items:flex-end;}',
+      '#twsCard{max-width:100%;max-height:96vh;border-radius:12px 12px 0 0;}',
+      '#twsIntroHead{padding:26px 22px 20px;}',
+      '#twsIntroHead h2{font-size:26px;}',
+      '#twsIntroBody{padding:18px 20px 22px;}',
+      '#twsQuizFrame{min-height:500px;}',
+    '}'
+  ].join('');
+  document.head.appendChild(s);
+}
+
+/* ── HTML ── */
+function injectHTML(){
+  if(document.getElementById('twsPop')) return;
+
+  var w = document.createElement('div');
+  w.innerHTML =
+    '<div id="twsPop">'
+    +  '<div id="twsCard">'
+
+    /* ── Intro screen ── */
+    +    '<div id="twsIntro">'
+    +      '<button id="twsClose" aria-label="Close">&#x2715;</button>'
+    +      '<div id="twsIntroHead">'
+    +        '<div class="tws-badge"><span>Free · Takes 60 Seconds</span></div>'
+    +        '<h2>Find Your <em>Perfect</em><br>Maternity Photo Window</h2>'
+    +        '<p>Answer 5 quick questions and we\'ll reveal the exact weeks to book — based on your due date, bump style, and who\'s joining you.</p>'
+    +        '<div id="twsStats">'
+    +          '<div class="tws-stat"><div class="sv">28–33</div><div class="sl">Ideal weeks</div></div>'
+    +          '<div class="tws-stat"><div class="sv">6</div><div class="sl">Spots / month</div></div>'
+    +          '<div class="tws-stat"><div class="sv">60s</div><div class="sl">Quiz length</div></div>'
+    +        '</div>'
+    +      '</div>'
+    +      '<div id="twsIntroBody">'
+    +        '<div class="tws-steps-preview">'
+    +          '<div class="tws-sp-row"><div class="tws-sp-num"><span>1</span></div><div class="tws-sp-txt"><strong>Enter your due date</strong> — we calculate your current week</div></div>'
+    +          '<div class="tws-sp-row"><div class="tws-sp-num"><span>2</span></div><div class="tws-sp-txt"><strong>Tell us about your pregnancy</strong> — first baby, multiples, etc.</div></div>'
+    +          '<div class="tws-sp-row"><div class="tws-sp-num"><span>3</span></div><div class="tws-sp-txt"><strong>Choose your look & vibe</strong> — full bump or earlier & comfortable</div></div>'
+    +          '<div class="tws-sp-row"><div class="tws-sp-num"><span>4</span></div><div class="tws-sp-txt"><strong>See your personalized window</strong> — plus a matched package recommendation</div></div>'
+    +        '</div>'
+    +        '<button id="twsStartBtn" onclick="twsLaunchQuiz()">'
+    +          '<span>Start My Timing Quiz</span>'
+    +          '<span class="btn-arrow">&#x2192;</span>'
+    +        '</button>'
+    +        '<p class="tws-privacy">No email required to see your results &nbsp;·&nbsp; Results in seconds</p>'
+    +      '</div>'
+    +    '</div>'
+
+    /* ── Iframe view ── */
+    +    '<div id="twsIframeView">'
+    +      '<div id="twsIframeBar">'
+    +        '<span class="tws-bar-brand">Two Wild <em>Souls</em> Photography</span>'
+    +        '<button class="tws-bar-close" onclick="twsDismiss()" aria-label="Close">&#x2715;</button>'
+    +      '</div>'
+    +      '<div style="position:relative;flex:1;display:flex;flex-direction:column;">'
+    +        '<div id="twsFrameLoading">'
+    +          '<div class="tws-frame-spinner"></div>'
+    +          '<div class="tws-frame-lbl">Loading your quiz…</div>'
+    +        '</div>'
+    +        '<iframe id="twsQuizFrame" title="Maternity Timing Quiz" allow="autoplay" scrolling="yes"></iframe>'
+    +      '</div>'
+    +    '</div>'
+
+    +    '<div id="twsPopFoot"><p>Two Wild Souls Photography &nbsp;·&nbsp; Metro Detroit &amp; Southeast Michigan</p></div>'
+    +  '</div>'
+    +'</div>'
+
+    /* ── Ribbon ── */
+    +'<div id="twsRibbon"><button onclick="twsRibbonOpen()" aria-label="Reopen timing calculator">Get Maternity Quote...</button></div>';
+
+  while(w.firstChild) document.body.appendChild(w.firstChild);
+
+  /* Close on overlay click */
+  document.getElementById('twsPop').addEventListener('click', function(e){
+    if(e.target === this) twsDismiss();
+  });
+
+  /* Hide iframe loading shimmer once frame loads */
+  document.getElementById('twsQuizFrame').addEventListener('load', function(){
+    var ldr = document.getElementById('twsFrameLoading');
+    if(ldr) ldr.classList.add('hidden');
+  });
+
+  /* ── Listen for quiz completion message from moments page ── */
+  window.addEventListener('message', function(e){
+    /* Security: only accept messages from our quiz domain */
+    if(e.origin !== 'https://moments.twowildsoulsphotography.com') return;
+    var data = e.data;
+    if(data && data.type === 'TWS_QUIZ_COMPLETE' && data.url){
+      window.location.href = data.url;
+    }
+  });
+}
+
+/* ── Launch quiz (swap intro → iframe) ── */
+window.twsLaunchQuiz = function(){
+  var intro = document.getElementById('twsIntro');
+  var view  = document.getElementById('twsIframeView');
+  var frame = document.getElementById('twsQuizFrame');
+  var card  = document.getElementById('twsCard');
+  if(!intro || !view || !frame) return;
+
+  /* Only set src once */
+  if(!iframeLoaded){
+    /* Pass fbclid/gclid through so analytics still work */
+    var urlParams = new URLSearchParams(window.location.search);
+    var quizSrc   = QUIZ_URL;
+    var extras    = [];
+    if(urlParams.get('fbclid')) extras.push('fbclid='+encodeURIComponent(urlParams.get('fbclid')));
+    if(urlParams.get('gclid'))  extras.push('gclid='+encodeURIComponent(urlParams.get('gclid')));
+    if(extras.length) quizSrc += (quizSrc.indexOf('?') === -1 ? '?' : '&') + extras.join('&');
+    frame.src = quizSrc;
+    iframeLoaded = true;
+  }
+
+  /* Expand card to accommodate the quiz height */
+  card.style.maxWidth  = '560px';
+  card.style.maxHeight = '92vh';
+
+  /* Animate swap */
+  intro.style.transition = 'opacity 0.2s ease';
+  intro.style.opacity    = '0';
+  setTimeout(function(){
+    intro.style.display = 'none';
+    view.classList.add('active');
+  }, 200);
+};
+
+/* ── Show / Dismiss / Ribbon ── */
+function twsShow(){ var p=document.getElementById('twsPop'); if(p) p.classList.add('open'); }
+
+window.twsDismiss = function(){
+  var p=document.getElementById('twsPop');
+  if(p){
+    p.style.transition='opacity 0.2s ease'; p.style.opacity='0';
+    setTimeout(function(){ p.classList.remove('open'); p.style.opacity=''; p.style.transition=''; showRibbon(); }, 200);
+  }
+  setDismissed(); clearTimer();
+};
+
+function showRibbon(){
+  if(isExcludedPage()) return;
+  setRibbonActive();
+  var el=document.getElementById('twsRibbon');
+  if(!el){ injectRibbon(); el=document.getElementById('twsRibbon'); }
+  if(!el) return;
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add('visible'); }); });
+}
+function hideRibbon(){ var r=document.getElementById('twsRibbon'); if(r) r.classList.remove('visible'); }
+function injectRibbon(){
+  if(document.getElementById('twsRibbon')) return;
+  var el=document.createElement('div'); el.id='twsRibbon';
+  el.innerHTML='<button onclick="twsRibbonOpen()" aria-label="Reopen timing calculator">Get Maternity Quote...</button>';
+  document.body.appendChild(el);
+}
+
+/* ── Reset (reopening) ── */
+function twsReset(){
+  iframeLoaded = false;
+  var intro = document.getElementById('twsIntro');
+  var view  = document.getElementById('twsIframeView');
+  var frame = document.getElementById('twsQuizFrame');
+  var card  = document.getElementById('twsCard');
+  if(intro){ intro.style.display=''; intro.style.opacity='1'; }
+  if(view)  view.classList.remove('active');
+  if(frame){ frame.src=''; }
+  if(card){ card.style.maxWidth=''; card.style.maxHeight=''; }
+  /* Restore loading shimmer */
+  var ldr=document.getElementById('twsFrameLoading'); if(ldr) ldr.classList.remove('hidden');
+}
+
+window.twsOpen = function(){
+  try{ localStorage.removeItem(DISMISS_KEY); }catch(e){}
+  hideRibbon(); clearRibbonActive();
+  if(!document.getElementById('twsPop')){ injectStyles(); injectHTML(); }
+  else twsReset();
+  twsShow();
+};
+
+window.twsRibbonOpen = function(){
+  hideRibbon(); clearRibbonActive();
+  try{ localStorage.removeItem(DISMISS_KEY); }catch(e){}
+  if(!document.getElementById('twsPop')){ injectStyles(); injectHTML(); }
+  else twsReset();
+  twsShow();
+};
+
+/* ── Core init ── */
+function tryInit(){
+  var log=function(m){ console.log('[TWS Popup v4] '+m); };
+
+  if(isRibbonActive()){
+    if(isExcludedPage()){ log('Excluded — ribbon suppressed'); return; }
+    log('Ribbon active — restoring tab');
+    injectStyles(); injectRibbon(); showRibbon(); return;
+  }
+
+  if(isDismissed()){ log('Suppressed — dismissed within 7 days'); return; }
+  if(isExcludedPage()){ log('Excluded page — popup blocked'); return; }
+
+  if(isQualifyingMaternityPage()){ log('Qualifying page — flagging'); setFlag(); setTimerStart(); }
+  else { log('Not a qualifying page'); }
+
+  if(!isFlagged()){ log('Not flagged yet'); return; }
+
+  var elapsed   = timeElapsed();
+  var remaining = TEST_MODE ? 0 : Math.max(0, DELAY_MS - elapsed);
+  log('Elapsed: '+Math.round(elapsed/1000)+'s, remaining: '+Math.round(remaining/1000)+'s');
+
+  if(remaining === 0){
+    log('Firing popup now');
+    if(!document.getElementById('twsPop')){ injectStyles(); injectHTML(); }
+    twsShow();
+  } else {
+    log('Scheduled in '+Math.round(remaining/1000)+'s');
+    setTimeout(function(){
+      if(isDismissed()){ log('Cancelled — dismissed during wait'); return; }
+      if(isExcludedPage()){ log('Cancelled — excluded page'); return; }
+      if(!document.getElementById('twsPop')){ injectStyles(); injectHTML(); }
+      twsShow();
+    }, remaining);
+  }
+}
+
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', tryInit);
+} else { tryInit(); }
+
+window.addEventListener('popstate', tryInit);
+window.addEventListener('hashchange', tryInit);
+
+})();
+</script>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
